@@ -38,7 +38,7 @@
 </head>
 
 <body>
-
+  <img src="" alt="">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4">
@@ -98,9 +98,10 @@
 
       $(function() {
         $('#huanfu').click(function() {
-          $('body').css({
-            'background-image':'url(/admin/assets/images/bg/mojave.jpg)',
-            'width':'100%'
+
+          $('img').css({
+            'background':'url(/admin/assets/images/bg/mojave.jpg) fixed no-repeat',
+             'background-size':'100% 100%'
           });
         });
       });

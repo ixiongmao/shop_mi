@@ -18,12 +18,14 @@ class AdminCateController extends Controller
     public function index()
     {
         //
+        check_admin_purview('0');
+        $get_session = session('Admin_Session');
         $data = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
         foreach ($data as $k => $v) {
              $n = substr_count($v->path,',');
              $data[$k]->cname = str_repeat('|----',$n).$data[$k]->cname;
         }
-        return view('Admin.Cate.list',['data'=>$data]);
+        return view('Admin.Cate.list',['data'=>$data,'get_session'=>$get_session]);
     }
 
     /**
@@ -33,12 +35,14 @@ class AdminCateController extends Controller
      */
     public function create()
     {
+        check_admin_purview('0');
+        $get_session = session('Admin_Session');
         $data = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(19);
         foreach ($data as $k => $v) {
              $n = substr_count($v->path,',');
              $data[$k]->cname = str_repeat('|----',$n).$data[$k]->cname;
         }
-        return view('Admin.Cate.add',['data'=>$data]);
+        return view('Admin.Cate.add',['data'=>$data,'get_session'=>$get_session]);
     }
 
     /**
@@ -50,12 +54,13 @@ class AdminCateController extends Controller
     public function store(Request $request)
     {
         //
+        check_admin_purview('0');
         $data = new CateModel;
         $pid = $request -> input('pid','');
         if ($pid == 0) {
             $data -> path = '0';
         } else {
-            $parent_data = Cates::find($pid);
+            $parent_data = CateModel::find($pid);
             $data -> path = $parent_data->path.','.$parent_data->id;
         }
         $data -> cname = $request -> input('cname','');

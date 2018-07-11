@@ -13,11 +13,11 @@
                 <div class="panel-heading">@yield('AD2_title')</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-lg-12">
                             <form action="/admin/user/store" method="post" id="isForm">
                               {{ csrf_field() }}
                               @if (session('Error'))
-                              <div class="alert alert-success alert-dismissable">
+                              <div class="alert alert-danger alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 {{ session('Error') }}
                               </div>
@@ -104,12 +104,6 @@
       </div>
     <!-- /.row -->
     <script type="text/javascript">
-    $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
         //检测用户名是否存在
         isName = false;
         isPass = false;

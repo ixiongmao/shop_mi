@@ -1,6 +1,6 @@
 @extends('Admin.common')
 
-@section('AD2_title', '驱动添加')
+@section('AD2_title', '文件添加')
 
 @section('Left_Nav')
     @parent

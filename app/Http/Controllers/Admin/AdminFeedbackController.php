@@ -17,9 +17,11 @@ class AdminFeedbackController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request -> input('fk_guanjianzi','');
-        $data = FeedbackModel::where('feedbacks_name','like','%'.$search.'%') -> orderBy('id','asc') -> paginate(1);
-        return view('Admin.Feedback.list',['data'=>$data,'search'=>$search]);
+        check_admin_purview('0');
+        $get_session = session('Admin_Session');
+        $search = $request->input('fk_guanjianzi','');
+        $data = FeedbackModel::where('feedbacks_name','like','%'.$search.'%')->orderBy('id','asc')->paginate(25);
+        return view('Admin.Feedback.list',['data'=>$data,'search'=>$search,'get_session'=>$get_session]);
     }
 
     /**
@@ -30,12 +32,12 @@ class AdminFeedbackController extends Controller
      */
     public function destroy($id)
     {
-        $del = DB::table('u_feedbacks') -> where('id','=',$id) -> delete();
+        $del = DB::table('u_feedbacks')->where('id','=',$id)->delete();
         //$res = $del -> delete();
         if ($del) {
-          return redirect('/admin/feedback/index') -> with('Success','删除成功');
+          return redirect('/admin/feedback/index')->with('Success','删除成功');
         } else {
-          return back() -> with('Error', '删除失败');
+          return back()->with('Error', '删除失败');
         }
 
     }

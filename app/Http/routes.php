@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','Home\HomeIndexController@index');
+Route::get('/list/{id}','Home\HomeIndexController@list');
+Route::get('/item/{id}','Home\HomeIndexController@item');
 
 //
 /**
@@ -25,14 +25,26 @@ Route::get('/', function () {
    return redirect('/admin/login');
  });
  Route::get('/admin/login','Admin\AdminLoginController@index');
- Route::post('/admin/login/select','Admin\AdminLoginController@save');
+ Route::post('/admin/login/select','Admin\AdminLoginController@Save');
  Route::get('/admin/login/logout','Admin\AdminLoginController@logout');
  //后台路由组
- Route::group(['middleware'=>'Admin_Login'],function() {
+ Route::group(['middleware'=>'Admin_Session'],function() {
    // 后台显示
    Route::get('/admin/index','Admin\AdminIndexController@index');
+   //后台空白页
+   Route::get('/admin/blank','Admin\AdminIndexController@blank');
+   // 后台员工操作
+   Route::get('/admin/admin/index','Admin\AdminAdminController@index');
+   Route::post('/admin/admin/ajax','Admin\AdminAdminController@Ajax');
+   Route::get('/admin/admin/create','Admin\AdminAdminController@create');
+   Route::post('/admin/admin/store','Admin\AdminAdminController@store');
+   Route::get('/admin/admin/edit/{id}','Admin\AdminAdminController@edit');
+   Route::post('/admin/admin/update/{id}','Admin\AdminAdminController@update');
+   Route::get('/admin/admin/del/{id}','Admin\AdminAdminController@destroy');
+   Route::get('/admin/admin/record/{id}','Admin\AdminAdminController@Record_index');
 
-   //分类
+
+   //后台商品分类
    Route::get('/admin/cate/create','Admin\AdminCateController@create');
    Route::post('/admin/cate/store','Admin\AdminCateController@store');
    Route::get('/admin/cate/index','Admin\AdminCateController@index');
@@ -58,7 +70,7 @@ Route::get('/', function () {
    Route::get('/admin/user/recycled','Admin\AdminUserController@recycled');//会员回收站显示
    Route::get('/admin/user/recover/{id}','Admin\AdminUserController@recover');//会员回收站恢复
    Route::get('/admin/user/del/{id}','Admin\AdminUserController@delete');//会员彻底删除
-   //驱动
+   //后天文件下载
    Route::get('/admin/qudong/create','Admin\AdminQuDongController@create');
    Route::post('/admin/qudong/store','Admin\AdminQuDongController@store');
    Route::get('/admin/qudong/index','Admin\AdminQuDongController@index');
@@ -68,6 +80,6 @@ Route::get('/', function () {
 
    // 后台会员反馈操作
    Route::get('/admin/feedback/index','Admin\AdminFeedbackController@index');
-   Route::get('/admin/feedback/edit/{id}','Admin\AdminFeedbackController@edit');
+   //Route::get('/admin/feedback/edit/{id}','Admin\AdminFeedbackController@edit');
    Route::get('/admin/feedback/del/{id}','Admin\AdminFeedbackController@destroy');
  });

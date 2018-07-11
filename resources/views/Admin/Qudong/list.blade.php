@@ -1,6 +1,6 @@
 @extends('Admin.common')
 
-@section('AD2_title', '驱动管理')
+@section('AD2_title', '文件管理')
 
 @section('Left_Nav')
     @parent
@@ -40,7 +40,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>文件备注</th>
-                                    <th>文件地址</th>
+                                    <th>下载</th>
                                     <th>添加时间</th>
                                     <th>操作</th></tr>
                             </thead>
@@ -49,29 +49,13 @@
                                 <tr>
                                     <td>{{ $v->id }}</td>
                                     <td>{{ $v->qudong_name }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm-{{ $v->id }}">点击查看文件地址或者图片</button>
+                                    <td><a href="{{ $v->qudong_files }}" class="btn btn-outline btn-default btn-sm">点击下载</a>
                                     </td>
                                     <td>{{ date('Y-m-d H:i:s',$v->qudong_time) }}</td>
                                     <td>
                                         <a href="/admin/qudong/edit/{{ $v->id }}" class="btn btn-primary btn-sm">修改</a> |
                                         <a href="/admin/qudong/del/{{ $v->id }}" class="btn btn-danger btn-sm" onclick="return confirm('你确定要删除吗？(不可恢复)')">删除</a></td>
                                 </tr>
-                                <!-- 反馈加载开始 -->
-                                <div class="modal fade bs-example-modal-sm-{{ $v->id }}" id="myModel" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                                    <div class="modal-dialog modal-sm" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">随意点击框外面其他处，即可关闭</h4></div>
-                                            <div class="modal-body" style="text-align: center;">
-                                              <a href="{{ $v->qudong_files }}" class="btn btn-outline btn-default btn-sm">点击下载</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 反馈加载结束 -->
                                 @endforeach
                               </tbody>
                         </table>

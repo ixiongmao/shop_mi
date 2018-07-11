@@ -33,6 +33,12 @@
     <script charset="utf-8" src="/Editor/kindeditor-all-min.js"></script>
     <script charset="utf-8" src="/Editor/lang/zh_CN.js"></script>
     <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     KindEditor.ready(function(K) {
             K.create('#d_content');
             var editor = K.editor();
@@ -79,30 +85,6 @@
                 });
             });
         });
-    </script>
-    <script type="text/javascript">
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-    })
-      $(function() {
-        $('#submit').click(function() {
-          var ixiongmao_radio = $('input[type=radio]:checked').val();
-          var ixiongmao_pic = $('#picture').val();
-          var ixiongmao_file = $('#file').val();
-          // if (ixiongmao_radio == undefined) {
-          //   layer.msg('请选择状态或者属性');
-          //   return false;
-          // } else
-          // if (ixiongmao_pic == '') {
-          //   layer.msg('请上传图片');
-          //   return false;
-          // }
-          if (ixiongmao_file == '') {
-            layer.msg('请上传文件');
-            return false;
-          }
-        });
-      });
     </script>
     <!-- HTML5垫片和回应。js IE8支持HTML5元素和媒体查询 -->
     <!-- 警告: 如果您通过文件://来查看页面，那么js无法工作 -->
@@ -205,7 +187,7 @@
               <li>
                 <a href="#">
                   <div>
-                    <i class="fa fa-comment fa-fw"></i>新消息
+                    <i class="fa fa-comment fa-fw"></i> 今天用户反馈数
                     <span class="pull-right text-muted small">4 minutes ago</span></div>
                 </a>
               </li>
@@ -213,7 +195,7 @@
               <li>
                 <a href="#">
                   <div>
-                    <i class="fa fa-twitter fa-fw"></i>新邮件
+                    <i class="fa fa-user fa-fw"></i> 今天新用户数
                     <span class="pull-right text-muted small">12 minutes ago</span></div>
                 </a>
               </li>
@@ -221,7 +203,7 @@
               <li>
                 <a href="#">
                   <div>
-                    <i class="fa fa-envelope fa-fw"></i>Message Sent
+                    <i class="fa fa-shopping-cart fa-fw"></i> 今天新订单数
                     <span class="pull-right text-muted small">4 minutes ago</span></div>
                 </a>
               </li>
@@ -237,7 +219,7 @@
               <li>
                 <a href="#">
                   <div>
-                    <i class="fa fa-upload fa-fw"></i>Server Rebooted
+                    <i class="fa fa-upload fa-fw"></i> 总共文件数
                     <span class="pull-right text-muted small">4 minutes ago</span></div>
                 </a>
               </li>
@@ -258,7 +240,7 @@
             <ul class="dropdown-menu dropdown-user">
               <li>
                 <a href="#">
-                  <i class="fa fa-user fa-fw"></i>{{ session('a_admin') }}</a>
+                  <i class="fa fa-user fa-fw"></i>{{ $get_session['a_name']}}</a>
               </li>
               <li>
                 <a href="#">
@@ -276,16 +258,6 @@
         <div class="navbar-default sidebar" role="navigation">
           <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-              <li class="sidebar-search">
-                <div class="input-group custom-search-form">
-                  <input type="text" class="form-control" placeholder="Search...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </span>
-                </div>
-              </li>
               <li>
                 <a href="/admin/index">
                   <i class="fa fa-dashboard fa-fw"></i>后台首页</a>
@@ -317,13 +289,13 @@
               </li>
               <li>
                 <a href="#">
-                  <i class="fa fa-bar-chart-o fa-fw"></i>驱动管理
+                  <i class="fa fa-bar-chart-o fa-fw"></i>文件管理
                   <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                   <li>
-                    <a href="/admin/qudong/create">添加驱动</a></li>
+                    <a href="/admin/qudong/create">添加文件</a></li>
                   <li>
-                    <a href="/admin/qudong/index">查看驱动</a></li>
+                    <a href="/admin/qudong/index">查看文件</a></li>
                 </ul>
               </li>
               <!-- 注释为Song -->
@@ -360,6 +332,17 @@
               <!-- 注释为IXiongmao -->
               <li>
                 <a href="#">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>员工管理
+                  <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="/admin/admin/create">添加员工</a></li>
+                  <li>
+                    <a href="/admin/admin/index">查看员工</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">
                   <i class="fa fa-wrench fa-fw"></i>网站设置</a>
               </li>
             </ul>
@@ -382,6 +365,45 @@
       <!-- 主体公共部分结束 -->
     </div>
     <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    })
+      $(function() {
+        $('#submit').click(function() {
+          var ixiongmao_radio = $('input[type=radio]:checked').val();
+          var ixiongmao_pic = $('#picture').val();
+          var ixiongmao_file = $('#file').val();
+          var a_name = $('input[name=a_name]').val();
+          var a_password = $('input[name=a_password]').val();
+          var a_passwd = $('input[name=a_passwd]').val();
+          var f_name = $('input[name=file_name]').val();
+          // if (ixiongmao_pic == '') {
+          //   layer.msg('请上传图片');
+          //   return false;
+          // }
+          if (f_name == '') {
+            layer.msg('请输入文件名称');
+            return false;
+          } else if (ixiongmao_file == '') {
+            layer.msg('请上传文件');
+            return false;
+          } else if (ixiongmao_radio == undefined) {
+            layer.msg('请选择状态或者属性');
+            return false;
+          } else if (a_name == '') {
+            layer.msg('用户不能为空');
+            return false;
+          } else if ((a_password && a_passwd)  == ''){ // && 一端为false 2边都为false ，|| or 一边为false 另一端还是为true
+            layer.msg('二次密码不能为空');
+            return false;
+          } else if (!(a_password == a_passwd)) {
+            layer.msg('二次密码不一样');
+            return false;
+          }
+        });
+      });
+    </script>
+    <script type="text/javascript">
       layui.use('laydate', function(){
         var laydate = layui.laydate;
         //执行一个laydate实例
@@ -391,5 +413,63 @@
         });
       });
     </script>
+    <style type="text/css">
+    /*回到顶部*/
+    #back-to-top {
+    	color:#fff;
+    	position:fixed;
+    	bottom:20px;
+    	right:20px;
+    	z-index:99;
+    	display:none;
+    	text-align:center;
+    	border-radius:5px;
+    	-moz-border-radius:5px;
+    	-webkit-border-radius:5px;
+    	-o-border-radius:2px;
+    	z-index:10000;
+    	height:45px;
+    	width:45px;
+    	background-color:#337ab7;
+    	background-repeat:no-repeat;
+    	background-position:center;
+    	transition:background-color 0.1s linear;
+    	-moz-transition:background-color 0.1s linear;
+    	-webkit-transition:background-color 0.1s linear;
+    	-o-transition:background-color 0.1s linear;
+    }
+    #back-to-top i {
+    	padding-top:12px;
+    	font-size:17px;
+    }
+    #back-to-top:hover {
+    	background:#B86662;
+    	background:#337ab7;
+    }
+
+    </style>
+    <a href="#top" id="back-to-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <script type="text/javascript">
+      //回到顶部
+        //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+        $(function() {
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#back-to-top').fadeIn('slow');
+                } else {
+                    $('#back-to-top').fadeOut('slow');
+                }
+            });
+            $('#back-to-top').click(function() {
+                $("html, body").animate({
+                    scrollTop: 0
+                },
+                600);
+                return false;
+            });
+        });
+      </script>
   </body>
 </html>

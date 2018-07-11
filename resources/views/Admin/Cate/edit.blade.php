@@ -14,7 +14,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-lg-6">
-                  <form action="/admin/qudong/update/{{ $data -> id}}" method="post">
+                  <form action="/admin/cate/update/{{ $data -> id}}" method="post">
                     {{ csrf_field() }}
                     @if (session('Error'))
                     <div class="alert alert-danger alert-dismissable">
@@ -22,14 +22,23 @@
                       {{ session('Error') }}
                     </div>
                     @endif
+
                       <div class="form-group input-group">
-                          <span class="input-group-addon">文件名称</span>
-                          <input type="text" class="form-control" name="file_name" value="{{ $data->qudong_name }}" placeholder="请输入文件名称">
+                          <span class="input-group-addon">商品分类添加</span>
+                          <input type="text" class="form-control" name="cname" value="{{ $data->qudong_name }}" placeholder="请输入文件名称">
                       </div>
                       <div class="form-group input-group">
                           <span class="input-group-addon">文件下载地址(点击文本框进行上传)</span>
                           <input type="text" class="form-control" name="file_file" value="{{ $data->qudong_files }}" placeholder="请上传文件下载地址" id="file">
+                          <span class="input-group-addon">商品父类</span>
+                            <select name="pid" class="form-control">
+                              <option value="">请选择商品父类</option>
+                              @foreach($cate as $k=>$v)
+                                <option value="{{ $v['id'] }} ">{{ $v['cname'] }}</option>
+                              @endforeach
+                            </select>
                       </div>
+
                       <input type="submit" class="btn btn-primary" value="提交" id="submit">
                       <input type="reset" class="btn btn-default" value="重置">
                     </form>

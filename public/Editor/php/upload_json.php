@@ -34,7 +34,7 @@ $save_path = realpath($save_path) . '/';
 if (!empty($_FILES['imgFile']['error'])) {
 	switch($_FILES['imgFile']['error']){
 		case '1':
-			$error = '超过php.ini允许的大小。';
+			$error = '超过规定允许的大小。';
 			break;
 		case '2':
 			$error = '超过表单允许的大小。';

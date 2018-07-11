@@ -13,7 +13,7 @@
             <div class="panel-heading">@yield('AD2_title')</div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <form action="/admin/user/update/{{ $data -> id}}" method="post" id="isForm">
                     {{ csrf_field() }}
                     @if (session('Error'))

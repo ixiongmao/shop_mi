@@ -21,8 +21,8 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>新消息</div>
+                                    <div class="huge"><?php echo $Feedback_count; ?></div>
+                                    <div>反馈数总计</div>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                     <div class="huge"><?php
                                       echo $U_count;
                                     ?></div>
-                                    <div>全部用户</div>
+                                    <div>全部用户(不包括被冻结的)</div>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,6 @@
                                 ?>
                             </div>
                             <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>
