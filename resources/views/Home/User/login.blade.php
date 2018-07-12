@@ -37,5 +37,9 @@
     <script type="text/javascript">
       layer.msg('{{session('Error')}}');
     </script>
+    @elseif (session('Success'))
+    <script type="text/javascript">
+      layer.msg('{{session('Success')}}');
+    </script>
     @endif
 @endsection

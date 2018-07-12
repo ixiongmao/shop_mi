@@ -122,7 +122,7 @@
                   data:{'u_name':u_name},
                   type:'POST',
                   success:function(msg) {
-                    if (msg == 'Error') {
+                    if (msg == 'Success') {
                       $('#u_name').html('<font style="color:red">用户名可用</font>');
                       isName = true;
                     } else {

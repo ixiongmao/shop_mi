@@ -23,8 +23,6 @@
         <script type="text/javascript" src="/Home/static/js/xiaomi_common.js"></script>
         <script type="text/javascript" src="/Home/static/js/jquery.flipcountdown.js"></script>
         <script type="text/javascript" src="/Home/layui/layui/layui.all.js"></script>
-        <link href="/Home/static/css/index.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="/Home/static/css/seckill.css" type="text/css">
         <link rel="stylesheet" href="/Home/static/css/foot.css" type="text/css">
         <script type="text/javascript" src="/home/static/js/xiaomi_category.js"></script>
         <!-- <script type="text/javascript" src="/Home/static/js/xiaomi_index.js"></script> --></head>
@@ -104,7 +102,7 @@
                             <i class="iconfont"></i></a>
                         <ul class="user-menu" style="display: none;">
                             <li>
-                                <a target="_blank" href="#">个人中心</a></li>
+                                <a target="_blank" href="/user/index">个人中心</a></li>
                             <li>
                                 <a target="_blank" href="#">我的收藏</a></li>
                             <li>
@@ -223,87 +221,11 @@
             </div>
         </div>
         <!-- 整体头部结束 -->
-        <!-- 继承部分开始 -->@yield('content')
+        <!-- 继承部分开始 -->
+        @yield('content')
         <!-- 继承部分结束 -->
         <div class="container">
             <img src="/Home/static/picture/intel_desc_002.jpg" alt="intel" style="position: relative;left: 50%;margin-left: -960px;" /></div>
-        <style type="text/css">.site-footer .footer-links .col-links{ width: 125px; }</style>
-        <!-- 底部开始 -->
-        <!-- <div class="site-footer">
-        <div class="container">
-        <div class="footer-service">
-        <ul class="list-service clearfix">
-        <li>
-        <i class="iconfont">
-        <img src="/Home/static/picture/t01.png" alt="" /></i>1年免费保修</li>
-        <li>
-        <i class="iconfont">
-        <img src="/Home/static/picture/t02.png" alt="" /></i>7天无理由退货</li>
-        <li>
-        <i class="iconfont">
-        <img src="/Home/static/picture/t03.png" alt="" /></i>15天免费换货</li>
-        <li>
-        <i class="iconfont">
-        <img src="/Home/static/picture/t04.png" alt="" /></i>顺丰包邮</li>
-        <li>
-        <i class="iconfont">
-        <img src="/Home/static/picture/t05.png" alt="" /></i>130余家售后网点</li></ul>
-        </div>
-        <div class="footer-links clearfix">
-        <div class="blank"></div>
-        <dl class="col-links">
-        <dt>帮助中心</dt>
-        <dd>
-        <a href="#" target="_blank" title="购物指南" rel="nofollow">购物指南</a></dd></dl>
-        <dl class="col-links">
-        <dt>服务支持</dt>
-        <dd>
-        <a href="#" target="_blank" title="保修政策" rel="nofollow">保修政策</a></dd></dl>
-        <dl class="col-links">
-        <dt>关于雷神</dt>
-        <dd>
-        <a href="#" target="_blank" title="公司介绍" rel="nofollow">公司介绍</a></dd></dl>
-        <dl class="col-links">
-        <dt>品牌资讯</dt>
-        <dd>
-        <a href="#" target="_blank" title="营业执照" rel="nofollow">营业执照</a></dd></dl>
-        <dl class="col-links">
-        <dt>线下门店</dt>
-        <dd>
-        <a href="#" target="_blank" title="售后网点" rel="nofollow">售后网点</a></dd></dl>
-        <div class="col-links">
-        <p style=" font-size:14px; color:#424242; line-height:1.25; font-weight:normal; padding-bottom:26px;">新浪微博</p>
-        <a>
-        <img src="#" width="70px" alt="" /></a></div>
-        <div class="col-links">
-        <p style=" font-size:14px; color:#424242; line-height:1.25; font-weight:normal; padding-bottom:26px;">雷神订阅号</p>
-        <a>
-        <img src="#" width="70px" alt="" /></a></div>
-        <div class="col-links" style="width: 100px">
-        <p style=" font-size:14px; color:#424242; line-height:1.25; font-weight:normal; padding-bottom:26px;">游戏外设群</p>
-        <a>
-        <img src="#" width="70px" alt="" /></a></div>
-        <div class="col-contact">
-        <p class="phone">4006-999-999</p>
-        <p>周一至周日 8:00-18:00
-        <br></p>
-        <a rel="nofollow" class="btn_1 btn-line-primary btn-small" href="#" target="_blank">
-        <i class="iconfont"></i>24小时在线客服</a></div></div>
-        </div>
-        </div>
-        <div class="site-info">
-        <div class="container">
-        <div class="logo ir">雷神官网</div>
-        <div class="info-text">
-        <p class="sites"></p>
-        <p>© 2014-2017 www.leishen.cn 青岛雷神科技股份有限公司 版权所有 全国免费咨询电话：4006-999-999 鲁ICP备14015908号-1</p>
-        </div>
-        <div class="info-links">
-        <a href="#">
-        <img src="#" alt="营业执照"></a></div>
-        </div>
-        </div>
-        <style type="text/css">.btn_1 { display:inline-block; width:158px; height:38px; padding:0; margin:0; border:1px solid #B9000F; font-size:14px; line-height:38px; text-align:center; color:#B9000F; cursor:pointer; -webkit-transition:all .4s; transition:all .4s; }</style> -->
         <div class="footer">
             <div class="container">
                 <div class="footer-service clearfix">

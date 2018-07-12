@@ -33,7 +33,7 @@ class AdminUserController extends Controller
 
     public function Ajax(Request $request)
     {
-        check_admin_purview('0');
+        //check_admin_purview('0');
         $uname = $request->input('u_name');
         $data = DB::table('users')->where('u_name','=',$uname)->first();
         if($data == null){

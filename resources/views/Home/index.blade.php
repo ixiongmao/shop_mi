@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="/Home/static/css/index.css" type="text/css" />
+<link rel="stylesheet" href="/Home/static/css/seckill.css" type="text/css">
 <div class="home-hero-container">
   <div class="home-hero">
     <!-- 幻灯片start -->

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UserIndexController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,7 @@ class UserIndexController extends Controller
     public function index()
     {
         //
-        $get_session = session('Home_Session');
-        // var_dump($get_session);
-        return view('Home.User.index',['get_session'=>$get_session]);
+        return view('Home.User.index');
     }
 
     /**

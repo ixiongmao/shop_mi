@@ -17,8 +17,11 @@ Route::get('/item/{id}','Home\HomeIndexController@item');
 Route::get('/login','Home\UserLoginController@index');
 Route::get('/reg','Home\UserLoginController@register');
 Route::post('/reg/create','Home\UserLoginController@regCreate');
+Route::post('/admin/user/ajax','Admin\AdminUserController@Ajax');
 Route::post('/login/select','Home\UserLoginController@loginIndex');
 Route::get('/logout','Home\UserLoginController@logout');
+
+
 
 Route::group(['middleware'=>'Home_Session'],function() {
   Route::get('/user/index','Home\UserIndexController@index');
@@ -72,7 +75,6 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/user/create','Admin\AdminUserController@create');
    Route::post('/admin/user/store','Admin\AdminUserController@store');
    Route::get('/admin/user/edit/{id}','Admin\AdminUserController@edit');
-   Route::post('/admin/user/ajax','Admin\AdminUserController@Ajax');
    Route::post('/admin/user/update/{id}','Admin\AdminUserController@update');
    Route::get('/admin/user/destroy/{id}','Admin\AdminUserController@destroy');//会员回收站
    Route::get('/admin/user/recycled','Admin\AdminUserController@recycled');//会员回收站显示

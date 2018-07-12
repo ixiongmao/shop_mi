@@ -114,13 +114,13 @@
         var password_pregc = /[0-9a-zA-Z_]{6,16}/g;
         if (password_prega.test(m_password)) {
             isPassword = true;
-            layer.msg('密码强度弱');
+            layer.tips('密码强度弱', '#m_password');
         } else if (password_pregb.test(m_password)) {
             isPassword = true;
-            layer.msg('密码强度中等');
+            layer.tips('密码强度中等', '#m_password');
         } else if (password_pregc.test(m_password)) {
             isPassword = true;
-            layer.msg('密码强度强');
+            layer.tips('密码强度强', '#m_password');
         } else {
             layer.tips('密码格式不正确', '#m_password');
         }
@@ -146,7 +146,6 @@
         var u_email_preg = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
         if (u_email_preg.test(u_email)) {
             isEmail = true;
-            layer.msg('邮箱可用');
         } else {
             layer.tips('邮箱格式不正确', '#m_email');
         }
@@ -159,7 +158,6 @@
         var u_phone_preg = /^1[34578]\d{9}$/;
         if (u_phone_preg.test(u_phone)) {
             isPhone = true;
-            layer.msg('手机号可用');
         } else {
           layer.tips('手机号格式不正确', '#m_phone');
         }
