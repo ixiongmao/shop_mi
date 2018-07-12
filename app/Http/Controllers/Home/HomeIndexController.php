@@ -17,7 +17,8 @@ class HomeIndexController extends Controller
     public function index()
     {
         //
-        return view('Home.Index');
+        $get_session = session('Home_Session');
+        return view('Home.Index',['get_session'=>$get_session]);
     }
 
     /**
@@ -28,7 +29,8 @@ class HomeIndexController extends Controller
     public function list(Request $request,$id)
     {
         //
-        return view('Home.list');
+        $get_session = session('Home_Session');
+        return view('Home.list',['get_session'=>$get_session]);
     }
 
     /**
@@ -39,7 +41,9 @@ class HomeIndexController extends Controller
     public function item(Request $request,$id)
     {
         //
-        return view('Home.item');
+        $get_session = session('Home_Session');
+        $url = $request->url();
+        return view('Home.item',['get_session'=>$get_session,'url'=>$url]);
     }
 
 }

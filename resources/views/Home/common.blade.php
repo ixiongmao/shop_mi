@@ -3,10 +3,12 @@
 
     <head>
         <meta charset="utf-8">
-        <title>分类页</title>
+        <title>@yield('Home_title')</title>
         <meta name="Keywords" content="" />
         <meta name="Description" content="" />
         <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="csrf_token" content="{{ csrf_token() }}" />
+        <link href="/Home/layui/layui/css/layui.css" rel="stylesheet" type="text/css" />
         <link href="/Home/static/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/Home/static/css/category.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="/Home/static/js/jquery-1.9.1.min.js"></script>
@@ -20,8 +22,7 @@
         <script type="text/javascript" src="/Home/static/js/jquery.superslide.js"></script>
         <script type="text/javascript" src="/Home/static/js/xiaomi_common.js"></script>
         <script type="text/javascript" src="/Home/static/js/jquery.flipcountdown.js"></script>
-        <script type="text/javascript" src="/Home/static/js/user.js"></script>
-        <script type="text/javascript" src="http://www.a.com/Home/layui/layui/layui.all.js"></script>
+        <script type="text/javascript" src="/Home/layui/layui/layui.all.js"></script>
         <link href="/Home/static/css/index.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="/Home/static/css/seckill.css" type="text/css">
         <link rel="stylesheet" href="/Home/static/css/foot.css" type="text/css">
@@ -36,9 +37,9 @@
                 <div class="topbar-nav">
                     <a href="index.php" class="snc-link snc-order">首页</a>
                     <span class="sep">|</span>
-                    <a href="list.php" class="snc-link snc-order">列表页</a>
+                    <a href="/list/1" class="snc-link snc-order">列表页</a>
                     <span class="sep">|</span>
-                    <a href="info.php" target="_blank" class="snc-link snc-order">信息页</a>
+                    <a href="/item/1" target="_blank" class="snc-link snc-order">信息页</a>
                     <span class="sep">|</span>
                     <a href="http://www.shenyou.tv/star/" target="_blank" class="snc-link snc-order">游戏星球</a>
                     <span class="sep">|</span></div>
@@ -63,7 +64,7 @@
                                         <i class="iconfont"></i></a>
                                 </div>
                             </li>
-                            <li class="clearfix first">
+                            <li class="clearfix">
                                 <div class="cart-item">
                                     <a class="thumb" target="_blank" href="#">
                                         <img src="http://www.leishen.cn/images/201707/thumb_img/484_thumb_G_1500327433366.jpg"></a>
@@ -73,7 +74,7 @@
                                         <i class="iconfont"></i></a>
                                 </div>
                             </li>
-                            <li class="clearfix first">
+                            <li class="clearfix">
                                 <div class="cart-item">
                                     <a class="thumb" target="_blank" href="#">
                                         <img src="http://www.leishen.cn/images/201707/thumb_img/484_thumb_G_1500327433366.jpg"></a>
@@ -94,11 +95,12 @@
                     </div>
                 </div>
                 <!-- 购物车部分结束 -->
+                @if (session('Home_Session'))
                 <!-- 顶部个人信息开始 -->
                 <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
                     <span class="user">
                         <a class="user-name" target="_blank" href="#">
-                            <span class="name">工资月薪不到11k不改网名</span>
+                            <span class="name">{{ $get_session['u_name'] }}</span>
                             <i class="iconfont"></i></a>
                         <ul class="user-menu" style="display: none;">
                             <li>
@@ -110,18 +112,20 @@
                             <li>
                                 <a target="_blank" href="#">跟踪包裹</a></li>
                             <li>
-                                <a href="#">退出登录</a></li>
+                                <a href="/logout">退出登录</a></li>
                         </ul>
                     </span>
                     <span class="sep">|</span>
                     <a href="#" class="link">我的订单</a></div>
                 <!-- 顶部个人信息结束 -->
+                @else
                 <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
-                    <a class="link" href="#" rel="nofollow">登录</a>
+                    <a class="link" href="/login" rel="nofollow">登录</a>
                     <span class="sep">|</span>
-                    <a class="link" href="#" rel="nofollow">注册</a>
+                    <a class="link" href="/reg" rel="nofollow">注册</a>
                     <span class="sep">|</span>
-                  </div>
+                </div>
+              @endif
             </div>
         </div>
         <!-- 头部结束 -->

@@ -1,9 +1,11 @@
 @extends('Home.common')
 
+@section('Home_title', '1')
+
 @section('Left_Nav')
     @parent
 @endsection
-
+{{ date('Y-m-d H:i:s',time()) }}
 @section('content')
  <link href="/Home/static/css/goods.css" rel="stylesheet" type="text/css" />
  <script type="text/javascript">$(document).ready(function() {
@@ -135,7 +137,7 @@
                              <span class="icon-mob"></span></div>
                            <i class="iconfont"></i>
                            <div class="to-mob-img">
-                             <img src="/Home/static/logo.jpg" width="100%"></div>
+                             <img src="https://api.lwl12.com/img/qrcode/get?ct={{ $url }}&w=200&h=200" width="100%"></div>
                          </div>
                          <li>
                            <span class="lbl">商品库存</span>

@@ -14,7 +14,15 @@
 Route::get('/','Home\HomeIndexController@index');
 Route::get('/list/{id}','Home\HomeIndexController@list');
 Route::get('/item/{id}','Home\HomeIndexController@item');
+Route::get('/login','Home\UserLoginController@index');
+Route::get('/reg','Home\UserLoginController@register');
+Route::post('/reg/create','Home\UserLoginController@regCreate');
+Route::post('/login/select','Home\UserLoginController@loginIndex');
+Route::get('/logout','Home\UserLoginController@logout');
 
+Route::group(['middleware'=>'Home_Session'],function() {
+  Route::get('/user/index','Home\UserIndexController@index');
+});
 //
 /**
  *  Auth：IXiongmao

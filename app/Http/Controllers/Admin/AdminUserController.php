@@ -36,7 +36,7 @@ class AdminUserController extends Controller
         check_admin_purview('0');
         $uname = $request->input('u_name');
         $data = DB::table('users')->where('u_name','=',$uname)->first();
-        if($data){
+        if($data == null){
             echo 'Success';
         }else{
             echo 'Error';

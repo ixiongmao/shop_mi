@@ -478,7 +478,7 @@ input::-ms-reveal {
 	cursor: pointer
 }
 .ng-cookie-area .remember-me{
-	vertical-align:-2px;	
+	vertical-align:-2px;
 }
 
 .checkbox {
@@ -773,7 +773,7 @@ input::-ms-reveal {
 		margin-top: -1px;
 		_margin-top: -3px
 	}
-	
+
 	.code-enter-item {
 		border-radius: 16px;
 		-webkit-box-flex: 1;
@@ -805,7 +805,7 @@ input::-ms-reveal {
 		box-shadow: inset 0 1px 1px #57ca4e;
 		color: #fff;
 	}
-	
+
 /*	.code-img{
 		border-radius:6px;
 		width:46%;
@@ -887,7 +887,7 @@ input {
 }
 .title-big{
 	font-size:20px;
-	margin:0;	
+	margin:0;
 }
 .mauto, .regbox {
 	margin: 0 auto;
@@ -901,7 +901,7 @@ input {
 	padding:10px 0;
 }
 .regbox .trig{
-	text-align:right;	
+	text-align:right;
 	padding-top:15px;
 }
 .regbox .trig a{
@@ -931,7 +931,7 @@ input {
 	display: inline-block;
 }
 .inputbg{
-	position:relative;	
+	position:relative;
 }
 .inputbg input {
 	width: 310px;
@@ -948,32 +948,7 @@ input {
 	display:block\9;
 	*display:block;
 }
-.err_tip, .err_tip_independ {
-	margin-bottom: 5px;
-	line-height: 20px;
-	font-size: 12px;
-	color: #B9000F;
-}
-.err_tip {
-	margin-top: -8px;
-}
-.icon_error, .err_tip_independ {
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFW…eKnuRAYA0QKwFxOxBfAeLfQPwViM8DcQtUbi1MMUCAAQBgriw0RAfMMAAAAABJRU5ErkJggg==);
-	background-repeat: no-repeat;
-	_background-image: none;
-	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="images/n-warning-ico.png");
-}
-.icon_error {
-	width: 14px;
-	height: 14px;
-	margin: -1px 5px 0 0;
-	overflow: hidden;
-	display: inline-block;
-	vertical-align: middle;
-}
-.err_tip span {
-	vertical-align: middle;
-}
+
 .chkcode_img {
 	margin-left: 7px;
 	margin-top:8px;
@@ -1555,7 +1530,7 @@ input {
 	display: inline-block
 }
 
-.dis_n,.listbox,.pwd_tip .icon_error,.app_succ_img,.ap_n_loss {
+.dis_n,.listbox,.app_succ_img,.ap_n_loss {
 	display: none
 }
 
@@ -1655,9 +1630,7 @@ body {
 	line-height: 20px
 }
 
-.err_tip {
-	margin-top: -8px
-}
+
 
 .pwd_tip {
 	color: #555
@@ -1867,10 +1840,6 @@ body {
 	width: 130px
 }
 
-.phone_step2 .err_tip {
-	margin-bottom: 10px
-}
-
 @media screen and (orientation: portrait) {
 	.apfooter {
 		width: 100%;
@@ -1950,7 +1919,7 @@ body {
 		font-size: 14px
 	}
 
-	.ap_n_loss,.inputbg input,.icon_noverify,.noverify a,.inputcode img,.inputcode a,.icon_error,.err_tip span {
+	.ap_n_loss,.inputbg input,.icon_noverify,.noverify a,.inputcode img,.inputcode a span {
 		display: block
 	}
 
@@ -2091,10 +2060,6 @@ body {
 		min-height: 0
 	}
 
-	.err_tip span {
-		-webkit-box-flex: 1;
-		box-flex: 1
-	}
 
 	.fixed_bot {
 		padding-top: 30px;
