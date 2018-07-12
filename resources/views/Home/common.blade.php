@@ -7,6 +7,7 @@
         <meta name="Keywords" content="" />
         <meta name="Description" content="" />
         <link rel="shortcut icon" href="/favicon.ico" />
+        <link href="/Home/layui/layui/css/layui.css" rel="stylesheet" type="text/css" />  
         <link href="/Home/static/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/Home/static/css/category.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="/Home/static/js/jquery-1.9.1.min.js"></script>
@@ -21,11 +22,12 @@
         <script type="text/javascript" src="/Home/static/js/xiaomi_common.js"></script>
         <script type="text/javascript" src="/Home/static/js/jquery.flipcountdown.js"></script>
         <script type="text/javascript" src="/Home/static/js/user.js"></script>
-        <script type="text/javascript" src="http://www.a.com/Home/layui/layui/layui.all.js"></script>
+        <script type="text/javascript" src="/Home/layui/layui/layui.all.js"></script>
         <link href="/Home/static/css/index.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="/Home/static/css/seckill.css" type="text/css">
         <link rel="stylesheet" href="/Home/static/css/foot.css" type="text/css">
         <script type="text/javascript" src="/home/static/js/xiaomi_category.js"></script>
+
         <!-- <script type="text/javascript" src="/Home/static/js/xiaomi_index.js"></script> --></head>
 
     <body style="overflow-x: hidden; background: #fff;">
@@ -358,18 +360,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="friend-links clearfix">
-                    <div class="fl c_ccc">友情链接：</div>
-                    <ul class="fl">
-                        <li class="fl">
-                          <img src="/home/static/logo.jpg" alt="" width="80px" height="40px"></li>
-                        <li class="fl">
-                            <a href="http://ecmoban.com" target="_blank">ecshop模板堂</a></li>
-                        <li class="fl">
-                            <a href="http://ectouch.cn" target="_blank">ECTouch移动商城</a></li>
-                        <li class="fl">
-                                <a href="http://ectouch.cn" target="_blank">ECTouch移动商城</a></li>
-                    </ul>
+                <div class="friend-links clearfix" style="width: 1200px;height:100px">
+                    <div style="width:200px;height: 100px;line-height: 100px;float: left"><span  style="margin-left: 50px;">友情链接</span></div>
+
+
+                
+                    <div style="float: right;width: 1000px;height: 100px;">
+                        <div style="width: 100px;height: 50px;">
+                                <img src="/Uploads/default.jpg" style="width: 100px;height: 50px;margin-top:20px;">
+                                <a href=""><span style="margin-left: 10px;">友情链接</span></a>
+                        </div>
+                    </div>
                   </div>
                 <div class="footer-copyright">
                     <p>© 2005-2018 严选科技商城(fxswl.com) 版权所有，并保留所有权利</p>

@@ -387,10 +387,10 @@
           } else if (ixiongmao_file == '') {
             layer.msg('请上传文件');
             return false;
-          } else if (ixiongmao_radio == undefined) {
+          }/* else if (ixiongmao_radio == undefined) {
             layer.msg('请选择状态或者属性');
             return false;
-          } else if (a_name == '') {
+          } else*/ if (a_name == '') {
             layer.msg('用户不能为空');
             return false;
           } else if ((a_password && a_passwd)  == ''){ // && 一端为false 2边都为false ，|| or 一边为false 另一端还是为true

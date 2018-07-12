@@ -49,9 +49,9 @@
                 <img src="/Home/static/picture/liwu1.png" alt="" /></i>以旧换新</a>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/home/qdxz" target="_blank">
               <i class="iconfont">
-                <img src="/Home/static/picture/sctb2.png" alt="" /></i>驱动下载</a>
+                <img src="/Home/static/picture/sctb2.png" alt="" /></i><span style="color: #e0e0e0">驱动下载</span></a>
           </li>
           <li>
             <a href="#">
@@ -103,7 +103,7 @@
   <!-- 每日推荐start -->
   <div class="xm-plain-box iflashbuy container">
     <div class="box-hd">
-      <h2 class="title">每日秒杀</h2>
+      <h2 class="title">热门产品</h2>
       <div class="more">
         <div class="xm-controls xm-controls-line-small xm-carousel-controls">
           <a class="control control-prev iconfont" href="javascript: void(0);"></a>

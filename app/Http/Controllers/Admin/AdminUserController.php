@@ -22,7 +22,7 @@ class AdminUserController extends Controller
         check_admin_purview('0');
         $get_session = session('Admin_Session');
         $search = $request->input('Search');
-        $data = UsersModel::where('u_name','like','%'.$search.'%')->orderBy('id','asc')->paginate(25);
+        $data = UsersModel::where('u_name','like','%'.$search.'%')->orderBy('id','asc')->paginate(18);
         return view('Admin.User.list',['data'=>$data,'search'=>$search,'get_session'=>$get_session]);
     }
     /**

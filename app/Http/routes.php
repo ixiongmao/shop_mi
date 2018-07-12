@@ -83,3 +83,11 @@ Route::get('/item/{id}','Home\HomeIndexController@item');
    //Route::get('/admin/feedback/edit/{id}','Admin\AdminFeedbackController@edit');
    Route::get('/admin/feedback/del/{id}','Admin\AdminFeedbackController@destroy');
  });
+
+
+
+
+
+
+//index   驱动下载
+Route::get('/home/qdxz','Home\HomeQuDongController@index');
