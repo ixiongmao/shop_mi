@@ -12,6 +12,7 @@ use App\Http\Requests\GoodInsertRequest;
 use App\Models\Admin\GoodsModel;
 use App\Models\Admin\GoodsDetails;
 use App\Models\Admin\CateModel;
+use App\Models\GoodsMondels;
 
 class GoodsController extends Controller
 {
@@ -28,10 +29,12 @@ class GoodsController extends Controller
         $data = GoodsModel::paginate(25);
         $detail = GoodsDetails::all();
         $cate = CateModel::all();
+
+        $get_session = session('Admin_Session');
         
 
         
-        return view('Admin.Good.list',['data'=>$data,'detail'=>$detail,'cate'=>$cate]);
+        return view('Admin.Good.list',['data'=>$data,'detail'=>$detail,'cate'=>$cate,'get_session'=>$get_session]);
 
     }
 
@@ -43,12 +46,14 @@ class GoodsController extends Controller
     public function create()
     {
         //
+        $get_session = session('Admin_Session');
+
         $user = DB::table('users')->get();
 
         $cate = CateModel::all();
         $meal = DB::table('goods_meals')->select('id','goods_meals_detail')->get();
 
-        return view('Admin.Good.add',['user'=>$user,'cate'=>$cate,'meal'=>$meal]);
+        return view('Admin.Good.add',['user'=>$user,'cate'=>$cate,'meal'=>$meal,'get_session'=>$get_session]);
     }
 
     /**
