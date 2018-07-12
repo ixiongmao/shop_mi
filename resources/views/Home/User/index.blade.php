@@ -7,7 +7,34 @@
                                 <div class="box_1">
                                     <div class="userCenterBox boxCenterList clearfix" style="_height:1%; font-size:14px;">
                                         <div class="user-card">
-                                            <h2 class="username">工资月薪不到11k不改网名</h2>
+                                            <h2 class="username">
+                                              <script type="text/javascript">
+                                              function dtime() {
+                                                //获取当前的时间
+                                                var tdate = new Date;
+                                                //获取当前小时
+                                                var ho = tdate.getHours();
+                                                if (ho < 6) {
+                                                 document.write('凌晨了，该休息了，安');
+                                                }else if (ho < 9) {
+                                                 document.write('早晨好:');
+                                                }else if (ho < 11) {
+                                                 document.write('上午好:');
+                                                }else if (ho < 13) {
+                                                 document.write('中午好:');
+                                               }else if (ho < 17) {
+                                                 document.write('下午好:');
+                                               }else if (ho < 18) {
+                                                 document.write('傍晚好:');
+                                               }else if (ho < 22) {
+                                                 document.write('晚上好:');
+                                               }else{
+                                                 document.write('夜里好,该去休息了');
+                                               }
+                                              }
+                                                dtime();
+                                              </script>
+                                            {{ $get_session['u_name'] }}</h2>
                                             <p class="tip" style="margin-top: 10px">欢迎您回到 ~</p>
                                             <a class="link" href="http://www.leishen.cn/user/profile">修改个人资料</a>
                                             <img class="avatar" src="{{ $get_session['u_photo'] }}"></div>
