@@ -27,9 +27,11 @@ class UserIndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function Uindex()
     {
         //
+        $get_session = session('Home_Session');
+        return view('Home.User.user',['get_session'=>$get_session]);
     }
 
     /**

@@ -14,24 +14,12 @@
       <div id="J_homeSlider" style="overflow:hidden;">
         <div class="bd">
           <ul>
-            <li _src="url()" style="background:#f8f8f8 center 0 no-repeat;">
-              <a target="_blank" href="#"></a>
-            </li>
-            <li _src="url()" style="background:#f8f8f8 center 0 no-repeat;">
-              <a target="_blank" href="#"></a>
-            </li>
-            <li _src="url()" style="background:#f8f8f8 center 0 no-repeat;">
-              <a target="_blank" href="#"></a>
-            </li>
-            <li _src="url()" style="background:#f8f8f8 center 0 no-repeat;">
-              <a target="_blank" href="#"></a>
-            </li>
-            <li _src="url()" style="background:#f8f8f8 center 0 no-repeat;">
-              <a target="_blank" href="#"></a>
-            </li>
-            <li _src="url()" style="background:#f8f8f8 center 0 no-repeat;">
-              <a target="_blank" href="#"></a>
-            </li>
+            @foreach ($banner as $k=>$v)
+              @if ($v['banner_status'] == 1)
+              <li _src="url({{ $v['banner_pic'] }})" style="background:#f8f8f8 center 0 no-repeat;">
+                <a target="_blank" href="{{ $v['banner_url'] }}"></a></li>
+              @endif
+            @endforeach
           </ul>
         </div>
         <div class="hd">
@@ -83,7 +71,7 @@
         <!-- 广告区end -->
         <!-- 新闻区 -->
         <div class="news_content">
-          <span class="news_title">雷神快报</span>
+          <span class="news_title">快报</span>
           <a style="float:right;" href="#" target="_blank">更多</a>
           <div class="clearfix"></div>
           <ul>
@@ -105,7 +93,7 @@
   <!-- 每日推荐start -->
   <div class="xm-plain-box iflashbuy container">
     <div class="box-hd">
-      <h2 class="title">每日秒杀</h2>
+      <h2 class="title">每日推荐</h2>
       <div class="more">
         <div class="xm-controls xm-controls-line-small xm-carousel-controls">
           <a class="control control-prev iconfont" href="javascript: void(0);"></a>

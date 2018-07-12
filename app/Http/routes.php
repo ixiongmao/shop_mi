@@ -25,6 +25,7 @@ Route::get('/logout','Home\UserLoginController@logout');
 
 Route::group(['middleware'=>'Home_Session'],function() {
   Route::get('/user/index','Home\UserIndexController@index');
+  Route::get('/user/user','Home\UserIndexController@Uindex');
 });
 //
 /**
@@ -79,7 +80,6 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::post('/admin/good_ajax/store','Admin\GoodsAjaxController@store');
 
    //后台组合套餐模块
-
    Route::get('/admin/meal/create','Admin\AdminMealController@create');
    Route::post('/admin/meal/store','Admin\AdminMealController@store');
    Route::get('/admin/meal/index','Admin\AdminMealController@index');
@@ -117,4 +117,12 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/feedback/index','Admin\AdminFeedbackController@index');
    //Route::get('/admin/feedback/edit/{id}','Admin\AdminFeedbackController@edit');
    Route::get('/admin/feedback/del/{id}','Admin\AdminFeedbackController@destroy');
+
+   // 后台首页幻灯片操作
+   Route::get('/admin/banner/index','Admin\AdminBannerController@index');
+   Route::get('/admin/banner/create','Admin\AdminBannerController@create');
+   Route::post('/admin/banner/store','Admin\AdminBannerController@store');
+   Route::get('/admin/banner/edit/{id}','Admin\AdminBannerController@edit');
+   Route::post('/admin/banner/update/{id}','Admin\AdminBannerController@update');
+   Route::get('/admin/banner/del/{id}','Admin\AdminBannerController@destroy');
  });

@@ -344,6 +344,17 @@
                     <a href="/admin/feedback/index">查看友情</a></li>
                 </ul>
               </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>幻灯片管理
+                  <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="/admin/banner/create">添加幻灯片</a></li>
+                  <li>
+                    <a href="/admin/banner/index">查看幻灯片</a></li>
+                </ul>
+              </li>
               <!-- 注释为IXiongmao -->
               <li>
                 <a href="#">
@@ -398,6 +409,9 @@
           // }
           if (f_name == '') {
             layer.msg('请输入文件名称');
+            return false;
+          } else if (ixiongmao_pic == '') {
+            layer.msg('请上传图片');
             return false;
           } else if (ixiongmao_file == '') {
             layer.msg('请上传文件');
