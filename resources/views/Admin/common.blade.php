@@ -273,6 +273,21 @@
                     <a href="/admin/cate/index">查看分类</a></li>
                 </ul>
               </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>商品管理
+                  <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="/admin/good/create">添加商品</a></li>
+                  <li>
+                    <a href="/admin/good/index">查看商品</a></li>
+                  <li>
+                    <a href="/admin/meal/create">添加套餐</a></li>
+                  <li>
+                    <a href="/admin/meal/index">查看套餐</a></li>
+                </ul>
+              </li>
               <!-- 注释为Song -->
               <li>
                 <a href="#">
@@ -387,12 +402,7 @@
           } else if (ixiongmao_file == '') {
             layer.msg('请上传文件');
             return false;
-          } 
-          // if (ixiongmao_radio == undefined) {
-          //   layer.msg('请选择状态或者属性');
-          //   return false;
-          // } else
-          if (a_name == '') {
+          } else if (a_name == '') {
             layer.msg('用户不能为空');
             return false;
           } else if ((a_password && a_passwd)  == ''){ // && 一端为false 2边都为false ，|| or 一边为false 另一端还是为true

@@ -55,6 +55,7 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/admin/record/{id}','Admin\AdminAdminController@Record_index');
 
 
+
    //后台商品分类
    Route::get('/admin/cate/create','Admin\AdminCateController@create');
    Route::post('/admin/cate/store','Admin\AdminCateController@store');
@@ -62,6 +63,30 @@ Route::group(['middleware'=>'Home_Session'],function() {
    // Route::get('/admin/cate/del/{id}','Admin\AdminCateController@destroy');
    // Route::get('/admin/cate/edit/{id}','Admin\AdminCateController@edit');
    // Route::post('/admin/cate/update/{id}','Admin\AdminCateController@update');
+
+
+   //后台 商品添加模块
+
+   Route::get('/admin/good/index','Admin\GoodsController@index');
+   Route::get('/admin/good/create','Admin\GoodsController@create');
+   Route::post('/admin/good/store','Admin\GoodsController@store');
+   Route::get('/admin/good/edit/{id}','Admin\GoodsController@edit');
+   Route::get('/admin/good/update/{id}','Admin\GoodsController@update');
+   Route::get('/admin/good/destroy/{id}','Admin\GoodsController@destroy');
+   //Route::post('/admin/good/delAll','Admin\GoodsController@delAll');
+
+   //后台商品模块AJAX验证
+   Route::post('/admin/good_ajax/store','Admin\GoodsAjaxController@store');
+
+   //后台组合套餐模块
+
+   Route::get('/admin/meal/create','Admin\AdminMealController@create');
+   Route::post('/admin/meal/store','Admin\AdminMealController@store');
+   Route::get('/admin/meal/index','Admin\AdminMealController@index');
+   Route::get('/admin/meal/edit/{id}','Admin\AdminMealController@edit');
+   Route::post('/admin/meal/update','Admin\AdminMealController@update');
+   Route::get('/admin/meal/delete/{id}','Admin\AdminMealController@delete');
+
 
    // 后台广告操作
    Route::get('/admin/ad/index','Admin\AdminAdController@index');
