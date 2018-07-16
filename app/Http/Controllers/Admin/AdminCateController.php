@@ -37,7 +37,7 @@ class AdminCateController extends Controller
     {
         check_admin_purview('0');
         $get_session = session('Admin_Session');
-        $data = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(19);
+        $data = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->get();
         foreach ($data as $k => $v) {
              $n = substr_count($v->path,',');
              $data[$k]->cname = str_repeat('|----',$n).$data[$k]->cname;
@@ -69,13 +69,13 @@ class AdminCateController extends Controller
         if ($data -> save()) {
             return redirect('/admin/cate/index')->with('Success','添加成功');
         }else{
-            return back()->with('Success','添加失败');
+            return back()->with('Error','添加失败');
         }
     }
 
 
     /**
-     * Show the form for editing the specified resource.
+     * 修改商品分类
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -83,6 +83,14 @@ class AdminCateController extends Controller
     public function edit($id)
     {
         //
+        $get_session = session('Admin_Session');
+        $cate = CateModel::find($id);
+        $cates = CateModel::all();
+       
+        /*echo "<pre>";
+        var_dump($cate);*/
+        return view('Admin.Cate.edit',['cate'=>$cate,'cates'=>$cates,'get_session'=>$get_session]);
+        
     }
 
     /**

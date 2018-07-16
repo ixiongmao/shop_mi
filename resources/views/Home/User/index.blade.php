@@ -7,76 +7,56 @@
                                 <div class="box_1">
                                     <div class="userCenterBox boxCenterList clearfix" style="_height:1%; font-size:14px;">
                                         <div class="user-card">
-                                            <h2 class="username">
-                                              <script type="text/javascript">
-                                              function dtime() {
-                                                //获取当前的时间
-                                                var tdate = new Date;
-                                                //获取当前小时
-                                                var ho = tdate.getHours();
-                                                if (ho < 6) {
-                                                 document.write('凌晨了，该休息了，安');
-                                                }else if (ho < 9) {
-                                                 document.write('早晨好:');
-                                                }else if (ho < 11) {
-                                                 document.write('上午好:');
-                                                }else if (ho < 13) {
-                                                 document.write('中午好:');
-                                               }else if (ho < 17) {
-                                                 document.write('下午好:');
-                                               }else if (ho < 18) {
-                                                 document.write('傍晚好:');
-                                               }else if (ho < 22) {
-                                                 document.write('晚上好:');
-                                               }else{
-                                                 document.write('夜里好,该去休息了');
-                                               }
-                                              }
-                                                dtime();
-                                              </script>
-                                            {{ $get_session['u_name'] }}</h2>
-                                            <p class="tip" style="margin-top: 10px">欢迎您回到 ~</p>
-                                            <a class="link" href="http://www.leishen.cn/user/profile">修改个人资料</a>
+                                            <h2 class="username">欢迎你，{{ $get_session['u_name'] }}</h2>
+                                            <p class="tip" style="margin-top: 10px">                                              <script type="text/javascript">
+                                                                                          function dtime() {
+                                                                                            //获取当前的时间
+                                                                                            var tdate = new Date;
+                                                                                            //获取当前小时
+                                                                                            var ho = tdate.getHours();
+                                                                                            if (ho < 6) {
+                                                                                             document.write('凌晨了，该休息了，安');
+                                                                                            }else if (ho < 9) {
+                                                                                             document.write('早晨好：');
+                                                                                            }else if (ho < 11) {
+                                                                                             document.write('上午好：');
+                                                                                            }else if (ho < 13) {
+                                                                                             document.write('中午好：');
+                                                                                           }else if (ho < 17) {
+                                                                                             document.write('下午好：');
+                                                                                           }else if (ho < 18) {
+                                                                                             document.write('傍晚好：');
+                                                                                           }else if (ho < 22) {
+                                                                                             document.write('晚上好：');
+                                                                                           }else{
+                                                                                             document.write('夜里好,该去休息了');
+                                                                                           }
+                                                                                          }
+                                                                                            dtime();
+                                                                                          </script>{{ $get_session['u_name']}}~</p>
                                             <img class="avatar" src="{{ $get_session['u_photo'] }}"></div>
                                         <div class="user-actions">
                                             <ul class="action-list">
-                                                <li>用户名：{{ $get_session['u_name'] }}</li>
+                                                <li>绑定手机：{{ $get_session['u_phone']}}</li>
                                                 <li>您的等级: 普通用户</li>
                                                 <li>您的上一次登录时间：2018-07-12 10:12:01</li>
                                                 <li style="color: #B9000F">
-                                                    <a href="http://www.leishen.cn/companies_register" style="text-align:center;color: #fff;background: #B9000F;border-radius: 3px;line-height: 30px;height: 30px;width: 180px;display: inline-block">升级为企业用户</a></li>
+                                                    <a href="/user/my_information" style="text-align:center;color: #fff;background: #B9000F;border-radius: 3px;line-height: 30px;height: 30px;width: 180px;display: inline-block">修改个人资料</a></li>
                                             </ul>
                                         </div>
                                     </div>
-
-                                    <!-- <script type="text/javascript">
-                                      layer.open({
-                                            id: 1,
-                                            type: 1,
-                                            title: '修改密码',
-                                            area: ['480px'],
-
-                                            content: '<div class="layui-form-item" style="margin: 10px 0px 10px 0px;">' + '<label class="layui-form-label" style="width: 50px;">输入框</label>' + '<div class="layui-input-block" style="margin-left: 55px;">' + ' <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:80%">' + ' </div>' + ' </div>' + '<div class="layui-form-item" style="margin: 10px 0px 10px 0px;">' + '<label class="layui-form-label" style="width: 50px;">输入框</label>' + '<div class="layui-input-block" style="margin-left: 55px;">' + ' <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:80%">' + ' </div>' + ' </div>',
-                                            btn: ['保存', '取消'],
-                                            btn1: function(index, layero) {},
-                                            btn2: function(index, layero) {
-                                                layer.close(index);
-                                            }
-
-                                        });
-                                      </script> -->
                                     <div class="portal-sub">
                                         <ul class="info-list clearfix" style="margin-left: 30px">
                                             <li>
                                                 <h3>余额：
                                                     <span class="num">{{ $get_session['u_money'] }}</span></h3>
-                                                <a href="http://www.leishen.cn/user/my_money">查看您的账户余额
+                                                <a href="/user/my_balance">查看我账户的余额
                                                     <i class="iconfont"></i></a>
                                                 <img src="/Home/static/images/user/index/portal-icon-1.png"></li>
                                             <li>
-                                                <h3>优惠券：
+                                                <h3>积分：
                                                     <span class="num">共计 1 个,价值 200.00</span></h3>
-                                                <a href="http://www.leishen.cn/user/bonus">查看您的账户优惠券
+                                                <a href="/user/my_integral">查看我账户的积分
                                                     <i class="iconfont"></i></a>
                                                 <img src="/Home/static/images/user/index/portal-icon-2.png"></li>
                                             <li>
@@ -86,23 +66,21 @@
                                                     <a style="color: #B9000F;" href="http://www.leishen.cn/try_list">0元抽奖</a>抽奖</h4>
                                                 <img src="/Home/static/images/user/index/portal-icon-3.png"></li>
                                             <li>
-                                                <h3>用户提醒：
-                                                    <span class="num">您最近30天内提交了0个订单
-                                                        <br></span></h3>
-                                                <img src="/Home/static/images/user/index/portal-icon-4.png"></li>
+                                                <h3>收藏：
+                                                        <span class="num">1000</span></h3>
+                                                    <a href="/user/my_integral">查看我账户的收藏
+                                                        <i class="iconfont"></i></a>
+                                                    <img src="/Home/static/images/user/index/portal-icon-4.png"></li>
                                         </ul>
                                     </div>
                                     <div class="userCenterBox boxCenterList clearfix" style="_height:1%;">
-                                        <h1>我的订单</h1>
+                                        <h1>我的登录记录</h1>
                                         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
                                             <tbody>
                                                 <tr align="center">
-                                                    <td bgcolor="#ffffff">订单号</td>
-                                                    <td bgcolor="#ffffff">下单时间</td>
-                                                    <td bgcolor="#ffffff">订单总金额</td>
-                                                    <td bgcolor="#ffffff">订单状态</td>
-                                                    <td bgcolor="#ffffff">服务</td>
-                                                    <td bgcolor="#ffffff">操作</td></tr>
+                                                    <td bgcolor="#ffffff">IP地址</td>
+                                                    <td bgcolor="#ffffff">时间</td>
+                                                  </tr>
                                             </tbody>
                                         </table>
                                         <form name="selectPageForm" action="http://www.leishen.cn//user.php" method="get">

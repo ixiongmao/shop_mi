@@ -66,7 +66,8 @@ class GoodsController extends Controller
     {
 
          $data = $request -> all();
-
+         //获取操作人
+         $get_session = session('Admin_Session');
           //事务回滚开始
          DB::beginTransaction();
           // 判断主图片是否存在
@@ -79,10 +80,14 @@ class GoodsController extends Controller
            $name = $temp_name.'.'.$ext;
            $dirname = date('Ymd',time());
            $res = $profile -> move('./Admin/uploads/'.$dirname,$name);
-           $path = $dirname.'/'.$name;
-        
+           $path = '/Admin/uploads/'.$dirname.'/'.$name;
+
            //执行添加数据  返回ID
-           $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$name,'goods_path'=>$path,'goods_price'=>$data['goods_price'],'goods_sales_status'=>$data['goods_sales_status'],'goods_sales_price'=>$data['goods_sales_price'],'display'=>$data['display'],'handler'=>$data['handler']]);
+           if($data['goods_sales_status']){
+             $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$path,'goods_price'=>$data['goods_price'],'goods_sales_status'=>$data['goods_sales_status'],'goods_sales_price'=>$data['goods_sales_price'],'goods_sales_start'=>strtotime($data['goods_sales_start']),'goods_sales_end'=>strtotime($data['goods_sales_end']),'display'=>$data['display'],'handler'=>$get_session['a_name'],'hander_time'=>date('Y-m-d H:i:s',time())]);
+           }else{
+                $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$path,'goods_price'=>$data['goods_price'],'display'=>$data['display'],'handler'=>$get_session['a_name'],'hander_time'=>date('Y-m-d H:i:s',time())]);
+           }
           }
 
 
@@ -96,13 +101,14 @@ class GoodsController extends Controller
              $name = $temp_name.'.'.$ext;
              $dirname = date('Ymd',time());
              $res = $v -> move('./Admin/uploads_pic/'.$dirname,$name);
-             $names[] = $name;
+             $names[] = '/Admin/uploads_pic/'.$dirname.'/'.$name;
             }
+
 
             $goods_set_meals = $data['meal1'].','.$data['meal2'];
 
            //执行添加数据  返回ID
-           $num = DB::table('goods_details')->insert(['gid'=>$gid,'goods_score'=>$data['goods_score'],'goods_nums'=>$data['goods_nums'],'goods_pics'=>implode(",",$names),'goods_paths'=>$dirname,'goods_tail'=>$data['goods_tail'],'goods_set_meals'=>$goods_set_meals]);
+           $num = DB::table('goods_details')->insert(['gid'=>$gid,'goods_score'=>$data['goods_score'],'goods_nums'=>$data['goods_nums'],'goods_pics'=>implode(",",$names),'goods_tail'=>$data['goods_tail'],'goods_set_meals'=>$goods_set_meals]);
 
 
            if($gid && $num){
@@ -175,11 +181,11 @@ class GoodsController extends Controller
            $temp_name = str_random(15);
            $name = $temp_name.'.'.$ext;
            $dirname = date('Ymd',time());
-           $res = $profile -> move('./uploads/'.$dirname,$name);
-           $path = $dirname.'/'.$name;
+           $res = $profile -> move('./Admin/uploads/'.$dirname,$name);
+   /*        $path = $dirname.'/'.$name;*/
           }
           if($res){
-              $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$name,'goods_path'=>$path,'goods_price'=>$data['goods_price'],'display'=>$data['display'],'handler'=>$data['handler']]);
+              $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$res,'goods_price'=>$data['goods_price'],'goods_sales_time'=>$data['goods_sales_time'],'display'=>$data['display'],'handler'=>$data['handler']]);
             }
 
             $profile = $request->file('goods_pics');
@@ -190,8 +196,8 @@ class GoodsController extends Controller
              $temp_name = str_random(5);
              $name = $temp_name.'.'.$ext;
              $dirname = date('Ymd',time());
-             $res = $v -> move('./uploads_pic/'.$dirname,$name);
-             $names[] = $name;
+             $res = $v -> move('./Admin/uploads_pic/'.$dirname,$name);
+             $names[] = '/Admin/uploads_pic/'.$dirname.'/'.$name;
         }
 
            $num = DB::table('goods_details')->insert(['gid'=>$gid,'goods_brand'=>$data['goods_brand'],'goods_nums'=>$data['goods_nums'],'goods_pics'=>implode(",",$names),'goods_tail'=>$data['goods_tail']]);

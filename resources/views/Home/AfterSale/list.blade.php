@@ -1,6 +1,6 @@
 @extends('Home.common')
 
-@section('Home_title', '文章列表')
+@section('Home_title', '售后网点')
 
 @section('Left_Nav')
     @parent
@@ -23,17 +23,17 @@
     <table class="layui-table" style=" display:inline-block; width:1122px;">
         <thead>
             <tr>
-                <th style="width:373px;">文章名称</th>
-                <th style="width:373px;">作者</th>
-                <th style="width:373px;">发布时间</th></tr>
+                <th style="width:373px;">售后网点地址</th>
+                <th style="width:373px;">联系电话</th>
+                <th style="width:373px;">售后范围</th></tr>
         </thead>
         <tbody>
           @foreach ($data as $k=>$v)
             <tr>
                 <td style="width:374px;">
-                    <a href="/news/{{ $v['id'] }}">{{ $v['news_name'] }}</a></td>
-                <td style="width:374px;"></td>
-                <td style="width:374px;">{{ date('Y-m-d H:i:s',$v['news_time']) }}</td>
+                    <a href="/news/{{ $v['id'] }}">{{ $v['aftersale_site'] }}</a></td>
+                <td style="width:374px;">{{ $v['aftersale_phone'] }}</td>
+                <td style="width:374px;">{{ $v['aftersale_scope'] }}</td>
             </tr>
             @endforeach
           </tbody>

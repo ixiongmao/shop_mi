@@ -3,9 +3,9 @@
 
     <head>
         <meta charset="utf-8">
-        <title>@yield('Home_title')</title>
-        <meta name="Keywords" content="" />
-        <meta name="Description" content="" />
+        <title>@yield('Home_title'){{ $systems['system_name'] }}</title>
+        <meta name="Keywords" content="{{ $systems['system_keywords'] }}" />
+        <meta name="Description" content="{{ $systems['system_description'] }}" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link href="/Home/layui/layui/css/layui.css" rel="stylesheet" type="text/css" />
@@ -25,7 +25,9 @@
         <script type="text/javascript" src="/Home/layui/layui/layui.all.js"></script>
         <link rel="stylesheet" href="/Home/static/css/foot.css" type="text/css">
         <script type="text/javascript" src="/home/static/js/xiaomi_category.js"></script>
-        <!-- <script type="text/javascript" src="/Home/static/js/xiaomi_index.js"></script> --></head>
+        <!-- <script type="text/javascript" src="/Home/static/js/xiaomi_index.js"></script> -->
+
+      </head>
 
     <body style="overflow-x: hidden; background: #fff;">
         <!-- 头部开始 -->
@@ -131,7 +133,7 @@
                 <!-- LOGo -->
                 <div class="header-log1 fl" style="margin-top:22px; margin-right: 5px">
                     <a href="/" target="_blank">
-                        <img src="/Home/static/picture/logozui.jpg" style="width:234px" /></a>
+                        <img src="{{ $systems['system_logo'] }}" style="width:234px" /></a>
                 </div>
                 <!-- LOGo -->
                 <!-- 搜索开始 -->
@@ -156,35 +158,50 @@
                               <ul class="site-category-list clearfix" id="site-category-list">
                                 <!-- 左start -->
 
-                                    <li class="category-item">
-                                        <a class="title" href="/list/1">123
-                                            <i class="iconfont"></i></a>
-                                        <div class="children clearfix children_2 children-col-4">
-                                            <div class="children-home-quan">
-                                              <!-- 右商品start -->
-                                                <ul class="children-list">
-                                                    <div class="home-category-child-list clearfix">
-                                                        <a href="http://www.leishen.cn/list/121" title="" class="home-category-list">1
-                                                            <i class="iconfont fr"></i></a>
-                                                    </div>
-                                                    <li>
-                                                        <a class="link" href="http://www.leishen.cn/item/422">
-                                                            <img class="thumb" src="http://www.leishen.cn/images/201712/thumb_img/422_thumb_G_1512686602167.jpg" width="40" height="40">
-                                                            <span>ST-Pro启天版</span></a>
-                                                    </li>
-                                                </ul>
-
-                                                <!-- 右商品end -->
-                                            </div>
-                                        </div>
-                                    </li>
+                                <!-- 左侧导航栏遍历开始 -->
+                                  @foreach($Cate as $k=>$v)
+                                  <li class="category-item">
+                                      @if(substr_count($v['path'],',')==0)
+                                      <a class="title" href="/list/{{ $v['id'] }}">{{ $v['cname'] }}
+                                          <i class="iconfont"></i></a>
+                                      <div class="children clearfix children_2">
+                                          <div class="children-home-quan">
+                                              <ul class="children-list">
+                                                  @foreach($Cate as $ka=>$va)
+                                                  @if($va['pid']==$v['id'])
+                                                  <div class="home-category-child-list clearfix">
+                                                      <a href="/list/{{ $va['id'] }}" title="" class="home-category-list">{{ $va['cname'] }}
+                                                      <i class="iconfont fr"></i></a>
+                                                  </div>
+                                                  @foreach($Cate as $key=>$val)
+                                                  @if($val['pid']==$va['id'])
+                                                  <li><!-- 商品分类搜索 -->
+                                                      @foreach($good as $kels=>$vals)
+                                                      @if($vals['goods_cates']==$val['id'])
+                                                      <a class="link" href="/item/{{ $vals['id'] }}">
+                                                          <img class="thumb" src="/Home/static/logo.jpg" width="40" height="40">
+                                                          <span>{{ $val['cname'] }}</span></a>
+                                                      @endif
+                                                      @endforeach
+                                                  </li>
+                                                  @endif
+                                                  @endforeach
+                                                  @endif
+                                                  @endforeach
+                                              </ul>
+                                          </div>
+                                      </div>
+                                      @endif
+                                  </li>
+                                  @endforeach
+                                  <!-- 左侧导航栏遍历结束 -->
 
                                   <!-- 左end -->
                                   <!-- 单个start -->
-                                  <li class="category-item">
+                                  <!-- <li class="category-item">
                                       <a class="title" href="#">免费试用
                                           <i class="iconfont"></i></a>
-                                  </li>
+                                  </li> -->
                                   <!-- 单个end -->
                               </ul>
                             </div>
@@ -283,7 +300,7 @@
                     <div class="contact">
                         <h3>联系我们<small>(电话号码)</small></h3>
                         <div class="tel">
-                            <div class="number">18888888888</div></div>
+                            <div class="number">{{ $systems['system_phone'] }}</div></div>
                         <div class="qrcode clearfix">
                             <div class="qrcode-item">
                                 <img src="/home/static/images/index/foot/erweima.png" alt="" width="110px" height="110px">
@@ -293,20 +310,19 @@
                     </div>
                 </div>
                 <div class="friend-links clearfix">
-                    <div class="fl c_ccc">友情链接：</div>
-                    <ul class="fl">
-                        <li class="fl">
-                          <img src="/home/static/logo.jpg" alt="" width="80px" height="40px"></li>
-                        <li class="fl">
-                            <a href="http://ecmoban.com" target="_blank">ecshop模板堂</a></li>
-                        <li class="fl">
-                            <a href="http://ectouch.cn" target="_blank">ECTouch移动商城</a></li>
-                        <li class="fl">
-                                <a href="http://ectouch.cn" target="_blank">ECTouch移动商城</a></li>
-                    </ul>
+                  <div class="fl c_ccc">友情链接：</div>
+                  <ul class="fl">
+                  @foreach ($Links as $k=>$v)
+                  @if ($v['links_pic'] != null)
+                  <li class="fl"><a href="{{ $v['links_url'] }}" target="_blank"><img src="{{ $v['links_pic'] }}" alt="{{ $v['links_name'] }}" title="{{ $v['links_name'] }}" width="80px" height="40px"></a></li>
+                  @endif
+                  @endforeach
+                  </ul>
                   </div>
+
+
                 <div class="footer-copyright">
-                    <p>© 2005-2018 严选科技商城(fxswl.com) 版权所有，并保留所有权利</p>
+                  {!! $systems['system_copyright'] !!}
                 </div>
             </div>
         </div>

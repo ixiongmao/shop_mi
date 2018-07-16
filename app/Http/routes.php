@@ -23,6 +23,8 @@ Route::get('/Search','Home\HomeIndexController@Search');
 //前台文章显示
 Route::get('/news','Home\HomeNewsController@index');
 Route::get('/news/{id}','Home\HomeNewsController@show');
+//售后网点
+Route::get('/aftersale_site','Home\HomeAfterSaleController@index');
 //登录注册操作
 Route::get('/login','Home\UserLoginController@Login');
 Route::post('/login/select','Home\UserLoginController@LoginIndex');
@@ -42,6 +44,10 @@ Route::group(['middleware'=>'Home_Session'],function() {
   Route::get('/user/user','Home\UserIndexController@Uindex');
   //订单中心
   Route::get('/user/user','Home\UserOrderController@index');
+  //修改我的资料
+  Route::post('/User/My/Ajax','Home\UserController@Ajax');
+  Route::get('/user/my_information','Home\UserMyInformationController@index');
+
   //售后服务
   Route::get('/user/aftersale','Home\UserAfterSaleController@index');
 
@@ -83,12 +89,12 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/admin/record/{id}','Admin\AdminAdminController@Record_index');
 
    //后台商品分类
-   Route::get('/admin/cate/create','Admin\AdminCateController@create');
-   Route::post('/admin/cate/store','Admin\AdminCateController@store');
-   Route::get('/admin/cate/index','Admin\AdminCateController@index');
-   // Route::get('/admin/cate/del/{id}','Admin\AdminCateController@destroy');
-   // Route::get('/admin/cate/edit/{id}','Admin\AdminCateController@edit');
-   // Route::post('/admin/cate/update/{id}','Admin\AdminCateController@update');
+  Route::get('/admin/cate/create','Admin\AdminCateController@create');
+  Route::post('/admin/cate/store','Admin\AdminCateController@store');
+  Route::get('/admin/cate/index','Admin\AdminCateController@index');
+  // Route::get('/admin/cate/del/{id}','Admin\AdminCateController@destroy');
+  Route::get('/admin/cate/edit/{id}','Admin\AdminCateController@edit');
+  // Route::post('/admin/cate/update/{id}','Admin\AdminCateController@update');
 
 
    //后台 商品添加模块
@@ -174,4 +180,12 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/links/edit/{id}','Admin\AdminLinksController@edit');
    Route::post('/admin/links/update/{id}','Admin\AdminLinksController@update');
    Route::get('/admin/links/del/{id}','Admin\AdminLinksController@destroy');
+
+   // 后台售后网点操作
+   Route::get('/admin/aftersale_site/index','Admin\AdminAfterSaleController@index');
+   Route::get('/admin/aftersale_site/create','Admin\AdminAfterSaleController@create');
+   Route::post('/admin/aftersale_site/store','Admin\AdminAfterSaleController@store');
+   Route::get('/admin/aftersale_site/edit/{id}','Admin\AdminAfterSaleController@edit');
+   Route::post('/admin/aftersale_site/update/{id}','Admin\AdminAfterSaleController@update');
+   Route::get('/admin/aftersale_site/del/{id}','Admin\AdminAfterSaleController@destroy');
  });

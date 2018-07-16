@@ -15,7 +15,7 @@
     overflow: hidden;
 }
 .fa-detail{
-    background: url("../images/user_01.png") no-repeat;
+    background: url("../../images/user/index/user_01.png") no-repeat;
     width: 40px;
     height: 40px;
     display: inline-block;
@@ -212,9 +212,9 @@
     margin-left: 50px;
     padding-top: 10px;
 }
-#mldl form dl,#mld2 form dl{
+/* #mldl form dl,#mld2 form dl{
     margin-left: 140px;
-}
+} */
 
 .user-form dt{
     float: left;
@@ -670,7 +670,7 @@
     cursor: pointer;
 }
 #is_img_avatar1:hover{
-    background: url("../../xiaomi/images/bj2.png") no-repeat;
+    background: url("../../images/user/index/bj2.png") no-repeat;
     opacity:1;
     filter:"alpha(opacity=100)";
     -ms-filter:"alpha(opacity=100)"; /* 旧版IE */

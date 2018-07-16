@@ -40,10 +40,11 @@
                                 <th >编号</th>
                                 <th style="width:150px;">类别</th>
                                 <th style="width:60px;">图片</th>
-                                <th>图片名称</th>
                                 <th style="width:70px;">价格</th>
                                 <th style="width:60px;">是否促销</th>
                                 <th style="width:60px;">促销价格</th>
+                                <th style="width:120px;">开始时间</th>
+                                <th style="width:120px;">结束时间</th>
                                 <th style="width:60px;">是否上架</th>
                                 <th style="width:80px;">库存</th>
                                 <th style="width:100px;">套餐</th>
@@ -67,14 +68,17 @@
                             <td>{{ $va['cname'] }}</td>
                             @endif
                             @endforeach
-                            <td><img style="width:50px;" src="/Admin/uploads/{{ $v['goods_path'] }}"></td>
-                            <td>{{ $v['goods_pic'] }}</td>
+                            <td><img style="width:50px;" src="{{ $v['goods_pic'] }}"></td>
                             <td>{{ $v['goods_price'] }}</td>  
                             @if($v['goods_sales_status']==1)
                             <td><code>√</code></td>  
                             <td>{{ $v['goods_sales_price'] }}</td>
+                            <td>{{ date('Y-m-d h:i:s',$v['goods_sales_start']) }}</td>
+                            <td>{{ date('Y-m-d h:i:s',$v['goods_sales_end']) }}</td>
                             @else
+                            <td>×</td> 
                             <td>-</td>  
+                            <td>-</td>
                             <td>-</td>
                             @endif
                             <td>{{ $v['display'] }}</td>
@@ -85,7 +89,7 @@
                             @endif
                             @endforeach
                             <td class="center">{{ $v['handler'] }}</td>
-                            <td class="center">{{ $v['created_at'] }}</td>
+                            <td class="center">{{ $v['hander_time'] }}</td>
                             <td class="center">
                                 <a href="/admin/good/edit/{{ $v['id'] }}"><button class="btn btn-primary">修改</button></a>
                                 <a href="/admin/good/destroy/{{ $v['id'] }}"><button class="btn btn-danger">删除</button></a>

@@ -68,13 +68,15 @@
  <div class="breadcrumbs">
    <div class="container">
      <a href="../">首页</a>
+
      <code>&gt;</code>
-     <a href="http://www.leishen.cn/list/39/0">游戏笔记本</a>
+     <a href="/list/{{ $firstid }}">{{ $first }}</a>
      <code>&gt;</code>
-     <a href="http://www.leishen.cn/list/61/0">911系列</a>
+     <a href="/list/{{ $firstid }}/{{ $secondid }}">{{ $second }}</a>
      <code>&gt;</code>
-     <a href="http://www.leishen.cn/list/159/0">黑色911系列</a>
-     <code>&gt;</code>雷神911SE-E5B巡航版
+     <a href="/list/{{ $firstid }}/{{ $secondid }}/{{ $goods->goods_cates }}">{{ $three }}</a>
+     <code>&gt;</code>{{ $goods->goods_name }}
+
      <!--<div style="float: right;">神游网</div>--></div></div>
  <div class="goods-detail">
    <div class="goods-detail-info  clearfix J_goodsDetail">
@@ -83,18 +85,9 @@
          <div class="span13  J_mi_goodsPic_block goods-detail-left-info">
            <div class="goods-pic-box" id="detail_img">
              <div class="goods-big-pic">
-               <!-- <div class="g-video-con" style="width: 480px;height: 480px;">
-               <i class="g-closed">
-               <s>×</s>
-               </i>
-               <div class="g-video-wrap g-video-place">
-               <video id="myVideo1" class=" video-js vjs-default-skin vjs-big-play-centered" autoplay=true; muted=true; style="background-color: #fff"  controls preload="auto" width="480" height="480" poster="" data-setup="{}">
-               <source src="http://7xkyx1.com1.z0.glb.clouddn.com/video/videocenter/se.mp4" type="video/mp4"></video>
-               </div>
-               </div>
-               <div class="g-playBtn"></div>-->
-               <a href="http://www.leishen.cn/images/201705/goods_img/461_P_1494813106935.png" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: current; zoom-distance: 60;zoom-width: 400; zoom-height: 400;">
-                 <img alt="雷神911SE-E5B巡航版" src="/Home/static/logo.jpg"></a>
+         
+               <a href="{{ $goods['goods_pic'] }}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: current; zoom-distance: 60;zoom-width: 400; zoom-height: 400;">
+                 <img alt="{{ $goods->goods_name }}" src="{{ $goods->goods_pic }}"></a>
              </div>
              <div class="goods-small-pic" id="item-thumbs">
                <a class="prev" href="javascript:void(0);"></a>
@@ -102,10 +95,12 @@
                <div class="bd">
                  <ul class="cle">
                    <!-- 左侧缩略图start -->
+                   @foreach(explode(',',$details['goods_pics']) as $key=>$val)
                    <li class="current">
-                     <a href="/Home/static/logo.jpg" rel="zoom-id: Zoomer" rev="/Home/static/logo.jpg">
-                       <img alt="雷神911SE-E5B巡航版" src="/Home/static/logo.jpg"></a>
+                     <a href="{{ $val }}" rel="zoom-id: Zoomer" rev="{{ $val }}">
+                       <img alt="{{ $goods['goods_name'] }}" src="{{ $val }}"></a>
                    </li>
+                   @endforeach
                    <!-- 左侧缩略图start -->
                  </ul>
                </div>
@@ -118,17 +113,38 @@
                <dl class="loaded">
                  <dt class="goods-info-head">
                    <dl>
-                     <dt class="goods-name">雷神911SE-E5B巡航版</dt>
+                  
+                     <dt class="goods-name">{{ $goods->goods_name }}</dt>
                      <dd class="goods-phone-type">
-                       <p>GTX1050独显，I5-7300HQ处理器，8G内存，128G固态+1T机械</p>
+                       <p>{{ $goods->goods_discript }}</p>
                      </dd>
+                     @if($goods->goods_sales_status && time()<$goods->goods_sales_end)
+                     <div id="dis1">
                      <del>官方价格：
-                       <em class="cancel">5299.0</em></del>
-                     <dd class="goods-info-head-price clearfix">
-                       <span class="icon_promo">限时秒杀</span>￥
-                       <span class="unit">
-                         <strong class="nala_price red">4799.0</strong></span>
-                     </dd>
+                       <em class="cancel">{{ $goods->goods_price }}</em></del>
+                       <dd class="goods-info-head-price clearfix">
+                         <span class="icon_promo">限时秒杀</span>￥
+                         <span class="unit">
+                           <strong id="ss" class="nala_price red">{{ $goods->goods_sales_price }}</strong></span>
+                           <input type="hidden" id="h1" name="h1" value="{{ $goods->goods_sales_price }}">
+                           <input type="hidden" id="" name="st1" value="{{ $goods->goods_sales_start }}">
+                           <input type="hidden" id="he" name="he" value="{{ $goods->goods_sales_end }}">
+                           <i class="iconfont" style="margin-left: 1px">☀</i>
+                            <span id="time_tip">剩余时间：</span>
+                            <span class="colockbox" id="colockbox1">
+                            </span> 
+                       </dd>
+                       </div>
+                     @else
+                     <div id="dis2">                    
+                       <dd class="goods-info-head-price clearfix">
+                         <span class="icon_promo">官方价格</span>￥
+                         <span class="unit">
+                           <strong id="ss" class="nala_price red">{{ $goods->goods_price }}</strong></span>
+                           <input type="hidden" id="h1" name="h1" value="{{ $goods['goods_price'] }}">
+                       </dd>
+                     </div>
+                     @endif
                      <dd style="position: relative">
                        <ul>
                          <br/>
@@ -140,27 +156,16 @@
                              <img src="https://api.lwl12.com/img/qrcode/get?ct={{ $url }}&w=200&h=200" width="100%"></div>
                          </div>
                          <li>
-                           <span class="lbl">商品库存</span>
-                           <em>：4</em></li>
+                           <span class="lbl">商品库存：</span>
+                           <em id="ku">{{ $details['goods_nums'] }} </em></li>
                          <li>
                            <span>此商品赠送：可获
-                             <em class="red">500</em>积分</span>
-                           <span>
-                             <a href="#">
-                               <span class="reward">
-                                 <img src="static/picture/jiang.png" style="width:20px; height: 20px" alt="" />
-                                 <div class="ky" style="display: none">
-                                   <div class="note1 note-left note-zi gray9 noteleft2 ">
-                                     <span class=" bot"></span>
-                                     <span class="top"></span>雷魂可用于抽奖使用</div>
-                                 </div>
-                               </span>
-                             </a>
-                           </span>
+                             <em class="red">{{ $details['goods_score'] }}</em>积分</span>
                          </li>
                          <li style="color:#666;"></li>
                        </ul>
                      </dd>
+
                      <dd class="goods-info-choose">
                        <div id="choose" class="spec_list_box">
                          <ul>
@@ -168,23 +173,107 @@
                              <div class="dt">搭配套餐：</div>
                              <div class="dd">
                                <div class="check_main_1 fl">
+                                @foreach(explode(',',$details['goods_set_meals']) as $k=>$v)
+                                @foreach($meals as $va)
+                                @if($va['id']==$v)
                                  <div class="check_item">
+
                                    <label for="spec_value_24790">
-                                     <input type="checkbox" name="spec_251" value="24790" id="spec_value_24790" onclick="changePrice()" />铠甲背包蓝色原价299 [加 199.00]</label>
+                                     <input type="checkbox" name="che[]" value="{{ $va['id'] }}" onclick="changePrice()" />{{ $va['goods_meals_detail'] }}</label>
+
                                   </div>
-                                  <div class="check_item">
-                                    <label for="spec_value_24790">
-                                      <input type="checkbox" name="spec_251" value="24790" id="spec_value_24790" onclick="changePrice()" />铠甲背包蓝色原价299 [加 199.00]</label>
-                                   </div>
+                                @endif
+                                @endforeach
+                                @endforeach
                                </div>
                                <div class="plus_icon1_1  fl" id="check_detail_1"></div>
-                               <input type="hidden" name="spec_list" value="5" /></div>
+                               <input type="hidden" name="spec_list" value="" /></div>
                            </li>
                          </ul>
                        </div>
                        <style>#choose{margin:0;} #choose li{overflow:hidden; padding-bottom:0px;} #choose .dt{width:72px; text-align:left; float:left; padding:6px 0 0;} #choose .dd{overflow:hidden;} #choose .dd .item{margin:2px 8px 2px 0; position:relative; padding: 5px;} #choose .dd .item a{border:1px solid #ccc; padding:4px 6px;overflow: visible;display: inline-block} #choose .dd .item a span{padding:0 3px; line-height:30px;} #choose .dd .item a img{width:30px; height:30px;} #choose .dd .item b{width:12px; height:12px; background:url(static/images/gou.png) no-repeat; position:absolute; bottom:0px; right:0px; overflow:hidden; display:none;} #choose .dd .item.selected a{border:2px solid #e4393c; padding:3px 5px; position: relative; overflow: visible;display: inline-block} #choose .dd .item.selected b{display:block;} #choose li.GeneralAttrImg .dt{padding-top:10px;} #choose li.GeneralAttrImg .dd .item a{padding:1px;} #choose li.GeneralAttrImg .dd .item a img{margin:1px;} #choose li.GeneralAttrImg .dd .item.selected a{padding:0;} .check_item{padding: 6px 0;} #check_detail_2{margin-top: 10px}</style>
+                       
+
+                        <script type="text/javascript">
+
+
+
+                                if({{ time() }}<{{$goods->goods_sales_end}}){
+                                  return ;   
+                                }
+
+
+                                function showToEndTime(id,endTime) {
+
+                                function formatTime(time) {
+                                if (time < 0){ 
+                                  clearInterval(dsq);
+                                  return
+                                  location.reload(true);
+                                }
+                                if (time > (1825 * 1000 * 60 * 60 * 24)) return "结束时间未知,请留意活动页面观察活动是否";
+                                var day = Math.floor(time / (1000 * 60 * 60 * 24));
+                                var hour = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+                                var seconds = Math.floor((time % (1000 * 60)) / (1000));
+                                return day + "天" + hour + "小时" + minutes + "分" + seconds + "秒";
+                                }
+
+                                return function() {
+                                  var time = endTime.split(/-| |:/);
+                                  document.getElementById(id).innerHTML = formatTime(new Date(time[0], time[1] - 1, time[2], time[3], time[4], time[5]) - new Date());
+                                  }
+                                }
+                                
+                               
+                              dsq = setInterval(showToEndTime("colockbox1","date('Y-m-d H:i:s',{{ $goods->goods_sales_end }})"), 1000);
+                       </script>
+                
+
+                       <!-- 计算价格 -->
                        <script>
-                       $(".spec_list_box .item a").click(function() {
+                            function changePrice(){
+
+                                $.ajaxSetup({
+                                    headers: {
+                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                             }
+                                });
+
+                                aaa = $("input[name='h1']").val();
+                                
+                                c1 = parseInt(aaa);
+                                num = $('#number').val();
+                                nums = parseInt(num);
+                                ids = $("input[name='che[]']");
+                                check_val = [];
+
+                                for(k in ids){
+                                     if(ids[k].checked){
+                                      check_val.push(ids[k].value);   
+                                     }
+                                }
+
+                                if(check_val.length==0){
+                                    $('#ss').html(c1+c1*(nums-1));
+                                }else{
+                                    $.post('/Home/check/meal',{'ids':check_val},function(msg){
+                                    if(msg){
+                                      c2 = parseInt(msg);
+
+                                      $('#ss').html(c1+c2+c1*(nums-1));
+                                    }else{
+                                      $('#ss').html(c1+c1*(nums-1));
+                                    }
+                                    });
+                                }
+                            }
+                       </script>
+
+
+
+                        <script>
+                       /*$(".spec_list_box .item a").click(function(){
                            if ($(this).parent().hasClass("selected")) {
                              $(this).parents(".dd").find(".item").removeClass("selected");
                              $(this).parents(".dd").find("input:radio").prop("checked", false);
@@ -196,8 +285,10 @@
                              $(this).parent().find("input:radio").prop("checked", true);
                              changePrice();
                            }
-                         })
+                         })*/
                        </script>
+
+
                        <script>$(document)
                        .ready(function() {
                            $("#show_details").click(function() {
@@ -264,16 +355,67 @@
                              $(".details").toggleClass('se');
                              $(".plus_icon1_3").toggleClass("minus_icon1_3");
                            });
-                         });</script>
+                         });
+                       </script>
+
+                       <!-- countNum->xiaomi_goods.js -->
                        <ul class="sku">
                          <li class="skunum_li clearfix fl">
                            <div class="ghd">数量：</div>
                            <div class="skunum gbd" id="skunum" style="width: 250px">
                              <span class="minus" title="减少1个数量"></span>
-                             <input id="number" name="number" type="text" min="1" value="1" onchange="countNum(0)">
+                             <input id="number" name="number" type="text" min="1" value="1" onchange="countNums(0)">
                              <span class="add" title="增加1个数量"></span>&nbsp;件</div>
                          </li>
                        </ul>
+
+                       <script>
+                            function countNums(i) {
+                            var $count_box = $("#skunum");
+                            var $input = $count_box.find('input');
+                            var num = $input.val();
+                            if (!$.isNumeric(num)) {
+                                 alert("请您输入正确的购买数量!");
+                                 $input.val('1');
+                                 return;
+                            }
+                            num = parseInt(num) + i;
+                            ku = $("#ku").html();
+                            stock = parseInt(ku);
+                            if(num > stock){
+                                 alert("请您输入正确的购买数量!");
+                                 $input.val('1');
+                            }
+                            switch (true) {
+                                case num == 0:
+                                $input.val('1');
+                                alert('您至少得购买1件商品！');
+                              
+
+                                break;
+                                  default:
+                                    $input.val(num);
+                                      break;
+                            }
+
+                            changePrices();
+                            }
+                      </script>
+
+                      <script type="text/javascript">
+                            function changePrices()
+                                {
+                                    var num = $('#number').val();
+                                    var nums = parseInt(num);
+                                    var bbb = $('#ss').html();
+                                    var c3 = parseInt(bbb);
+                                    var aaa = $("input[name='h1']").val();
+                                    var c1 = parseInt(aaa);
+                                    cx = c3%c1==0 ? c1*nums : (c1*nums) + (c3%c1);
+                                    $('#ss').html(cx);
+                                }
+                      </script>
+
                      </dd>
                      <div class="clearfix"></div>
                      <dd class="goods-info-head-cart">
@@ -336,27 +478,29 @@
          <div class="container">
            <div class="shape-container">
              <a href="#" target="_blank">
-               <img src="/Home/static/logo.jpg"></a>
-             <p style="text-align: center;">
+               <img src="{{ $goods['goods_pic'] }}"></a>
+            <!--  <p style="text-align: center;">
                <img src="static/picture/111(1).jpg" width="790" height="158" alt="" /></p>
              <p style="text-align: center;">
+               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" /> -->
+              <!--  <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
+               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" /> -->
+              <!--  <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
                <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
                <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
                <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
                <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
-               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
-               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
-               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
-               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
-               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
-             </p>
+               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" /> 
+             </p>-->
+             
              <p style="text-align: center;">
-               <img src="static/picture/151807781689826笔记本.jpg" title="1518077816252137.jpg" alt="笔记本.jpg" /></p>
+               <img src="static/picture/151807781689826笔记本.jpg" title="1518077816252137.jpg" alt="详情描述图片" /></p>
            </div>
          </div>
          <!--<div class="shouwang" style="margin-top: 20px">-->
          <!--<img src="static/picture/757960439095603811.jpg" alt="守望先锋"/>-->
          <!--</div>--></div>
+
        <div class="goods-detail-nav-name-block goods_con_item">
          <div class="container main-block">
            <div class="border-line"></div>
@@ -366,42 +510,13 @@
          <div class="container">
            <ul class="param-list">
              <li class="goods-img">
-               <img src="/Home/static/logo.jpg" alt="雷神911SE-E5B巡航版" /></li>
+               <img src="{{ $goods['goods_pic'] }}" alt="{{ $goods['goods_name'] }}" /></li>
              <li class="goods-tech-spec">
                <ul>
-                 <li>产品名称：雷神911SE-E5B巡航版</li>
-                 <li>型号：雷神911SE-E5B巡航版</li>
-                 <li>颜色：黑色</li>
-                 <li>操作系统：其他</li>
-                 <li>CPU类型：I5-7300HQ</li>
-                 <li>CPU缓存：6M</li>
-                 <li>集成核显：Intel®HD Graphics 630</li>
-                 <li>核心：四核</li>
-                 <li>芯片组：英特尔® HM175高速芯片组</li>
-                 <li>内存容量：8G</li>
-                 <li>内存类型：DDR4</li>
-                 <li>插槽数量：2</li>
-                 <li>最大支持内存：32G</li>
-                 <li>硬盘容量：128GSSD+1T</li>
-                 <li>独显型号：GTX1050</li>
-                 <li>显存容量：2G</li>
-                 <li>光驱类型：无</li>
-                 <li>屏幕尺寸：15.6英寸</li>
-                 <li>显示比例：16:9</li>
-                 <li>物理分辨率：1920X1080</li>
-                 <li>屏幕类型：全高清</li>
-                 <li>内置蓝牙：蓝牙Bluetooth v4.2</li>
-                 <li>局域网：内置10/100/1000M以太局域网</li>
-                 <li>无线局域网：802.11ac/a/b/g/n</li>
-                 <li>端口介绍：USB Type-A*3 USB Type-c*1</li>
-                 <li>扬声器：内置扬声器</li>
-                 <li>键盘：孤岛式全尺寸白色背光键盘</li>
-                 <li>摄像头：1.0M HD视频摄像头</li>
-                 <li>读卡器：有</li>
-                 <li>电池容量：6芯</li>
-                 <li>电源适配器：47Wh</li>
-                 <li>尺寸：378(W)×267(D)×26.5(H) mm</li>
-                 <li>净重：约2.90Kg(含有电池，具体重量依据产品出货配置为准)</li></ul>
+                @foreach(explode(',',$details['goods_tail']) as $keys=>$vals)
+                 <li>{{ $vals }}</li>
+                 @endforeach
+                 </ul>
              </li>
            </ul>
          </div>
@@ -703,6 +818,9 @@
      <a href="javascript:addToCart(461)" class="btn btn-primary goods-add-cart-btn">
        <i class="iconfont"></i>加入购物车</a></div>
  </div>
+
+
+
 
 
    <script type="text/javascript" src="/Home/static/js/touchtouch.jquery.js"></script>

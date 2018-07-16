@@ -46,10 +46,10 @@ class AdminLoginController extends Controller
             'admin_remark'=>'员工于：'.date('Y-m-d H:i:s',time()).'登录后台,IP为：'.$_SERVER['REMOTE_ADDR'],
             'admin_ip'=>ip2long($_SERVER['REMOTE_ADDR']),
             'admin_time'=>time()]);
-            Mail::send('Home.mail',['name'=>$a_name,'date'=>date('Y-m-d H:i:s',time()),'ip'=>$_SERVER['REMOTE_ADDR']],function($message){
-            $to = '774396655@qq.com';
-            $message ->to($to)->subject('有新的消息');
-          });
+          //   Mail::send('Home.mail',['name'=>$a_name,'date'=>date('Y-m-d H:i:s',time()),'ip'=>$_SERVER['REMOTE_ADDR']],function($message){
+          //   $to = '774396655@qq.com';
+          //   $message ->to($to)->subject('有新的消息');
+          // });
           session(['Admin_Session'=>$A_data]);
           return redirect('/admin/index')->with('Success','登录成功！');
         } else {
@@ -68,7 +68,7 @@ class AdminLoginController extends Controller
       $data = DB::table('admins')->where('a_name','=',$get_session['a_name'])->first();
       if (!session('Admin_Session')) {
         return redirect('/admin/login')->with('Error','请先登录！');
-      }else if (session()->flush() == null) {
+      }else if (session()->forget('Admin_Session') == null) {
         DB::table('admin_records')->insert([
             'admin_id'=>$data['id'],
             'admin_remark'=>'员工于：'.date('Y-m-d H:i:s',time()).'退出后台,IP为：'.$_SERVER['REMOTE_ADDR'],

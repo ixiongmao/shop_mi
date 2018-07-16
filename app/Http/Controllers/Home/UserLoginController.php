@@ -19,7 +19,7 @@ class UserLoginController extends Controller
     public function Login()
     {
         if (session('Home_Session')) {
-          return back()->with('Error','您已经登录，请先退出！');
+          return redirect('/')->with('Error','您已经登录，请先退出！');
         } else {
           $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
           return view('Home.User.login',['Cate'=>$Cate]);
@@ -36,7 +36,7 @@ class UserLoginController extends Controller
     {
         //
         if (session('Home_Session')) {
-          return back()->with('Error','您已经登录，请先退出！');
+          return redirect('/')->with('Error','您已经登录，请先退出！');
         } else {
           $get_session = session('Home_Session');
           $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
@@ -53,8 +53,13 @@ class UserLoginController extends Controller
     public function VerifyMimaCode()
     {
         //
-        $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
-        return view('Home.User.VerifyMimaCode',['Cate'=>$Cate]);
+        if (session('Home_Session')) {
+          return redirect('/')->with('Error','您已经登录，请先退出！');
+        } else {
+          $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
+          return view('Home.User.VerifyMimaCode',['Cate'=>$Cate]);
+        }
+
     }
     /**
      * 前台用户登录
@@ -150,6 +155,7 @@ class UserLoginController extends Controller
           $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
           return view('Home.User.SetMima',['Cate'=>$Cate,'data'=>$db]);
         }
+
     }
 
     /**
@@ -173,7 +179,7 @@ class UserLoginController extends Controller
     {
         if (!session('Home_Session')) {
           return redirect('/login')->with('Error','请先登录！');
-        }else if (session()->flush() == null) {
+        }else if (session()->forget('Home_Session') == null) {
           return redirect('/login')->with('Error','退出成功！');
         }
     }

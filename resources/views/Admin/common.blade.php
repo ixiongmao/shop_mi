@@ -392,6 +392,17 @@
                 </ul>
               </li>
               <li>
+                <a href="#">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>售后网点
+                  <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="/admin/aftersale_site/create">添加网点</a></li>
+                  <li>
+                    <a href="/admin/aftersale_site/index">查看售后网点</a></li>
+                </ul>
+              </li>
+              <li>
                 <a href="/admin/system/index">
                   <i class="fa fa-wrench fa-fw"></i>网站设置</a>
               </li>
