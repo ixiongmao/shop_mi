@@ -1,9 +1,10 @@
+@section('Home_title', $systems['system_name'])
 <!DOCTYPE html>
 <html lang="Zh-cn">
 
     <head>
         <meta charset="utf-8">
-        <title>@yield('Home_title'){{ $systems['system_name'] }}</title>
+        <title>@yield('Home_title')-{{ $systems['system_name'] }}</title>
         <meta name="Keywords" content="{{ $systems['system_keywords'] }}" />
         <meta name="Description" content="{{ $systems['system_description'] }}" />
         <link rel="shortcut icon" href="/favicon.ico" />

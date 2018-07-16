@@ -18,6 +18,9 @@ Route::get('/send','MailController@send');
 Route::get('/','Home\HomeIndexController@index');
 Route::get('/list/{id}','Home\HomeIndexController@list');
 Route::get('/item/{id}','Home\HomeIndexController@item');
+//前台产品详情页 查询
+Route::post('/Home/check/meal','Home\HomeIndexController@meal');
+
 Route::get('/downloads','Home\HomeIndexController@Downloads');
 Route::get('/Search','Home\HomeIndexController@Search');
 //前台文章显示

@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
-use App\Models\Admin\GoodsModel;
-use App\Http\Controllers\Controller;
-use App\Models\Admin\CateModel;
 
+use App\Http\Controllers\Controller;
+
+use App\Models\Admin\CateModel;
+use App\Models\Admin\GoodsModel;
+use App\Models\Admin\GoodsDetails;
 use App\Http\Composer\ViewComposers;
+
 class HomeIndexController extends Controller
 {
     /**
@@ -48,11 +51,39 @@ class HomeIndexController extends Controller
     public function item(Request $request,$id)
     {
         //
-        $url = $request->url();
-        $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
-        return view('Home.item',['url'=>$url,'Cate'=>$Cate]);
-    }
+        $goods = GoodsModel::find($id);
+        $three = CateModel::find($goods->goods_cates)->cname;
+        $secondid = CateModel::find($goods->goods_cates)->pid;
+        $second = CateModel::find($secondid)->cname;
+        $firstid = CateModel::find($secondid)->pid;
+        $first = CateModel::find($firstid)->cname;
+        $details = DB::table('goods_details')->where('gid','=',$id)->get();
+        $details = $details[0];
+        $meals = DB::table('goods_meals')->select('id','goods_meals_detail','goods_meals_price')->get();
 
+        $url = $request->url();
+        return view('Home.item',['url'=>$url,'goods'=>$goods,'first'=>$first,'firstid'=>$firstid,'second'=>$second,'secondid'=>$secondid,'three'=>$three,'details'=>$details,'meals'=>$meals]);
+    }
+    /**
+     *
+     *
+     *
+     */
+    public function meal(Request $request)
+    {
+        $ids = $request -> input('ids');
+        //var_dump($ids);
+
+
+        $prices = DB::table('goods_meals')->whereIn('id',$ids)->sum('goods_meals_price');
+        if($prices){
+            echo $prices;
+        }else{
+            echo 1;
+        }
+
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

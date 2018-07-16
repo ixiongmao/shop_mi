@@ -1,6 +1,6 @@
 @extends('Home.common')
 
-@section('Home_title', '1')
+@section('Home_title', $goods->goods_name)
 
 @section('Left_Nav')
     @parent
@@ -85,7 +85,7 @@
          <div class="span13  J_mi_goodsPic_block goods-detail-left-info">
            <div class="goods-pic-box" id="detail_img">
              <div class="goods-big-pic">
-         
+
                <a href="{{ $goods['goods_pic'] }}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: current; zoom-distance: 60;zoom-width: 400; zoom-height: 400;">
                  <img alt="{{ $goods->goods_name }}" src="{{ $goods->goods_pic }}"></a>
              </div>
@@ -113,7 +113,7 @@
                <dl class="loaded">
                  <dt class="goods-info-head">
                    <dl>
-                  
+
                      <dt class="goods-name">{{ $goods->goods_name }}</dt>
                      <dd class="goods-phone-type">
                        <p>{{ $goods->goods_discript }}</p>
@@ -132,11 +132,11 @@
                            <i class="iconfont" style="margin-left: 1px">☀</i>
                             <span id="time_tip">剩余时间：</span>
                             <span class="colockbox" id="colockbox1">
-                            </span> 
+                            </span>
                        </dd>
                        </div>
                      @else
-                     <div id="dis2">                    
+                     <div id="dis2">
                        <dd class="goods-info-head-price clearfix">
                          <span class="icon_promo">官方价格</span>￥
                          <span class="unit">
@@ -192,21 +192,21 @@
                          </ul>
                        </div>
                        <style>#choose{margin:0;} #choose li{overflow:hidden; padding-bottom:0px;} #choose .dt{width:72px; text-align:left; float:left; padding:6px 0 0;} #choose .dd{overflow:hidden;} #choose .dd .item{margin:2px 8px 2px 0; position:relative; padding: 5px;} #choose .dd .item a{border:1px solid #ccc; padding:4px 6px;overflow: visible;display: inline-block} #choose .dd .item a span{padding:0 3px; line-height:30px;} #choose .dd .item a img{width:30px; height:30px;} #choose .dd .item b{width:12px; height:12px; background:url(static/images/gou.png) no-repeat; position:absolute; bottom:0px; right:0px; overflow:hidden; display:none;} #choose .dd .item.selected a{border:2px solid #e4393c; padding:3px 5px; position: relative; overflow: visible;display: inline-block} #choose .dd .item.selected b{display:block;} #choose li.GeneralAttrImg .dt{padding-top:10px;} #choose li.GeneralAttrImg .dd .item a{padding:1px;} #choose li.GeneralAttrImg .dd .item a img{margin:1px;} #choose li.GeneralAttrImg .dd .item.selected a{padding:0;} .check_item{padding: 6px 0;} #check_detail_2{margin-top: 10px}</style>
-                       
+
 
                         <script type="text/javascript">
 
 
 
                                 if({{ time() }}<{{$goods->goods_sales_end}}){
-                                  return ;   
+                                  return ;
                                 }
 
 
                                 function showToEndTime(id,endTime) {
 
                                 function formatTime(time) {
-                                if (time < 0){ 
+                                if (time < 0){
                                   clearInterval(dsq);
                                   return
                                   location.reload(true);
@@ -224,11 +224,11 @@
                                   document.getElementById(id).innerHTML = formatTime(new Date(time[0], time[1] - 1, time[2], time[3], time[4], time[5]) - new Date());
                                   }
                                 }
-                                
-                               
+
+
                               dsq = setInterval(showToEndTime("colockbox1","date('Y-m-d H:i:s',{{ $goods->goods_sales_end }})"), 1000);
                        </script>
-                
+
 
                        <!-- 计算价格 -->
                        <script>
@@ -241,7 +241,7 @@
                                 });
 
                                 aaa = $("input[name='h1']").val();
-                                
+
                                 c1 = parseInt(aaa);
                                 num = $('#number').val();
                                 nums = parseInt(num);
@@ -250,7 +250,7 @@
 
                                 for(k in ids){
                                      if(ids[k].checked){
-                                      check_val.push(ids[k].value);   
+                                      check_val.push(ids[k].value);
                                      }
                                 }
 
@@ -390,7 +390,7 @@
                                 case num == 0:
                                 $input.val('1');
                                 alert('您至少得购买1件商品！');
-                              
+
 
                                 break;
                                   default:
@@ -490,9 +490,9 @@
                <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
                <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
                <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
-               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" /> 
+               <img src="/Home/static/logo.jpg" width="790" height="892" alt="" />
              </p>-->
-             
+
              <p style="text-align: center;">
                <img src="static/picture/151807781689826笔记本.jpg" title="1518077816252137.jpg" alt="详情描述图片" /></p>
            </div>
@@ -686,110 +686,9 @@
            </div>
          </div>
        </div>
-       <div class="goods-detail-nav-name-block goods_con_item">
-         <div class="container main-block">
-           <div class="border-line"></div>
-           <h2 class="nav-name">商品提问</h2></div>
-       </div>
-       <div class="container">
-         <div id="goodstiwen">
-           <form action="#" method="post" name="question">
-             <div class="question-input">
-               <input placeholder="输入你的提问" type="text" name="qu" class="input-question">
-               <input type="hidden" name="goods_id" value="461">
-               <input type="hidden" name="goods_name" value="">
-               <input type="hidden" name="act" value="question">
-               <input value="提交" type="submit" class="btn-question"></div>
-           </form>
-         </div>
-         <div class="z-com-list" id="ECS_QUESTION">
-           <div class="goods-detail-comment-content">
-             <div class="container">
-               <div class="row">
-                 <div class="span20 goods-detail-comment-list">
-                   <div class="comment-order-title">
-                     <div class="left-title">
-                       <h3 class="comment-name">最有帮助的提问（0）</h3></div>
-                   </div>
-                   <ul class="comment-box-list">暂时还没有任何用户评论
-                     <li class="pagenav">
-                       <form name="selectPageForm" action="/" method="get">
-                         <a href="javascript:;" class="step" style="border:1px solid #eee; color:#ccc;">上一页</a>
-                         <a href="javascript:;" class="step" style="border:1px solid #eee; color:#ccc;">下一页</a></form>
-                     </li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
      </div>
    </div>
-   <div>
-     <div class="goods-detail-nav-name-block goods_con_item">
-       <div class="container main-block">
-         <div class="border-line"></div>
-         <h2 class="nav-name" style="width: 416px; margin-left: -202px;">购买了该商品的用户还购买了</h2></div>
-     </div>
-     <div class="goods-detail-param" style="margin-bottom: 50px!important;">
-       <div class="container">
-         <ul class="param-list clearfix" style="padding: 0;">
-           <li class="fore1 fl" style="box-sizing: border-box;width: 20%;padding: 20px;text-align: center;">
-             <div class="p-img">
-               <a target="_blank" title="雷神猎兵M301幻彩游戏鼠标" href="http://www.leishen.cn/item/448">
-                 <img height="200px" width="200px" alt="雷神猎兵M301幻彩游戏鼠标" src="static/picture/448_thumb_g_1490656224997.jpg" class="loading-style2"></a>
-             </div>
-             <div class="p-name">
-               <a target="_blank" title="雷神猎兵M301幻彩游戏鼠标" href="http://www.leishen.cn/item/448">雷神猎兵M301幻彩游戏鼠标</a></div>
-             <div class="p-price">
-               <strong class="J-p-718196">159.0</strong></div>
-           </li>
-           <li class="fore2 fl" style="box-sizing: border-box;width: 20%;padding: 20px;text-align: center;">
-             <div class="p-img">
-               <a target="_blank" title="雷神电竞鼠标垫P30（加厚）" href="http://www.leishen.cn/item/193">
-                 <img height="200px" width="200px" alt="雷神电竞鼠标垫P30（加厚）" src="static/picture/193_thumb_g_1517336209041.jpg" class="loading-style2"></a>
-             </div>
-             <div class="p-name">
-               <a target="_blank" title="雷神电竞鼠标垫P30（加厚）" href="http://www.leishen.cn/item/193">雷神电竞鼠标垫P30（加厚）</a></div>
-             <div class="p-price">
-               <strong class="J-p-718196">59.0</strong></div>
-           </li>
-           <li class="fore3 fl" style="box-sizing: border-box;width: 20%;padding: 20px;text-align: center;">
-             <div class="p-img">
-               <a target="_blank" title="雷神K30黑轴/青轴/茶轴机械键盘" href="http://www.leishen.cn/item/538">
-                 <img height="200px" width="200px" alt="雷神K30黑轴/青轴/茶轴机械键盘" src="static/picture/538_thumb_g_1508960729824.jpg" class="loading-style2"></a>
-             </div>
-             <div class="p-name">
-               <a target="_blank" title="雷神K30黑轴/青轴/茶轴机械键盘" href="http://www.leishen.cn/item/538">雷神K30黑轴/青轴/茶轴机械键盘</a></div>
-             <div class="p-price">
-               <strong class="J-p-718196">199.0</strong></div>
-           </li>
-           <li class="fore4 fl" style="box-sizing: border-box;width: 20%;padding: 20px;text-align: center;">
-             <div class="p-img">
-               <a target="_blank" title="雷神机械键盘掌托 胡桃木" href="http://www.leishen.cn/item/312">
-                 <img height="200px" width="200px" alt="雷神机械键盘掌托 胡桃木" src="static/picture/312_thumb_g_1505270437742.jpg" class="loading-style2"></a>
-             </div>
-             <div class="p-name">
-               <a target="_blank" title="雷神机械键盘掌托 胡桃木" href="http://www.leishen.cn/item/312">雷神机械键盘掌托 胡桃木</a></div>
-             <div class="p-price">
-               <strong class="J-p-718196">69.0</strong></div>
-           </li>
-           <li class="fore5 fl" style="box-sizing: border-box;width: 20%;padding: 20px;text-align: center;">
-             <div class="p-img">
-               <a target="_blank" title="雷神ST Plus标准版" href="http://www.leishen.cn/item/518">
-                 <img height="200px" width="200px" alt="雷神ST Plus标准版" src="static/picture/518_thumb_g_1512686561937.jpg" class="loading-style2"></a>
-             </div>
-             <div class="p-name">
-               <a target="_blank" title="雷神ST Plus标准版" href="http://www.leishen.cn/item/518">雷神ST Plus标准版</a></div>
-             <div class="p-price">
-               <strong class="J-p-718196">4999.0</strong></div>
-           </li>
-         </ul>
-       </div>
-     </div>
-     <div style="height: 50px;width: 100px;margin: 0 auto;"></div>
-   </div>
+
  </div>
  </div>
  </div>
@@ -801,10 +700,7 @@
        <li>
          <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a></li>
        <li>
-         <a class="J_scrollHref" href="javascript:void(0);" name="pjxqitem" rel="nofollow">用户评价(
-           <em>102</em>)</a></li>
-       <li>
-         <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">商品提问</a></li>
+         <a class="J_scrollHref" href="javascript:void(0);" name="pjxqitem" rel="nofollow">用户评价(<em>102</em>)</a></li>
      </ul>
      <dl class="goods-sub-bar-info clearfix">
        <dt>
