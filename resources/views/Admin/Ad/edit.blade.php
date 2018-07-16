@@ -17,7 +17,7 @@
                   <form action="/admin/ad/update/{{ $data['id'] }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     @if (session('Error'))
-                    <div class="alert alert-success alert-dismissable">
+                    <div class="alert alert-danger alert-dismissable">
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                       {{ session('Error') }}
                     </div>
@@ -37,16 +37,6 @@
                       <span class="input-group-addon">广告名字</span>
                       <input type="text" class="form-control" name="ad_name" value="{{ $data['ad_name'] }}" placeholder="请输入广告名">
                     </div>
-                    <div class="form-group">
-                        <label>广告位置</label>
-                        <select class="form-control" name="ad_position">
-                            <option value="0" @if ($data['ad_position'] == 0) selected @endif>导航顶部</option>
-                            <option value="1" @if ($data['ad_position'] == 1) selected @endif>首页中部</option>
-                            <option value="2" @if ($data['ad_position'] == 2) selected @endif>首页底部</option>
-                            <option value="3" @if ($data['ad_position'] == 3) selected @endif>分类中部</option>
-                            <option value="4" @if ($data['ad_position'] == 4) selected @endif>商品中部</option>
-                        </select>
-                    </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">广告备注</span>
                         <input type="text" class="form-control" name="ad_remark" value="{{ $data['ad_remark'] }}"/></div>
@@ -56,7 +46,7 @@
                     </div>
                     <div class="form-group input-group">
                       <span class="input-group-addon">广告地址</span>
-                      <input type="text" class="form-control" name="ad_dizhi" value="{{ $data['ad_location'] }}" placeholder="请输入地址"></div>
+                      <input type="text" class="form-control" name="ad_dizhi" value="{{ $data['ad_url'] }}" placeholder="请输入地址"></div>
                     <div class="form-group input-group">
                       <span class="input-group-addon">到期时间</span>
                       <input type="text" class="form-control" name="ad_etime" value="{{ date('Y-m-s H:i:s',$data['ad_etime']) }}" placeholder="请输入到期时间" id="ht_time"></div>

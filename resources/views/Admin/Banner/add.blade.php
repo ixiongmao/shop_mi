@@ -40,7 +40,7 @@
                                     <input type="text" class="form-control" name="b_url" placeholder="请输入幻灯片地址">
                                 </div>
                                 <div class="form-group input-group">
-                                    <span class="input-group-addon">幻灯片图片(点击文本框进行上传，可不选)</span>
+                                    <span class="input-group-addon">幻灯片图片(点击文本框进行上传)</span>
                                     <input type="text" name="b_pic" id="picture" class="form-control" />
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="提交" id="submit">

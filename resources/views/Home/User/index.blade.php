@@ -48,6 +48,23 @@
                                             </ul>
                                         </div>
                                     </div>
+
+                                    <!-- <script type="text/javascript">
+                                      layer.open({
+                                            id: 1,
+                                            type: 1,
+                                            title: '修改密码',
+                                            area: ['480px'],
+
+                                            content: '<div class="layui-form-item" style="margin: 10px 0px 10px 0px;">' + '<label class="layui-form-label" style="width: 50px;">输入框</label>' + '<div class="layui-input-block" style="margin-left: 55px;">' + ' <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:80%">' + ' </div>' + ' </div>' + '<div class="layui-form-item" style="margin: 10px 0px 10px 0px;">' + '<label class="layui-form-label" style="width: 50px;">输入框</label>' + '<div class="layui-input-block" style="margin-left: 55px;">' + ' <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:80%">' + ' </div>' + ' </div>',
+                                            btn: ['保存', '取消'],
+                                            btn1: function(index, layero) {},
+                                            btn2: function(index, layero) {
+                                                layer.close(index);
+                                            }
+
+                                        });
+                                      </script> -->
                                     <div class="portal-sub">
                                         <ul class="info-list clearfix" style="margin-left: 30px">
                                             <li>

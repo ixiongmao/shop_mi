@@ -15,10 +15,8 @@
         <div class="bd">
           <ul>
             @foreach ($banner as $k=>$v)
-              @if ($v['banner_status'] == 1)
-              <li _src="url({{ $v['banner_pic'] }})" style="background:#f8f8f8 center 0 no-repeat;">
+              <li _src="url({{ $v['banner_pic'] }})" style="background:#f8f8f8 center 0 no-repeat;height:460px">
                 <a target="_blank" href="{{ $v['banner_url'] }}"></a></li>
-              @endif
             @endforeach
           </ul>
         </div>
@@ -39,7 +37,7 @@
                 <img src="/Home/static/picture/liwu1.png" alt="" /></i>以旧换新</a>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/downloads" target="_blank">
               <i class="iconfont">
                 <img src="/Home/static/picture/sctb2.png" alt="" /></i>驱动下载</a>
           </li>
@@ -49,7 +47,7 @@
                 <img src="/Home/static/picture/sctb3.png" alt="" /></i>服务标准</a>
           </li>
           <li>
-            <a href="#" target="_blank">
+            <a href="/aftersale_site" target="_blank">
               <i class="iconfont">
                 <img src="/home/static/picture/sctb4.png" alt="" /></i>售后网点</a>
           </li>
@@ -59,28 +57,29 @@
       <div class="span16 span21">
         <!-- 广告区start -->
         <ul class="home-promo-list">
-          <li class="first">
-            <a href="#" target='_blank'>
-              <img src="#" width='316' height='170' border='0' /></a>
-          </li>
-          <li class="">
-            <a href="#" target='_blank'>
-              <img src="#" width='316' height='170' border='0' /></a>
-          </li>
+          @foreach ($guanggao as $k=>$v)
+            <li class="first">
+              <a href="{{ $v['ad_url'] }}" target='_blank'>
+                <img src="{{ $v['ad_pic'] }}" width='316' height='170' border='0' /></a>
+            </li>
+          @endforeach
         </ul>
         <!-- 广告区end -->
         <!-- 新闻区 -->
         <div class="news_content">
           <span class="news_title">快报</span>
-          <a style="float:right;" href="#" target="_blank">更多</a>
+          <a style="float:right;" href="/news" target="_blank">更多</a>
           <div class="clearfix"></div>
           <ul>
+
             <!-- 单个start -->
+            @foreach ($News as $k=>$v)
             <ul>
               <li>
                 <span style="color: #b60005">【新闻】</span>
-                <a href="#" target="_blank" title="雷神911Air轻薄性能游戏本，引爆全面屏时代！">雷神911Air轻薄性能游戏本，引爆...</a></li>
+                <a href="/news/{{ $v['id'] }}" target="_blank" title="{{ $v['news_name'] }}">{{ $v['news_name'] }}</a></li>
             </ul>
+            @endforeach
             <!-- 单个end -->
           </ul>
         </div>
@@ -302,114 +301,24 @@
         <div class="box-bd" style="width: 1240px">
           <div class="xm-carousel-wrapper iflashbuy">
             <ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
+              @foreach ($zengzhi as $v)
               <!-- 单个轮播商品start -->
               <li class="" style="position: relative">
-                <a class="thumb thumb_time" href="/seckill" target="_blank">
-                  <img src="/Home/static/logo.jpg"/></a>
+                <a class="thumb thumb_time" href="/item/{{ $v['id'] }}" target="_blank">
+                  <img src="{{ $v['vas_pic'] }}"/></a>
                 <a>
                   <h3 class="iflashbuyTitle">
-                    <a href="/seckill" target="_blank">雷神Dino-X5Ta</a></h3>
+                    <a href="/item/{{ $v['id'] }}" target="_blank">{{ $v['vas_name'] }}</a></h3>
                 </a>
                 <a>
-                  <p style="text-align: center" class=" ellipsis">GTX1050Ti独显，芯七代I7-7700HQ处理器，8G内存，128G固态+1T机械，IPS高清屏，【如需升级16G内存加699元，请拍搭配套餐】</p></a>
+                  <p style="text-align: center" class=" ellipsis">{{ $v['vas_introduce'] }}</p></a>
                 <div class="iflashbuyPrice">
-                  <a>
-                    <span class="killPrice">6999</span>&nbsp;
+                    <span class="killPrice">{{ $v['vas_price'] }}</span>&nbsp;
                     <span class="killPrice">元</span>&nbsp;&nbsp;
-                    <del class="delPrice">8499元</del></a>
                 </div>
               </li>
               <!-- 单个轮播商品end -->
-              <!-- 单个轮播商品start -->
-              <li class="" style="position: relative">
-                <a class="thumb thumb_time" href="/seckill" target="_blank">
-                  <img src="/Home/static/logo.jpg"/></a>
-                <a>
-                  <h3 class="iflashbuyTitle">
-                    <a href="/seckill" target="_blank">雷神Dino-X5Ta</a></h3>
-                </a>
-                <a>
-                  <p style="text-align: center" class=" ellipsis">GTX1050Ti独显，芯七代I7-7700HQ处理器，8G内存，128G固态+1T机械，IPS高清屏，【如需升级16G内存加699元，请拍搭配套餐】</p></a>
-                <div class="iflashbuyPrice">
-                  <a>
-                    <span class="killPrice">6999</span>&nbsp;
-                    <span class="killPrice">元</span>&nbsp;&nbsp;
-                    <del class="delPrice">8499元</del></a>
-                </div>
-              </li>
-              <!-- 单个轮播商品end -->
-              <!-- 单个轮播商品start -->
-              <li class="" style="position: relative">
-                <a class="thumb thumb_time" href="/seckill" target="_blank">
-                  <img src="/Home/static/logo.jpg"/></a>
-                <a>
-                  <h3 class="iflashbuyTitle">
-                    <a href="/seckill" target="_blank">雷神Dino-X5Ta</a></h3>
-                </a>
-                <a>
-                  <p style="text-align: center" class=" ellipsis">GTX1050Ti独显，芯七代I7-7700HQ处理器，8G内存，128G固态+1T机械，IPS高清屏，【如需升级16G内存加699元，请拍搭配套餐】</p></a>
-                <div class="iflashbuyPrice">
-                  <a>
-                    <span class="killPrice">6999</span>&nbsp;
-                    <span class="killPrice">元</span>&nbsp;&nbsp;
-                    <del class="delPrice">8499元</del></a>
-                </div>
-              </li>
-              <!-- 单个轮播商品end -->
-              <!-- 单个轮播商品start -->
-              <li class="" style="position: relative">
-                <a class="thumb thumb_time" href="/seckill" target="_blank">
-                  <img src="/Home/static/logo.jpg"/></a>
-                <a>
-                  <h3 class="iflashbuyTitle">
-                    <a href="/seckill" target="_blank">雷神Dino-X5Ta</a></h3>
-                </a>
-                <a>
-                  <p style="text-align: center" class=" ellipsis">GTX1050Ti独显，芯七代I7-7700HQ处理器，8G内存，128G固态+1T机械，IPS高清屏，【如需升级16G内存加699元，请拍搭配套餐】</p></a>
-                <div class="iflashbuyPrice">
-                  <a>
-                    <span class="killPrice">6999</span>&nbsp;
-                    <span class="killPrice">元</span>&nbsp;&nbsp;
-                    <del class="delPrice">8499元</del></a>
-                </div>
-              </li>
-              <!-- 单个轮播商品end -->
-              <!-- 单个轮播商品start -->
-              <li class="" style="position: relative">
-                <a class="thumb thumb_time" href="/seckill" target="_blank">
-                  <img src="/Home/static/logo.jpg"/></a>
-                <a>
-                  <h3 class="iflashbuyTitle">
-                    <a href="/seckill" target="_blank">雷神Dino-X5Ta</a></h3>
-                </a>
-                <a>
-                  <p style="text-align: center" class=" ellipsis">GTX1050Ti独显，芯七代I7-7700HQ处理器，8G内存，128G固态+1T机械，IPS高清屏，【如需升级16G内存加699元，请拍搭配套餐】</p></a>
-                <div class="iflashbuyPrice">
-                  <a>
-                    <span class="killPrice">6999</span>&nbsp;
-                    <span class="killPrice">元</span>&nbsp;&nbsp;
-                    <del class="delPrice">8499元</del></a>
-                </div>
-              </li>
-              <!-- 单个轮播商品end -->
-              <!-- 单个轮播商品start -->
-              <li class="" style="position: relative">
-                <a class="thumb thumb_time" href="/seckill" target="_blank">
-                  <img src="/Home/static/logo.jpg"/></a>
-                <a>
-                  <h3 class="iflashbuyTitle">
-                    <a href="/seckill" target="_blank">雷神Dino-X5Ta</a></h3>
-                </a>
-                <a>
-                  <p style="text-align: center" class=" ellipsis">GTX1050Ti独显，芯七代I7-7700HQ处理器，8G内存，128G固态+1T机械，IPS高清屏，【如需升级16G内存加699元，请拍搭配套餐】</p></a>
-                <div class="iflashbuyPrice">
-                  <a>
-                    <span class="killPrice">6999</span>&nbsp;
-                    <span class="killPrice">元</span>&nbsp;&nbsp;
-                    <del class="delPrice">8499元</del></a>
-                </div>
-              </li>
-              <!-- 单个轮播商品end -->
+              @endforeach
             </ul>
           </div>
         </div>

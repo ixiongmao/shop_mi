@@ -31,8 +31,9 @@
                                   <div class="root_node">订单中心</div>
                                   <ul>
                                       <li>
-                                          <a class="" href="/user/">我的订单</a>
+                                          <a class="" href="/user/orders">我的订单</a>
                                           <a class="" href="/user/index">收货地址</a>
+                                          <a class="" href="/user/aftersale">售后服务</a>
                                       </li>
                                   </ul>
                               </li>

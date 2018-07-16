@@ -11,21 +11,40 @@
 |
 */
 
+Route::get('/send','MailController@send');
+
+
+
 Route::get('/','Home\HomeIndexController@index');
 Route::get('/list/{id}','Home\HomeIndexController@list');
 Route::get('/item/{id}','Home\HomeIndexController@item');
-Route::get('/login','Home\UserLoginController@index');
-Route::get('/reg','Home\UserLoginController@register');
-Route::post('/reg/create','Home\UserLoginController@regCreate');
-Route::post('/admin/user/ajax','Admin\AdminUserController@Ajax');
-Route::post('/login/select','Home\UserLoginController@loginIndex');
+Route::get('/downloads','Home\HomeIndexController@Downloads');
+Route::get('/Search','Home\HomeIndexController@Search');
+//前台文章显示
+Route::get('/news','Home\HomeNewsController@index');
+Route::get('/news/{id}','Home\HomeNewsController@show');
+//登录注册操作
+Route::get('/login','Home\UserLoginController@Login');
+Route::post('/login/select','Home\UserLoginController@LoginIndex');
+Route::get('/reg','Home\UserLoginController@Register');
+Route::post('/reg/create','Home\UserLoginController@RegCreate');
+Route::get('/User/VerifyMimaCode','Home\UserLoginController@VerifyMimaCode');
+Route::post('/User/Ajax','Home\UserLoginController@Ajax');
+Route::post('/User/SetMima','Home\UserLoginController@SetPassword');
+Route::post('/User/SavePassword','Home\UserLoginController@UpdatePasswd');
+
 Route::get('/logout','Home\UserLoginController@logout');
 
-
+Route::post('/admin/user/ajax','Admin\AdminUserController@Ajax');
 
 Route::group(['middleware'=>'Home_Session'],function() {
   Route::get('/user/index','Home\UserIndexController@index');
   Route::get('/user/user','Home\UserIndexController@Uindex');
+  //订单中心
+  Route::get('/user/user','Home\UserOrderController@index');
+  //售后服务
+  Route::get('/user/aftersale','Home\UserAfterSaleController@index');
+
 });
 //
 /**
@@ -41,6 +60,14 @@ Route::group(['middleware'=>'Home_Session'],function() {
  Route::get('/admin/login/logout','Admin\AdminLoginController@logout');
  //后台路由组
  Route::group(['middleware'=>'Admin_Session'],function() {
+   // 后台文章管理
+   Route::get('/admin/news/index','Admin\AdminNewsController@index');
+   Route::get('/admin/news/create','Admin\AdminNewsController@create');
+   Route::post('/admin/news/store','Admin\AdminNewsController@store');
+   Route::get('/admin/news/edit/{id}','Admin\AdminNewsController@edit');
+   Route::post('/admin/news/update/{id}','Admin\AdminNewsController@update');
+   Route::get('/admin/news/del/{id}','Admin\AdminNewsController@destroy');
+
    // 后台显示
    Route::get('/admin/index','Admin\AdminIndexController@index');
    //后台空白页
@@ -55,8 +82,6 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/admin/del/{id}','Admin\AdminAdminController@destroy');
    Route::get('/admin/admin/record/{id}','Admin\AdminAdminController@Record_index');
 
-
-
    //后台商品分类
    Route::get('/admin/cate/create','Admin\AdminCateController@create');
    Route::post('/admin/cate/store','Admin\AdminCateController@store');
@@ -67,7 +92,6 @@ Route::group(['middleware'=>'Home_Session'],function() {
 
 
    //后台 商品添加模块
-
    Route::get('/admin/good/index','Admin\GoodsController@index');
    Route::get('/admin/good/create','Admin\GoodsController@create');
    Route::post('/admin/good/store','Admin\GoodsController@store');
@@ -105,7 +129,7 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/user/recycled','Admin\AdminUserController@recycled');//会员回收站显示
    Route::get('/admin/user/recover/{id}','Admin\AdminUserController@recover');//会员回收站恢复
    Route::get('/admin/user/del/{id}','Admin\AdminUserController@delete');//会员彻底删除
-   //后天文件下载
+   //后台文件下载
    Route::get('/admin/qudong/create','Admin\AdminQuDongController@create');
    Route::post('/admin/qudong/store','Admin\AdminQuDongController@store');
    Route::get('/admin/qudong/index','Admin\AdminQuDongController@index');
@@ -125,4 +149,29 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/banner/edit/{id}','Admin\AdminBannerController@edit');
    Route::post('/admin/banner/update/{id}','Admin\AdminBannerController@update');
    Route::get('/admin/banner/del/{id}','Admin\AdminBannerController@destroy');
+
+   // 后台增值服务操作
+   Route::get('/admin/zengzhi/index','Admin\AdminZengZhiController@index');
+   Route::get('/admin/zengzhi/create','Admin\AdminZengZhiController@create');
+   Route::post('/admin/zengzhi/store','Admin\AdminZengZhiController@store');
+   Route::get('/admin/zengzhi/edit/{id}','Admin\AdminZengZhiController@edit');
+   Route::post('/admin/zengzhi/update/{id}','Admin\AdminZengZhiController@update');
+   Route::get('/admin/zengzhi/del/{id}','Admin\AdminZengZhiController@destroy');
+
+   // 后台网站配置
+   Route::get('/admin/system/index','Admin\AdminSystemController@index');
+   Route::post('/admin/system/update/{id}','Admin\AdminSystemController@update');
+
+   // 后台记录管理
+   Route::get('/admin/record/index','Admin\AdminRecordController@index');
+   Route::post('/admin/Record/Ajax','Admin\AdminRecordController@Ajax');
+   //Route::post('/admin/system/update/{id}','Admin\AdminSystemController@update');
+
+   // 后台友情链接操作
+   Route::get('/admin/links/index','Admin\AdminLinksController@index');
+   Route::get('/admin/links/create','Admin\AdminLinksController@create');
+   Route::post('/admin/links/store','Admin\AdminLinksController@store');
+   Route::get('/admin/links/edit/{id}','Admin\AdminLinksController@edit');
+   Route::post('/admin/links/update/{id}','Admin\AdminLinksController@update');
+   Route::get('/admin/links/del/{id}','Admin\AdminLinksController@destroy');
  });

@@ -1,6 +1,6 @@
 @extends('Home.common')
 
-@section('Home_title', '注册账号')
+@section('Home_title', '登录账号')
 
 @section('Left_Nav')
     @parent
@@ -11,7 +11,7 @@
     <div id="main" style="margin:  5px;background:#fff;">
         <div class="n-frame device-frame reg_frame">
             <div class="title-item dis_bot35 t_c">
-                <h4 class="title-big">登录帐号</h4></div>
+                <h4 class="title-big">@yield('Home_title')</h4></div>
             <div class="regbox" id="register_box">
                 <form action="/login/select" method="post">
                   {{ csrf_field() }}
@@ -26,20 +26,11 @@
                         </div>
                         <div class="fixed_bot mar_phone_dis1">
                             <input type="submit" value="登录" class="btn332 btn_reg_1 submit-step"></div>
-                        <div class="trig">已有账号?
-                            <a href="/reg" class="trigger-box">点击注册</a></div>
+                        <div class="trig">未有账号?
+                            <a href="/reg" class="trigger-box">点击注册</a><span class="sep">|</span><a href="/User/VerifyMimaCode" class="trigger-box">忘记密码？</a></div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    @if (session('Error'))
-    <script type="text/javascript">
-      layer.msg('{{session('Error')}}');
-    </script>
-    @elseif (session('Success'))
-    <script type="text/javascript">
-      layer.msg('{{session('Success')}}');
-    </script>
-    @endif
 @endsection

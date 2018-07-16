@@ -29,16 +29,6 @@
                                   <span class="input-group-addon">广告名字</span>
                                   <input type="text" class="form-control" name="ad_name" placeholder="请输入广告名">
                               </div>
-                              <div class="form-group">
-                                  <label>广告位置</label>
-                                  <select class="form-control" name="ad_position">
-                                      <option value="0">导航顶部</option>
-                                      <option value="1">首页中部</option>
-                                      <option value="2">首页底部</option>
-                                      <option value="3">分类中部</option>
-                                      <option value="4">商品中部</option>
-                                  </select>
-                              </div>
                               <div class="form-group input-group">
                                   <span class="input-group-addon">广告备注</span>
                                   <input type="text" class="form-control" name="ad_remark"/></div>

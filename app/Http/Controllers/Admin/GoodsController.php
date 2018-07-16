@@ -78,7 +78,7 @@ class GoodsController extends Controller
            $temp_name = str_random(15);
            $name = $temp_name.'.'.$ext;
            $dirname = date('Ymd',time());
-           $res = $profile -> move('./uploads/'.$dirname,$name);
+           $res = $profile -> move('./Admin/uploads/'.$dirname,$name);
            $path = $dirname.'/'.$name;
         
            //执行添加数据  返回ID
@@ -95,7 +95,7 @@ class GoodsController extends Controller
              $temp_name = str_random(5);
              $name = $temp_name.'.'.$ext;
              $dirname = date('Ymd',time());
-             $res = $v -> move('./uploads_pic/'.$dirname,$name);
+             $res = $v -> move('./Admin/uploads_pic/'.$dirname,$name);
              $names[] = $name;
             }
 

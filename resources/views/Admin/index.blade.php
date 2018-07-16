@@ -150,7 +150,7 @@
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> <?php echo $_SERVER['DOCUMENT_ROOT']; ?>
+                                    <i class="fa fa-file-o fa-fw"></i> <?php echo $_SERVER['DOCUMENT_ROOT']; ?>
                                     <span class="pull-right text-muted small"><em>9:49 AM</em>
                                     </span>
                                 </a>

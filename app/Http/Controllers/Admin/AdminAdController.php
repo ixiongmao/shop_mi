@@ -52,10 +52,9 @@ class AdminAdController extends Controller
         $db = DB::table('advertises')->insert([
           'ad_status'=>$data['ad_status'],
           'ad_name'=>$data['ad_name'],
-          'ad_position'=>$data['ad_position'],
           'ad_remark'=>$data['ad_remark'],
           'ad_pic'=>$data['ad_pic'],
-          'ad_location'=> $data['ad_dizhi'],
+          'ad_url'=> $data['ad_dizhi'],
           'ad_etime'=>strtotime($data['ad_etime']),
           'ad_time'=>time()
         ]);
@@ -95,12 +94,10 @@ class AdminAdController extends Controller
         $db = DB::table('advertises')->where('id','=',$id) -> update([
           'ad_status'=>$data['ad_status'],
           'ad_name'=>$data['ad_name'],
-          'ad_position'=>$data['ad_position'],
           'ad_remark'=>$data['ad_remark'],
           'ad_pic'=>$data['ad_pic'],
-          'ad_location'=>$data['ad_dizhi'],
-          'ad_etime'=>strtotime($data['ad_etime']),
-          'ad_time'=>time()
+          'ad_url'=>$data['ad_dizhi'],
+          'ad_etime'=>strtotime($data['ad_etime'])
         ]);
         if ($db) {
           return redirect('/admin/ad/index')->with('Success','修改成功');

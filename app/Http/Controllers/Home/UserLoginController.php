@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
+use App\Models\Admin\CateModel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -15,12 +16,13 @@ class UserLoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function Login()
     {
         if (session('Home_Session')) {
           return back()->with('Error','您已经登录，请先退出！');
         } else {
-          return view('Home.User.login');
+          $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
+          return view('Home.User.login',['Cate'=>$Cate]);
         }
 
     }
@@ -30,17 +32,36 @@ class UserLoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function register()
+    public function Register()
     {
         //
-        return view('Home.User.register');
+        if (session('Home_Session')) {
+          return back()->with('Error','您已经登录，请先退出！');
+        } else {
+          $get_session = session('Home_Session');
+          $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
+          return view('Home.User.register',['get_session'=>$get_session,'Cate'=>$Cate]);
+        }
+
+    }
+
+    /**
+     * 前台用户忘记密码显示
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function VerifyMimaCode()
+    {
+        //
+        $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
+        return view('Home.User.VerifyMimaCode',['Cate'=>$Cate]);
     }
     /**
      * 前台用户登录
      *
      * @return \Illuminate\Http\Response
      */
-    public function loginIndex(Request $request)
+    public function LoginIndex(Request $request)
     {
       $data = $request->except('_token');
       $u_name = $data['m_name'];
@@ -54,12 +75,13 @@ class UserLoginController extends Controller
         return back()->with('Error','登录失败');
       }
     }
+
     /**
      * 前台用户注册添加
      *
      * @return \Illuminate\Http\Response
      */
-    public function regCreate(Request $request)
+    public function RegCreate(Request $request)
     {
         //
         $data = $request->except('_token');
@@ -79,6 +101,71 @@ class UserLoginController extends Controller
           }
         } else {
           return back()->with('Error','用户名已存在');
+        }
+    }
+
+    /**
+     * 前台用户注册手机号重复验证、前台用户找回密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function Ajax(Request $request)
+    {
+        //
+        $m_phone = $request->input('m_phone');
+        isset($_GET['do']) ? $_GET['do'] : '';
+        if ($_GET['do'] == 'isPhone') {
+          $db = DB::table('users')->where('u_phone','=',$m_phone)->first();
+          if ($db == null) {
+            echo 'Success';
+          } else {
+           echo 'Error';
+          }
+        }
+        if ($_GET['do'] == 'VerifyMimaCode') {
+          $m_name = $request->input('m_name');
+          $m_phone = $request->input('m_phone');
+          $db = DB::table('users')->where('u_name','=',$m_name)->where('u_phone','=',$m_phone)->first();
+          if ($db == null) {
+            echo 'Error';
+          } else {
+           echo 'Success';
+          }
+        }
+    }
+
+    /**
+     * 前台用户找回密码显示
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function SetPassword(Request $request)
+    {
+        //
+        $data = $request->except('_token');
+        $db = DB::table('users')->where('u_name','=',$data['m_name'])->where('u_phone','=',$data['m_phone'])->first();
+        if ($db == null) {
+          return back()->with('Error','验证失败！');
+        } else {
+          $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
+          return view('Home.User.SetMima',['Cate'=>$Cate,'data'=>$db]);
+        }
+    }
+
+    /**
+     * 前台用户找回密码显示
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function UpdatePasswd(Request $request)
+    {
+        //
+        $data = $request->except('_token');
+        $db = DB::table('users')->where('id','=',$data['m_id'])->update(['u_password'=>Hash::make($data['m_password'])]);
+        if ($db == '1') {
+          return redirect('/login')->with('Error','修改成功');
+        } else {
+          return back()->with('Error','修改失败');
         }
     }
 

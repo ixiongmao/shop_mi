@@ -11,7 +11,7 @@
 <body>
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default"  style="width:1500px;">
                 <!-- 搜索开始 -->
                 <div class="panel-heading" > 
                     <form class="form-inline" action="" method="">
@@ -29,23 +29,28 @@
                     </form>
                 </div>
                 <!-- 搜索结束 -->
-                <div class="panel-body">
-    
-                    <table width="100%" class="table table-bordered table-hover">
+                <div class="panel-body"  style="width:1500px height:800px;">
+                    <div style="width:1480px;height:500px;overflow:scroll;">
+                    <table style="width:1480px;" class="table table-bordered table-hover text-center">
                         <thead>
                             <tr>
-                                <th>批量删除</th>
-                                <th>ID</th>
-                                <th>商品名称</th>
-                                <th>商品编号</th>
-                                <th>商品类别</th>
-                                <th>商品图片</th>
+                                <th></th>
+                                <th style="width:20px;">ID</th>
+                                <th style="width:180px;">名称</th>
+                                <th >编号</th>
+                                <th style="width:150px;">类别</th>
+                                <th style="width:60px;">图片</th>
                                 <th>图片名称</th>
-                                <th>商品价格</th>
-                                <th>商品库存</th>
-                                <th>操作人</th>
-                                <th>上线时间</th>
-                                <th>操作</th>
+                                <th style="width:70px;">价格</th>
+                                <th style="width:60px;">是否促销</th>
+                                <th style="width:60px;">促销价格</th>
+                                <th style="width:60px;">是否上架</th>
+                                <th style="width:80px;">库存</th>
+                                <th style="width:100px;">套餐</th>
+                                <th style="width:120px;">操作人</th>
+                                <th style="width:120px;">添加时间</th>
+                                <th style="width:200px;" align="center">操作</th>
+                                </div>
                             </tr>
                         </thead>
                         <tbody>   
@@ -62,12 +67,21 @@
                             <td>{{ $va['cname'] }}</td>
                             @endif
                             @endforeach
-                            <td><img style="width:50px;" src="/Uploads/{{ $v['goods_path'] }}"></td>
+                            <td><img style="width:50px;" src="/Admin/uploads/{{ $v['goods_path'] }}"></td>
                             <td>{{ $v['goods_pic'] }}</td>
                             <td>{{ $v['goods_price'] }}</td>  
+                            @if($v['goods_sales_status']==1)
+                            <td><code>√</code></td>  
+                            <td>{{ $v['goods_sales_price'] }}</td>
+                            @else
+                            <td>-</td>  
+                            <td>-</td>
+                            @endif
+                            <td>{{ $v['display'] }}</td>
                             @foreach($detail as $ka => $va)
                             @if($v['id']==$va['gid'])
                             <td>{{ $va['goods_nums'] }}</td> 
+                            <td class="center">{{ $va['goods_set_meals'] }}</td>
                             @endif
                             @endforeach
                             <td class="center">{{ $v['handler'] }}</td>
@@ -80,6 +94,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                     <!-- 用来全选 -->
                     全选&nbsp;<input type="checkbox" class="checkbox-inline" onclick="checkAll(this)">&nbsp;&nbsp;
                     <!-- 批量删除 -->

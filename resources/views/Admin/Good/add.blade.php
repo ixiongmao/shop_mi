@@ -82,11 +82,8 @@
                                             <option value="{{$v->id}}" id="{{$v->pid}}">{{$v ->cname}}</option>
                                                 @endif
                                             @endforeach
-                                        </select>
-
-
-                           
-                            </td>
+                                        </select> 
+                                    </td>
                                     </tr>
 
                                     <tr>
@@ -96,12 +93,12 @@
                                         </td>
                                          <th>是否促销：</th>
                                          <td>
-                                            <input type="radio" name="goods_sales_status" value="1">是
-                                            <input type="radio" name="goods_sales_status" value="0" checked>否
+                                            <input type="radio" name="goods_sales_status" id="gss1" value="1" cheched="">是
+                                            <input type="radio" name="goods_sales_status" id="gss2" value="0" checked>否
                                         </td>
-                                        <td>促销价格：</td>
                                         <td>
-                                            <input type="text" name="goods_sales_price" value="">
+                                            <div class="goods_discount">促销价格：
+                                           <input type="text" name="goods_sales_price" value=""></div>
                                         </td>
                                         <th>是否上架</th>
                                         <td>
@@ -141,13 +138,13 @@
                                             <th>商品套餐组合</th>
                                             <td  colspan="4">
                                                 <select name="meal1">
-                                                    <option>--请选择--</option>
+                                                    <option value="">--请选择--</option>
                                                     @foreach($meal as $k=>$v)
                                                     <option id="op1" value="{{ $v['id'] }}">{{ $v['goods_meals_detail'] }}</option>
                                                     @endforeach
                                                 </select>
                                                 <select name="meal2">
-                                                    <option>--请选择--</option>
+                                                    <option value="">--请选择--</option>
                                                     @foreach($meal as $k=>$v)
                                                     <option id="op2" value="{{ $v['id'] }}">{{ $v['goods_meals_detail'] }}</option>
                                                     @endforeach
@@ -300,8 +297,24 @@
 
 </script>
 
+<script type="text/javascript">
+    
+    
+    $('.goods_discount').hide();
+    /*$(function(){
+        if($('input[#gss1]:checked') == true){
+           $('.goods_discount').show(); 
+        }
+
+    })*/
+
+
+</script>
+
 
 
 @endsection
+
+
 
                                 

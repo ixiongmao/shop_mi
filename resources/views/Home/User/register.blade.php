@@ -7,8 +7,7 @@
 @endsection
 
 @section('content')
-
-    <link rel="stylesheet" href="/Home/static/css/login.css">
+<link rel="stylesheet" href="/Home/static/css/login.css">
     <div id="main" style="margin:  5px;background:#fff;">
         <div class="n-frame device-frame reg_frame">
             <div class="title-item dis_bot35 t_c">
@@ -65,15 +64,10 @@
             </div>
         </div>
     </div>
-    @if (session('Error'))
-    <script type="text/javascript">
-      layer.msg('{{session('Error')}}');
-    </script>
-    @endif
     <script type="text/javascript">
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     isName = false;
@@ -88,17 +82,22 @@
         var m_name = $(this).val();
         var m_name_preg = /^[a-zA-Z]+[0-9_]{3,18}$/;
         if (m_name_preg.test(m_name)) {
-            $.post('/admin/user/ajax', {
-                'u_name': m_name
-            },
-            function(msg) {
+            $.ajax({
+              url:'/admin/user/ajax',
+              type:'POST',
+              data:{'u_name': m_name},
+              success:function(msg){
                 if (msg == 'Error') {
                     layer.msg('用户名已存在');
+                    isName = false;
                 } else {
                     isName = true;
                     layer.msg('用户名可用');
                 }
-            })
+              },
+              dataType:'HTML',
+              async:true
+            });
         } else {
             layer.tips('用户名格式不正确', '#m_name');
         }
@@ -148,20 +147,37 @@
             isEmail = true;
         } else {
             layer.tips('邮箱格式不正确', '#m_email');
+            isEmail = false;
         }
     });
 
     $('input[name=m_phone]').focus(function() {
-      layer.tips('请输入手机号', '#m_phone');
+        layer.tips('请输入手机号码。', '#m_phone');
     }).blur(function() {
-        var u_phone = $(this).val();
-        var u_phone_preg = /^1[34578]\d{9}$/;
-        if (u_phone_preg.test(u_phone)) {
-            isPhone = true;
+        var m_phone = $(this).val();
+        var m_phone_preg = /^1[345678]\d{9}$/;
+        if (m_phone_preg.test(m_phone)) {
+            $.ajax({
+              url:'/User/Ajax?do=isPhone',
+              type:'POST',
+              data:{'m_phone': m_phone},
+              success:function(msg){
+                if (msg == 'Error') {
+                    layer.msg('手机号已存在');
+                    isPhone = false;
+                } else {
+                    layer.msg('手机号可用');
+                    isPhone = true;
+                }
+              },
+              dataType:'HTML',
+              async:true
+            });
         } else {
-          layer.tips('手机号格式不正确', '#m_phone');
+            layer.tips('手机号格式不正确', '#m_name');
+            isPhone = false;
         }
-    })
+    });
 
     $('#submit').click(function() {
         if (isName && isPassword && isnu_Password && isEmail && isPhone) {

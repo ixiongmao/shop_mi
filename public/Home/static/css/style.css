@@ -1560,7 +1560,7 @@ a:hover {
 	box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 .home-promo-list li.first {
-	margin-left: 0;
+	margin-left: 5px;
 }
 .home-promo-list li img {
 	width: 316px;
@@ -2554,19 +2554,6 @@ a:hover {
 	color:#ddd !important;
 }
 
-
-/* pages.lbi 翻页 */
-.pagebar{
-	float:right;
-	height:30px;
-	line-height:30px;
-}
-.pagebar a,.pagebar span{
-	float:left;
-	margin:0 5px;
-	padding:0 5px;
-}
-
 /* catalog */
 .catalog-wrap{}
 .cata-level-0{clear:both; font-size:18px; padding-top:30px;}
@@ -2750,4 +2737,78 @@ a:hover {
     visibility: visible;
     top: 0;
     left: 55px;
+}
+
+/* 分页样式 */
+#pull_right{
+		text-align:center;
+}
+.pull-right {
+		/*float: left!important;*/
+}
+.pagination {
+		display: inline-block;
+		padding-left: 0;
+		margin: 20px 0;
+		border-radius: 4px;
+}
+.pagination > li {
+		display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+		position: relative;
+		float: left;
+		padding: 6px 12px;
+		margin-left: -1px;
+		line-height: 1.42857143;
+		color: #c01734;
+		text-decoration: none;
+		background-color: #fff;
+		border: 1px solid #ddd;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+		margin-left: 0;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+		color: #c01734;
+		background-color: #eee;
+		border-color: #ddd;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+		z-index: 2;
+		color: #fff;
+		cursor: default;
+		background-color: #c01734;
+		border-color: #c01734;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+		color: #777;
+		cursor: not-allowed;
+		background-color: #fff;
+		border-color: #ddd;
+}
+.clear{
+		clear: both;
 }

@@ -264,6 +264,17 @@
               </li>
               <li>
                 <a href="#">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>文章管理
+                  <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="/admin/news/create">添加文章</a></li>
+                  <li>
+                    <a href="/admin/news/index">查看文章</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">
                   <i class="fa fa-bar-chart-o fa-fw"></i>分类管理
                   <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -288,7 +299,18 @@
                     <a href="/admin/meal/index">查看套餐</a></li>
                 </ul>
               </li>
-              <!-- 注释为Song -->
+              <li>
+                <a href="#">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>增值服务
+                  <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="/admin/zengzhi/create">添加商品</a></li>
+                  <li>
+                    <a href="/admin/zengzhi/index">查看商品</a></li>
+                </ul>
+              </li>
+              <!-- 注释为mao -->
               <li>
                 <a href="#">
                   <i class="fa fa-bar-chart-o fa-fw"></i>用户管理
@@ -341,7 +363,9 @@
                   <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                   <li>
-                    <a href="/admin/feedback/index">查看友情</a></li>
+                    <a href="/admin/links/create">添加友情</a></li>
+                  <li>
+                    <a href="/admin/links/index">查看友情</a></li>
                 </ul>
               </li>
               <li>
@@ -368,8 +392,12 @@
                 </ul>
               </li>
               <li>
-                <a href="#">
+                <a href="/admin/system/index">
                   <i class="fa fa-wrench fa-fw"></i>网站设置</a>
+              </li>
+              <li>
+                <a href="/admin/record/index">
+                  <i class="glyphicon glyphicon-record"></i>记录管理</a>
               </li>
             </ul>
           </div>

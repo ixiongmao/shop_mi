@@ -7,7 +7,7 @@
         <meta name="Keywords" content="" />
         <meta name="Description" content="" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <meta name="csrf_token" content="{{ csrf_token() }}" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link href="/Home/layui/layui/css/layui.css" rel="stylesheet" type="text/css" />
         <link href="/Home/static/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/Home/static/css/category.css" rel="stylesheet" type="text/css" />
@@ -33,18 +33,17 @@
             <div class="container">
                 <!-- 左侧头部开始 -->
                 <div class="topbar-nav">
-                    <a href="index.php" class="snc-link snc-order">首页</a>
+                    <a href="/" class="snc-link snc-order">首页</a>
                     <span class="sep">|</span>
                     <a href="/list/1" class="snc-link snc-order">列表页</a>
                     <span class="sep">|</span>
                     <a href="/item/1" target="_blank" class="snc-link snc-order">信息页</a>
                     <span class="sep">|</span>
-                    <a href="http://www.shenyou.tv/star/" target="_blank" class="snc-link snc-order">游戏星球</a>
-                    <span class="sep">|</span></div>
+                  </div>
                 <!-- 左侧头部结束 -->
                 <!-- 购物车部分开始 -->
                 <div class="topbar-cart" id="ECS_CARTINFO">
-                    <a class="cart-mini " href="http://www.leishen.cn/flow/">
+                    <a class="cart-mini " href="/flow/">
                         <i class="iconfont">&#xe60c;</i>购物车
                         <span class="mini-cart-num J_cartNum" id="hd_cartnum">(1)</span></a>
                     <div id="J_miniCartList" class="cart-menu">
@@ -137,13 +136,12 @@
                 <!-- LOGo -->
                 <!-- 搜索开始 -->
                 <div class="header-search fl">
-                    <form action="#" method="get" id="searchForm" name="searchForm" class="search-form clearfix">
+                    <form action="/Search" method="get" id="searchForm" class="search-form clearfix">
                         <label class="hide">站内搜索</label>
-                        <input class="search-text" type="text" name="keywords" id="keyword" value="" autocomplete="off">
-                        <input type="hidden" value="k1" name="dataBi">
+                        <input class="search-text" type="text" name="key" value="" autocomplete="off">
                         <button type="submit" class="search-btn iconfont"></button>
                         <div class="hot-words">
-                            <a href="#" target="_blank">Test</a></div>
+                            <a href="/Search?key=Macbook Pro" target="_blank">Macbook Pro</a></div>
                     </form>
                 </div>
                 <!-- 搜索结束 -->
@@ -155,31 +153,40 @@
                             <span>全部分类</span>
                             <img class="fr" src="/Home/static/picture/fen.png" style="width: 15px;height: 7px" />
                             <div class="site-category category-hidden">
-                                <ul class="site-category-list clearfix" id="site-category-list">
+                              <ul class="site-category-list clearfix" id="site-category-list">
+                                <!-- 左start -->
+
                                     <li class="category-item">
-                                        <a class="title" href="#">游戏笔记本
+                                        <a class="title" href="/list/1">123
                                             <i class="iconfont"></i></a>
-                                        <div class="children clearfix children_2">
+                                        <div class="children clearfix children_2 children-col-4">
                                             <div class="children-home-quan">
+                                              <!-- 右商品start -->
                                                 <ul class="children-list">
                                                     <div class="home-category-child-list clearfix">
-                                                        <a href="#" title="" class="home-category-list">办公游戏本
+                                                        <a href="http://www.leishen.cn/list/121" title="" class="home-category-list">1
                                                             <i class="iconfont fr"></i></a>
                                                     </div>
                                                     <li>
-                                                        <a class="link" href="#">
-                                                            <img class="thumb" src="/Home/static/logo.jpg" width="40" height="40">
-                                                            <span>雷神911Air星云版</span></a>
+                                                        <a class="link" href="http://www.leishen.cn/item/422">
+                                                            <img class="thumb" src="http://www.leishen.cn/images/201712/thumb_img/422_thumb_G_1512686602167.jpg" width="40" height="40">
+                                                            <span>ST-Pro启天版</span></a>
                                                     </li>
                                                 </ul>
+
+                                                <!-- 右商品end -->
                                             </div>
                                         </div>
-                                        <li class="category-item">
-                                            <a class="title" href="#">免费试用
-                                                <i class="iconfont"></i></a>
-                                        </li>
                                     </li>
-                                </ul>
+
+                                  <!-- 左end -->
+                                  <!-- 单个start -->
+                                  <li class="category-item">
+                                      <a class="title" href="#">免费试用
+                                          <i class="iconfont"></i></a>
+                                  </li>
+                                  <!-- 单个end -->
+                              </ul>
                             </div>
                     </ul>
                 </div>
@@ -225,7 +232,8 @@
         @yield('content')
         <!-- 继承部分结束 -->
         <div class="container">
-            <img src="/Home/static/picture/intel_desc_002.jpg" alt="intel" style="position: relative;left: 50%;margin-left: -960px;" /></div>
+            <img src="/Home/static/picture/intel_desc_002.jpg" alt="intel" style="position: relative;left: 50%;margin-left: -960px;" />
+        </div>
         <div class="footer">
             <div class="container">
                 <div class="footer-service clearfix">
@@ -302,6 +310,14 @@
                 </div>
             </div>
         </div>
+        @if (session('Error'))
+        <script type="text/javascript">
+          layer.msg('{{session('Error')}}');
+        </script>
+        @elseif (session('Success'))
+        <script type="text/javascript">
+          layer.msg('{{session('Success')}}');
+        </script>
+        @endif
     </body>
-
 </html>

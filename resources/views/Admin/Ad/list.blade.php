@@ -26,7 +26,6 @@
                       <th>ID</th>
                       <th>广告状态</th>
                       <th>广告名字</th>
-                      <th>广告位置</th>
                       <th>广告备注</th>
                       <th>广告图片</th>
                       <th>广告地址</th>
@@ -41,28 +40,15 @@
                       <td>{{ $v['id'] }}</td>
                       <td>
                         @if ($v['ad_status'] == 0)
-                          隐藏
+                          <font color="red">隐藏</font>
                         @else
                           显示
                         @endif
                       </td>
                       <td>{{ $v['ad_name'] }}</td>
-                      <td>
-                        @if ($v['ad_position'] == 0)
-                          导航顶部
-                        @elseif ($v['ad_position'] == 1)
-                          首页中部
-                        @elseif ($v['ad_position'] == 2)
-                          首页底部
-                        @elseif ($v['ad_position'] == 3)
-                          分类中部
-                        @elseif ($v['ad_position'] == 4)
-                          商品中部
-                        @endif
-                      </td>
                       <td>{{ $v['ad_remark'] }}</td>
                       <td><button type="button" class="btn btn-outline btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg-{{ $v['id'] }}">点击查看图片大图</button></td>
-                      <td>{{ $v['ad_location'] }}</td>
+                      <td>{{ $v['ad_url'] }}</td>
                       <td>{{ date('Y-m-d H:i:s',$v['ad_etime']) }}</td>
                       <td>{{ date('Y-m-d H:i:s',$v['ad_time']) }}</td>
                       <td><a href="/admin/ad/edit/{{ $v['id'] }}" class="btn btn-primary btn-sm">修改</a></td>
