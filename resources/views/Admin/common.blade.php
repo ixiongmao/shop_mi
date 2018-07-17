@@ -294,9 +294,9 @@
                   <li>
                     <a href="/admin/goods/index">查看商品</a></li>
                   <li>
-                    <a href="/admin/meal/create">添加套餐</a></li>
+                    <a href="/admin/meals/create">添加套餐</a></li>
                   <li>
-                    <a href="/admin/meal/index">查看套餐</a></li>
+                    <a href="/admin/meals/index">查看套餐</a></li>
                 </ul>
               </li>
               <li>

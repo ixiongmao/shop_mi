@@ -113,12 +113,12 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::post('/admin/good_ajax/store','Admin\GoodsAjaxController@store');
 
    //后台组合套餐模块
-   Route::get('/admin/meal/create','Admin\AdminMealController@create');
-   Route::post('/admin/meal/store','Admin\AdminMealController@store');
-   Route::get('/admin/meal/index','Admin\AdminMealController@index');
-   Route::get('/admin/meal/edit/{id}','Admin\AdminMealController@edit');
-   Route::post('/admin/meal/update','Admin\AdminMealController@update');
-   Route::get('/admin/meal/delete/{id}','Admin\AdminMealController@delete');
+   Route::get('/admin/meals/create','Admin\AdminMealController@create');
+   Route::post('/admin/meals/store','Admin\AdminMealController@store');
+   Route::get('/admin/meals/index','Admin\AdminMealController@index');
+   Route::get('/admin/meals/edit/{id}','Admin\AdminMealController@edit');
+   Route::post('/admin/meals/update/{id}','Admin\AdminMealController@update');
+   Route::get('/admin/meals/delete/{id}','Admin\AdminMealController@delete');
 
 
    // 后台广告操作

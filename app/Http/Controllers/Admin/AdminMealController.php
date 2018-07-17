@@ -21,7 +21,7 @@ class AdminMealController extends Controller
         $get_session = session('Admin_Session');
         $meal = DB::table('goods_meals')->paginate(25);
 
-        return view('Admin.Meal.list',['meal'=>$meal,'get_session'=>$get_session]);
+        return view('Admin.Meals.list',['meal'=>$meal,'get_session'=>$get_session]);
     }
 
     /**
@@ -33,7 +33,7 @@ class AdminMealController extends Controller
     {
         //
         $get_session = session('Admin_Session');
-        return view('Admin.Meal.add',['get_session'=>$get_session]);
+        return view('Admin.Meals.add',['get_session'=>$get_session]);
     }
 
     /**
@@ -47,26 +47,13 @@ class AdminMealController extends Controller
         //
 
         $meal = $request->all();
-
-
         $num = DB::table('goods_meals')->insert(['goods_meals_name'=>$meal['goods_meals_name'],'goods_meals_detail'=>$meal['goods_meals_detail'],'goods_meals_price'=>$meal['goods_meals_price']]);
 
         if($num){
-            return redirect('/admin/meal/index');
+            return redirect('/admin/meals/index')->with('Success','添加成功');
         }
 
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -82,9 +69,8 @@ class AdminMealController extends Controller
         $meal = DB::table('goods_meals')->where('id','=',$id)->get();
         $meal = $meal[0];
 
-
         if($meal){
-            return view('Admin.Meal.edit',['meal'=>$meal,'get_session'=>$get_session]);
+            return view('Admin.Meals.edit',['meal'=>$meal,'get_session'=>$get_session]);
         }
     }
 
@@ -95,15 +81,15 @@ class AdminMealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         //
         $meal = $request->all();
 
-         $num = DB::table('goods_meals')->where('id',$meal['id'])->update(['goods_meals_name'=>$meal['goods_meals_name'],'goods_meals_detail'=>$meal['goods_meals_detail'],'goods_meals_price'=>$meal['goods_meals_price']]);
+         $num = DB::table('goods_meals')->where('id','=',$id)->update(['goods_meals_name'=>$meal['goods_meals_name'],'goods_meals_detail'=>$meal['goods_meals_detail'],'goods_meals_price'=>$meal['goods_meals_price']]);
 
          if($num){
-            return redirect('/admin/meal/index');
+            return redirect('/admin/meals/index')->with('Success','修改成功');
         }
 
 
