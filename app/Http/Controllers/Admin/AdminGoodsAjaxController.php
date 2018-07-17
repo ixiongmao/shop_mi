@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\GoodsModel;
 
-class GoodsAjaxController extends Controller
+class AdminGoodsAjaxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class GoodsAjaxController extends Controller
     {
         //
 
-        
+
     }
 
     /**

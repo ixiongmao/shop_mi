@@ -704,11 +704,11 @@
      </ul>
      <dl class="goods-sub-bar-info clearfix">
        <dt>
-         <img src="/Home/static/logo.jpg" alt="雷神911SE-E5B巡航版" /></dt>
+         <img src="{{ $goods->goods_pic }}" alt="{{ $goods->goods_name }}" /></dt>
        <dd>
-         <strong>雷神911SE-E5B巡航版</strong>
+         <strong>{{ $goods->goods_name }}</strong>
          <p>
-           <em>GTX1050独显，I5-7300HQ处理器，8G内存，128G固态+1T机械</em></p>
+           <em>{{ $goods->goods_discript }}</em></p>
        </dd>
      </dl>
      <a href="javascript:addToCart(461)" class="btn btn-primary goods-add-cart-btn">

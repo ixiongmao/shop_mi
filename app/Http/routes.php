@@ -101,12 +101,12 @@ Route::group(['middleware'=>'Home_Session'],function() {
 
 
    //后台 商品添加模块
-   Route::get('/admin/good/index','Admin\GoodsController@index');
-   Route::get('/admin/good/create','Admin\GoodsController@create');
-   Route::post('/admin/good/store','Admin\GoodsController@store');
-   Route::get('/admin/good/edit/{id}','Admin\GoodsController@edit');
-   Route::get('/admin/good/update/{id}','Admin\GoodsController@update');
-   Route::get('/admin/good/destroy/{id}','Admin\GoodsController@destroy');
+   Route::get('/admin/goods/index','Admin\AdminGoodsController@index');
+   Route::get('/admin/goods/create','Admin\AdminGoodsController@create');
+   Route::post('/admin/goods/store','Admin\AdminGoodsController@store');
+   Route::get('/admin/goods/edit/{id}','Admin\AdminGoodsController@edit');
+   Route::get('/admin/goods/update/{id}','Admin\AdminGoodsController@update');
+   Route::get('/admin/goods/destroy/{id}','Admin\AdminGoodsController@destroy');
    //Route::post('/admin/good/delAll','Admin\GoodsController@delAll');
 
    //后台商品模块AJAX验证

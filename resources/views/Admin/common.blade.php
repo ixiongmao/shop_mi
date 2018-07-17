@@ -290,9 +290,9 @@
                   <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                   <li>
-                    <a href="/admin/good/create">添加商品</a></li>
+                    <a href="/admin/goods/create">添加商品</a></li>
                   <li>
-                    <a href="/admin/good/index">查看商品</a></li>
+                    <a href="/admin/goods/index">查看商品</a></li>
                   <li>
                     <a href="/admin/meal/create">添加套餐</a></li>
                   <li>

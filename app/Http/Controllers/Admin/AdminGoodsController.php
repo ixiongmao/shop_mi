@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use DB;
 
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GoodInsertRequest;
@@ -14,7 +13,7 @@ use App\Models\Admin\GoodsDetails;
 use App\Models\Admin\CateModel;
 use App\Models\GoodsMondels;
 
-class GoodsController extends Controller
+class AdminGoodsController extends Controller
 {
     /**
      * 上
@@ -31,10 +30,10 @@ class GoodsController extends Controller
         $cate = CateModel::all();
 
         $get_session = session('Admin_Session');
-        
 
-        
-        return view('Admin.Good.list',['data'=>$data,'detail'=>$detail,'cate'=>$cate,'get_session'=>$get_session]);
+
+
+        return view('Admin.Goods.list',['data'=>$data,'detail'=>$detail,'cate'=>$cate,'get_session'=>$get_session]);
 
     }
 
@@ -46,14 +45,12 @@ class GoodsController extends Controller
     public function create()
     {
         //
-        $get_session = session('Admin_Session');
-
         $user = DB::table('users')->get();
 
         $cate = CateModel::all();
         $meal = DB::table('goods_meals')->select('id','goods_meals_detail')->get();
 
-        return view('Admin.Good.add',['user'=>$user,'cate'=>$cate,'meal'=>$meal,'get_session'=>$get_session]);
+        return view('Admin.Goods.add',['user'=>$user,'cate'=>$cate,'meal'=>$meal]);
     }
 
     /**
@@ -136,7 +133,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * 
+     *
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -144,17 +141,17 @@ class GoodsController extends Controller
     public function edit($id)
     {
         //查询此id在关联数据
-
+          $get_session = session('Admin_Session');
           $goods = DB::table('goods')->where('id','=',$id)->get();
           $details = DB::table('goods_details')->where('gid','=',$id)->get();
-          $cate = CateModel::all();          
+          $cate = CateModel::all();
 
           if($goods && $details){
-            return view('Admin.Good.edit',['goods'=>$goods,'details'=>$details,'cate'=>$cate]);
+            return view('Admin.Good.edit',['get_session'=>$get_session,'goods'=>$goods,'details'=>$details,'cate'=>$cate]);
           }else{
             return back();
           }
-        
+
 
     }
 
@@ -225,7 +222,7 @@ class GoodsController extends Controller
     public function destroy($id)
     {
         //
-        
+
         $order = GoodsModel::find($id);
         if($order -> delete()){
             return redirect('/admin/good/index');
@@ -254,5 +251,3 @@ class GoodsController extends Controller
       }*/
     }
 }
-
-

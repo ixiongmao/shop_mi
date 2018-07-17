@@ -73,7 +73,7 @@
                                         @endforeach
                                 </select>
                             </td>
-                               
+
                          </tr>
 
                         <tr>
@@ -94,17 +94,17 @@
                             </td>
                              <th>操作人：</th>
                                 <td>{{ $val['handler'] }} </td>
-                            <td> 
+                            <td>
                                 <button type="reset" class="btn btn-info text-center">重置</button>
                             </td>
                         </tr>
-                    </tbody>   
-                    @endforeach        
+                    </tbody>
+                    @endforeach
                 </table>
                 <br/>
 
        <!-- 商品详情表栏 -->
-              
+
                  <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -114,15 +114,13 @@
                         <tbody>
                             <tr>
                                 @foreach($details as $ka => $va)
-                                <th>商品品牌</th>
-                                <td><input type="text" name="goods_brand" value="{{ $va['goods_brand'] }}"></td>
                                 <th>商品库存</th>
                                 <td colspan="2">
                                     <input type="text" name="goods_nums" value="{{ $va['goods_nums'] }}">
                                 </td>
-                              
+
                             </tr>
-                            <tr>   
+                            <tr>
                                 <th>商品副图：</th>
                                 <td>{{ $va['goods_pics'] }}</td>
                                 <td colspan="5">
@@ -136,16 +134,16 @@
                                 </td>
                             </tr>
                             <tr>
-                                    
+
                                 <td colspan="2">
                                     <button type="reset" class="btn btn-info">重置</button>
                                 </td>
-                            </tr> 
-                       
+                            </tr>
+
                             <tr>
                                 <td colspan="6">
                                     <button type="submit" class="btn btn-primary">提交</button>
-                                    
+
                                 </td>
                             </tr>
 
@@ -184,7 +182,7 @@
 </script>
 
 <script type="text/javascript">
-    
+
 
     $('select[name=c12] option').hide();
     $('select[name=goods_cates] option').hide();
@@ -208,5 +206,3 @@
 </script>
 
 @endsection
-
-                                

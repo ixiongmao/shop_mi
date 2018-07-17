@@ -72,9 +72,6 @@ class HomeIndexController extends Controller
     public function meal(Request $request)
     {
         $ids = $request -> input('ids');
-        //var_dump($ids);
-
-
         $prices = DB::table('goods_meals')->whereIn('id',$ids)->sum('goods_meals_price');
         if($prices){
             echo $prices;
@@ -83,7 +80,7 @@ class HomeIndexController extends Controller
         }
 
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *

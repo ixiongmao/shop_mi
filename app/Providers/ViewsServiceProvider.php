@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers\Home;
+namespace App\Providers;
 
 use DB;
 use App\Models\Admin\GoodsModel;
@@ -18,6 +18,10 @@ class ViewsServiceProvider extends ServiceProvider
     {
         //
         //视图Composer
+        view()->composer('Admin.*',function($view){
+          $get_session = session('Admin_Session');
+             $view->with('get_session',$get_session);
+         });
 
         view()->composer('Home.*',function($view){
           $get_session = session('Home_Session');
