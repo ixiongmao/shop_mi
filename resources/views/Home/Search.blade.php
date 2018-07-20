@@ -18,11 +18,6 @@
         @if ($Search->first())
         <div class="order-list-box clearfix">
             <ul class="order-list">
-              <li class="first active">
-                <a title="销量" href="#" class="curr" rel="nofollow">
-                  <span class="search_DESC">销量</span>&nbsp;
-                  <i class="iconfont"></i></a>
-              </li>
               @if ($jiage == 'asc')
                 <li class="active">
                   <a title="价格" href="/Search?key={{ $Sdata }}&jiage=desc" class="curr" rel="nofollow">
@@ -39,23 +34,7 @@
                     <span>价格</span></a>
                 </li>
               @endif
-              <li class="">
-                <a title="上架时间" href="#" rel="nofollow">
-                  <span class="">上架时间</span></a>
-              </li>
             </ul>
-
-          <ul class="type-list">
-            <li>显示方式：</li>
-            <li>
-              <a href="#">
-                <img src="/home/static/picture/display_mode_list.gif" alt=""></a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <img src="/home/static/picture/display_mode_grid_act.gif" alt=""></a>
-            </li>
-          </ul>
         </div>
 
           <div class="goods-list-box">
@@ -64,7 +43,6 @@
               @foreach ($Search as $k=>$v)
               <div class="goods-item">
                 <div class="figure figure-img">
-                  <!-- <span class="text_center_red">限时秒杀</span> -->
                   <a href="/item/{{ $v['id'] }}">
                     <img src="{{ $v['goods_pic'] }}" alt="{{ $v['goods_name'] }}" class="goodsimg" /></a>
                 </div>

@@ -18,9 +18,8 @@ class AdminAfterSaleController extends Controller
     public function index()
     {
         //
-        $get_session = session('Admin_Session');
         $data = DB::table('aftersale_site')->paginate(25);
-        return view('Admin.AfterSale_Site.list',['get_session'=>$get_session,'data'=>$data]);
+        return view('Admin.AfterSale_Site.list',['data'=>$data]);
     }
 
     /**
@@ -31,8 +30,7 @@ class AdminAfterSaleController extends Controller
     public function create()
     {
         //
-        $get_session = session('Admin_Session');
-        return view('Admin.AfterSale_Site.add',['get_session'=>$get_session]);
+        return view('Admin.AfterSale_Site.add');
     }
 
     /**
@@ -58,17 +56,6 @@ class AdminAfterSaleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -77,9 +64,8 @@ class AdminAfterSaleController extends Controller
     public function edit($id)
     {
         //
-        $get_session = session('Admin_Session');
         $data = DB::table('aftersale_site')->where('id','=',$id)->first();
-        return view('Admin.AfterSale_Site.edit',['get_session'=>$get_session,'data'=>$data]);
+        return view('Admin.AfterSale_Site.edit',['data'=>$data]);
     }
 
     /**

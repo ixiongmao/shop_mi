@@ -17,11 +17,9 @@ class AdminQuDongController extends Controller
      */
     public function index(Request $request)
     {
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
         $Search = $request->input('Search');
         $data = QuDongModel::where('qudong_name','like','%'.$Search.'%')->orderBy('id','asc')->paginate(15);
-        return view('Admin.QuDong.list',['data'=>$data,'Search'=>$Search,'get_session'=>$get_session]);
+        return view('Admin.QuDong.list',['data'=>$data,'Search'=>$Search]);
     }
 
     /**
@@ -31,9 +29,7 @@ class AdminQuDongController extends Controller
      */
     public function create()
     {
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
-        return view('Admin.QuDong.add',['get_session'=>$get_session]);
+        return view('Admin.QuDong.add');
     }
 
     /**
@@ -44,7 +40,6 @@ class AdminQuDongController extends Controller
      */
     public function store(Request $request)
     {
-          check_admin_purview('0');
           $data = $request->except('_token');
           $QuDong = new QuDongModel;
           $QuDong -> qudong_name = $data['file_name'];
@@ -66,10 +61,8 @@ class AdminQuDongController extends Controller
      */
     public function edit($id)
     {
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
         $data = QuDongModel::find($id);
-        return view('Admin.QuDong.edit',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.QuDong.edit',['data'=>$data]);
     }
 
     /**
@@ -81,7 +74,6 @@ class AdminQuDongController extends Controller
      */
     public function update(Request $request, $id)
     {
-        check_admin_purview('0');
         $data = $request->except('_token');
         $QuDong = QuDongModel::find($id);
         $QuDong -> qudong_name = $data['file_name'];
@@ -102,7 +94,6 @@ class AdminQuDongController extends Controller
      */
     public function destroy($id)
     {
-        check_admin_purview('0');
         $QuDong = QuDongModel::find($id);
         $db = $QuDong->delete();
         if ($db) {

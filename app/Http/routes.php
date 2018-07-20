@@ -11,17 +11,18 @@
 |
 */
 
-Route::get('/send','MailController@send');
-
-
+Route::get('/VerifyCode','Admin\AdminCaptchaController@Captcha');
 
 Route::get('/','Home\HomeIndexController@index');
+Route::get('/shelves','Home\HomeIndexController@shelves');
 Route::get('/list/{id}','Home\HomeIndexController@list');
 Route::get('/item/{id}','Home\HomeIndexController@item');
+
 //前台产品详情页 查询
 Route::post('/Home/check/meal','Home\HomeIndexController@meal');
 
 Route::get('/downloads','Home\HomeIndexController@Downloads');
+//搜索
 Route::get('/Search','Home\HomeIndexController@Search');
 //前台文章显示
 Route::get('/news','Home\HomeNewsController@index');
@@ -42,22 +43,56 @@ Route::get('/logout','Home\UserLoginController@logout');
 
 Route::post('/admin/user/ajax','Admin\AdminUserController@Ajax');
 
+
 Route::group(['middleware'=>'Home_Session'],function() {
+
+  //评论发送Ajax
+  Route::post('/User/Comment/Ajax','Home\HomeAjaxController@Ajax');
+
+  //购物车
+  Route::get('/shop_car','Home\ShopCarController@index');
+
+
+  //购物车管理
+  Route::get('/shop_car','Home\ShopCarController@create');
+  Route::post('/shop_car/store','Home\ShopCarController@store');
+  Route::post('/score/update','Home\ShopCarController@update');
+  Route::get('/shop_car/clear/{id}','Home\ShopCarController@destroy');
+  Route::get('/shop_car/clearall/{id}','Home\ShopCarController@clearCart');
+  Route::get('/shop_car/checkout/','Home\ShopCarController@checkout');
+
+  //用户中心
   Route::get('/user/index','Home\UserIndexController@index');
-  Route::get('/user/user','Home\UserIndexController@Uindex');
   //订单中心
-  Route::get('/user/user','Home\UserOrderController@index');
+  Route::get('/user/my_orders','Home\UserOrdersController@index');
   //修改我的资料
   Route::post('/User/My/Ajax','Home\UserController@Ajax');
   Route::get('/user/my_information','Home\UserMyInformationController@index');
+  //消费记录
+  Route::get('/user/my_balance_records','Home\HomeRecordsController@records');
 
-  //售后服务
-  Route::get('/user/aftersale','Home\UserAfterSaleController@index');
+  //我的收藏
+  Route::get('/user/my_collect_goods','Home\UserCollectController@index');
+  Route::get('/user/my_collect_goods/create/{id}','Home\UserCollectController@create');
+  Route::get('/user/my_collect_goods/del/{id}','Home\UserCollectController@destroy');
+
+  //我的反馈
+  Route::get('/user/my_feedback','Home\UserFeedbackController@index');
+  Route::post('/user/my_feedback/create','Home\UserFeedbackController@create');
+
+  //收货地址
+  Route::get('/user/my_address','Home\UserAddressController@index');
+  Route::post('/user/my_address/store','Home\UserAddressController@store');
+  Route::get('/user/my_address/edit/{id}','Home\UserAddressController@edit');
+  Route::post('/user/my_address/update/{id}','Home\UserAddressController@update');
+  Route::get('/user/my_address/del/{id}','Home\UserAddressController@destroy');
 
 });
 //
+
+
 /**
- *  Auth：IXiongmao
+ *  Auth：李、松、君、IXiongmao
  *  DES：后台全部操作管理
  */
  // 后台登录
@@ -79,8 +114,6 @@ Route::group(['middleware'=>'Home_Session'],function() {
 
    // 后台显示
    Route::get('/admin/index','Admin\AdminIndexController@index');
-   //后台空白页
-   Route::get('/admin/blank','Admin\AdminIndexController@blank');
    // 后台员工操作
    Route::get('/admin/admin/index','Admin\AdminAdminController@index');
    Route::post('/admin/admin/ajax','Admin\AdminAdminController@Ajax');
@@ -92,12 +125,12 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/admin/record/{id}','Admin\AdminAdminController@Record_index');
 
    //后台商品分类
-  Route::get('/admin/cate/create','Admin\AdminCateController@create');
-  Route::post('/admin/cate/store','Admin\AdminCateController@store');
-  Route::get('/admin/cate/index','Admin\AdminCateController@index');
-  // Route::get('/admin/cate/del/{id}','Admin\AdminCateController@destroy');
-  Route::get('/admin/cate/edit/{id}','Admin\AdminCateController@edit');
-  // Route::post('/admin/cate/update/{id}','Admin\AdminCateController@update');
+   Route::get('/admin/cate/create','Admin\AdminCateController@create');
+   Route::post('/admin/cate/store','Admin\AdminCateController@store');
+   Route::get('/admin/cate/index','Admin\AdminCateController@index');
+   // Route::get('/admin/cate/del/{id}','Admin\AdminCateController@destroy');
+   Route::get('/admin/cate/edit/{id}','Admin\AdminCateController@edit');
+   // Route::post('/admin/cate/update/{id}','Admin\AdminCateController@update');
 
 
    //后台 商品添加模块
@@ -110,7 +143,7 @@ Route::group(['middleware'=>'Home_Session'],function() {
    //Route::post('/admin/good/delAll','Admin\GoodsController@delAll');
 
    //后台商品模块AJAX验证
-   Route::post('/admin/good_ajax/store','Admin\GoodsAjaxController@store');
+   Route::post('/admin/good_ajax/store','Admin\AdminGoodsAjaxController@store');
 
    //后台组合套餐模块
    Route::get('/admin/meals/create','Admin\AdminMealController@create');
@@ -138,6 +171,28 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/user/recycled','Admin\AdminUserController@recycled');//会员回收站显示
    Route::get('/admin/user/recover/{id}','Admin\AdminUserController@recover');//会员回收站恢复
    Route::get('/admin/user/del/{id}','Admin\AdminUserController@delete');//会员彻底删除
+   Route::get('/admin/user/record','Admin\ADminUserRecordController@index');//用户记录
+   Route::get('/admin/user/record/list/{id}','Admin\ADminUserRecordController@list');//用户记录
+   Route::get('/admin/user/balance_record','Admin\ADminUserRecordController@balance_index');//用户消费记录
+   Route::get('/admin/user/balance_record/list/{id}','Admin\ADminUserRecordController@list');//用户消费记录
+   Route::get('/admin/user/dlrecord','Admin\ADminUserRecordController@dl_index');//用户登录记录
+   Route::get('/admin/user/dlrecord/list/{id}','Admin\ADminUserRecordController@list');//用户登录记录
+   Route::get('/admin/user/collect_record/','Admin\ADminUserRecordController@collect_index');//用户收藏
+   Route::get('/admin/user/collect_record/list/{id}','Admin\ADminUserRecordController@list');//用户收藏
+
+   //后台订单中心模块
+   Route::get('/admin/orders/index','Admin\AdminOrdersController@index');
+   Route::get('/admin/orders/create','Admin\AdminOrdersController@create');
+   Route::post('/admin/orders/store','Admin\AdminOrdersController@store');
+   Route::get('/admin/orders/edit/{id}','Admin\AdminOrdersController@edit');
+   Route::get('/admin/orders/update/{id}','Admin\AdminOrdersController@update');
+   Route::get('/admin/orders/destroy/{id}','Admin\AdminOrdersController@destroy');
+
+   // 后台会员收货地址操作
+   Route::get('/admin/address/index','Admin\AdminAddressController@index');
+   //Route::get('/admin/feedback/edit/{id}','Admin\AdminFeedbackController@edit');
+   Route::get('/admin/address/del/{id}','Admin\AdminAddressController@destroy');
+
    //后台文件下载
    Route::get('/admin/qudong/create','Admin\AdminQuDongController@create');
    Route::post('/admin/qudong/store','Admin\AdminQuDongController@store');
@@ -148,8 +203,11 @@ Route::group(['middleware'=>'Home_Session'],function() {
 
    // 后台会员反馈操作
    Route::get('/admin/feedback/index','Admin\AdminFeedbackController@index');
-   //Route::get('/admin/feedback/edit/{id}','Admin\AdminFeedbackController@edit');
    Route::get('/admin/feedback/del/{id}','Admin\AdminFeedbackController@destroy');
+
+   // 后台评价操作
+   Route::get('/admin/comment/index','Admin\AdminCommentController@index');
+   Route::get('/admin/comment/del/{id}','Admin\AdminCommentController@destroy');
 
    // 后台首页幻灯片操作
    Route::get('/admin/banner/index','Admin\AdminBannerController@index');
@@ -158,14 +216,6 @@ Route::group(['middleware'=>'Home_Session'],function() {
    Route::get('/admin/banner/edit/{id}','Admin\AdminBannerController@edit');
    Route::post('/admin/banner/update/{id}','Admin\AdminBannerController@update');
    Route::get('/admin/banner/del/{id}','Admin\AdminBannerController@destroy');
-
-   // 后台增值服务操作
-   Route::get('/admin/zengzhi/index','Admin\AdminZengZhiController@index');
-   Route::get('/admin/zengzhi/create','Admin\AdminZengZhiController@create');
-   Route::post('/admin/zengzhi/store','Admin\AdminZengZhiController@store');
-   Route::get('/admin/zengzhi/edit/{id}','Admin\AdminZengZhiController@edit');
-   Route::post('/admin/zengzhi/update/{id}','Admin\AdminZengZhiController@update');
-   Route::get('/admin/zengzhi/del/{id}','Admin\AdminZengZhiController@destroy');
 
    // 后台网站配置
    Route::get('/admin/system/index','Admin\AdminSystemController@index');

@@ -58,18 +58,6 @@
                                     <input type="text" class="form-control" name="u_passwd" placeholder="请重复密码">
                                     <span class="input-group-addon" id="u_passwd"></span>
                                 </div>
-                                <hr>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon">支付密码</span>
-                                    <input type="text" class="form-control" name="u_paypassword" placeholder="请输入支付密码">
-                                    <span class="input-group-addon" id="u_paypassword"></span>
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon">确认支付密码</span>
-                                    <input type="text" class="form-control" name="u_paypasswd" placeholder="请重复输入支付密码">
-                                    <span class="input-group-addon" id="u_paypasswd"></span>
-                                </div>
-                                <hr>
                                 <div class="form-group input-group">
                                     <span class="input-group-addon">头像(点击文本框进行上传，可不选)</span>
                                     <input type="text" name="u_photo" id="picture" class="form-control" />
@@ -107,7 +95,6 @@
         //检测用户名是否存在
         isName = false;
         isPass = false;
-        isPayPass = false;
         isEmail = false;
         isPhone = false;
         isPassword = false;
@@ -178,37 +165,6 @@
             }
         });
 
-
-        //验证支付密码
-        $('input[name=u_paypassword]').focus(function() {
-            $('#u_paypassword').html('<font style="color:red">字母/数字,长度在6到18之间</font>');
-        }).blur(function() {
-            var password = $('input[name=u_paypassword]').val();
-            var password_prega = /[0-9]{6,18}/g;
-            var password_pregb = /[a-zA-Z0-9]{6,18}/g;
-            if (password_prega.test(password)) {
-                $('#u_paypassword').html('<font style="color:red">密码强度:弱</font>');
-            } else if (password_pregb.test(password)) {
-                $('#u_paypassword').html('<font style="color:red">密码强度:强</font>');
-            } else {
-                $('#u_paypassword').html('<font style="color:red">密码格式不正确</font>');
-            }
-        });
-
-        //验证支付密码
-        $('input[name=u_paypasswd]').focus(function() {
-            $('#u_paypasswd').html('<font style="color:red">请再次输入密码</font>');
-        }).blur(function() {
-            var password = $('input[name=u_paypassword]').val();
-            var npassword = $('input[name=u_paypasswd]').val();
-            if (password != npassword) {
-                $('#u_paypasswd').html('<font style="color:red">两次输入的密码不一致</font>');
-            } else {
-                isPayPass = true;
-                $('#u_paypasswd').html('<font style="color:red"></font>');
-            }
-        });
-
         $('input[name=u_email]').focus(function() {
             $('#u_email').html('<font style="color:red">请输入邮箱</font>');
         }).blur(function() {
@@ -238,7 +194,7 @@
 
 
         $('#isForm').submit(function() {
-            if (isName && isPass && isPassword && isPayPass && isEmail && isPhone) {
+            if (isName && isPass && isPassword && isEmail && isPhone) {
                 return true;
             }
             return false;

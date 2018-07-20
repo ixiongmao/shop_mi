@@ -86,7 +86,7 @@
 }
 .content .empty{
 	padding-top:70px;
-	text-align:center;	
+	text-align:center;
 }
 /*排序规则*/
 .order-list-box {
@@ -170,7 +170,7 @@
 }
 /*商品列表-列表*/
 .goods-list-list{
-	
+
 }
 .goods-list-list .goods-item{
 	position: relative;
@@ -194,7 +194,7 @@
 }
 .goods-list-list .goods-item .thumb img{
 	width:120px;
-	height:120px;	
+	height:120px;
 }
 .goods-list-list .goods-item .action{
 	position:absolute;
@@ -267,7 +267,7 @@
 	position: relative;
 	float: left;
 	width: 296px;
-	height: 383px;
+	height: 340px;
 	padding-top: 47px;
 	margin-right: 14px;
 	margin-bottom: 14px;
@@ -566,5 +566,3 @@
 	color:#B9000F;
 	padding-right:3px;
 }
-
-

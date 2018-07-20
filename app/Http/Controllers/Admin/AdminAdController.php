@@ -19,10 +19,8 @@ class AdminAdController extends Controller
     public function index(Request $request)
     {
         //
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
         $data = DB::table('advertises')->orderBy('id', 'asc') -> get();
-        return view('Admin.Ad.list',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.Ad.list',['data'=>$data]);
     }
 
     /**
@@ -33,9 +31,7 @@ class AdminAdController extends Controller
     public function create()
     {
         //
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
-        return view('Admin.Ad.add',['get_session'=>$get_session]);
+        return view('Admin.Ad.add');
     }
 
     /**
@@ -47,7 +43,6 @@ class AdminAdController extends Controller
     public function store(Request $request)
     {
         //
-        check_admin_purview('0');
         $data = $request -> except(['_token','_method']);
         $db = DB::table('advertises')->insert([
           'ad_status'=>$data['ad_status'],
@@ -74,10 +69,8 @@ class AdminAdController extends Controller
     public function edit($id)
     {
         //
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
         $data = DB::table('advertises')->where('id','=',$id)->first();
-        return view('Admin.Ad.edit',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.Ad.edit',['data'=>$data]);
     }
 
     /**

@@ -18,9 +18,8 @@ class AdminLinksController extends Controller
     public function index()
     {
         //
-        $get_session = session('Admin_Session');
         $data = DB::table('links')->get();
-        return view('Admin.Links.list',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.Links.list',['data'=>$data]);
     }
 
     /**
@@ -31,8 +30,7 @@ class AdminLinksController extends Controller
     public function create()
     {
         //
-        $get_session = session('Admin_Session');
-        return view('Admin.Links.add',['get_session'=>$get_session]);
+        return view('Admin.Links.add');
 
     }
 
@@ -67,9 +65,8 @@ class AdminLinksController extends Controller
     public function edit($id)
     {
         //
-        $get_session = session('Admin_Session');
         $data = DB::table('links')->where('id','=',$id)->first();
-        return view('Admin.Links.edit',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.Links.edit',['data'=>$data]);
     }
 
     /**

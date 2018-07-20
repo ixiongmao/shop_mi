@@ -1,6 +1,6 @@
 @extends('Admin.common')
 
-@section('AD2_title', '友情链接修改')
+@section('AD2_title', '文章修改')
 
 @section('Left_Nav')
     @parent

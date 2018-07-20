@@ -29,7 +29,7 @@
                                                                                            }else if (ho < 22) {
                                                                                              document.write('晚上好：');
                                                                                            }else{
-                                                                                             document.write('夜里好,该去休息了');
+                                                                                             document.write('夜里好,该去休息了：');
                                                                                            }
                                                                                           }
                                                                                             dtime();
@@ -50,25 +50,25 @@
                                             <li>
                                                 <h3>余额：
                                                     <span class="num">{{ $get_session['u_money'] }}</span></h3>
-                                                <a href="/user/my_balance">查看我账户的余额
+                                                <a href="/user/my_balance_records?Records=balance">查看我的消费记录
                                                     <i class="iconfont"></i></a>
                                                 <img src="/Home/static/images/user/index/portal-icon-1.png"></li>
                                             <li>
                                                 <h3>积分：
-                                                    <span class="num">共计 1 个,价值 200.00</span></h3>
+                                                    <span class="num">200.00</span></h3>
                                                 <a href="/user/my_integral">查看我账户的积分
                                                     <i class="iconfont"></i></a>
                                                 <img src="/Home/static/images/user/index/portal-icon-2.png"></li>
                                             <li>
-                                                <h3>可用雷魂：
+                                                <h3>订单：
                                                     <span class="num">10雷魂</span></h3>
-                                                <h4 style="color: #333;">雷魂可用于
-                                                    <a style="color: #B9000F;" href="http://www.leishen.cn/try_list">0元抽奖</a>抽奖</h4>
+                                                    <a href="/user/my_orders">查看我的订单
+                                                        <i class="iconfont"></i></a>
                                                 <img src="/Home/static/images/user/index/portal-icon-3.png"></li>
                                             <li>
                                                 <h3>收藏：
-                                                        <span class="num">1000</span></h3>
-                                                    <a href="/user/my_integral">查看我账户的收藏
+                                                        <span class="num">{{ $U_collect_goods }}</span></h3>
+                                                    <a href="/user/my_collect_goods">查看我收藏的商品
                                                         <i class="iconfont"></i></a>
                                                     <img src="/Home/static/images/user/index/portal-icon-4.png"></li>
                                         </ul>
@@ -78,19 +78,26 @@
                                         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
                                             <tbody>
                                                 <tr align="center">
+                                                    <td bgcolor="#ffffff">备注</td>
                                                     <td bgcolor="#ffffff">IP地址</td>
                                                     <td bgcolor="#ffffff">时间</td>
-                                                  </tr>
+                                                </tr>
+                                                @foreach ($U_dlrecords as $v)
+                                                <tr align="center">
+                                                    <td bgcolor="#ffffff">{{ $v['user_remark'] }}</td>
+                                                    <td bgcolor="#ffffff">{{ long2ip($v['user_ip']) }}</td>
+                                                    <td bgcolor="#ffffff">{{ date('Y-m-d H:i:s',$v['user_time']) }}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
-                                        <form name="selectPageForm" action="http://www.leishen.cn//user.php" method="get">
-                                            <div class="clearfix">
-                                                <div id="pager" class="pagebar">
-                                                    <span class="f_l f6" style="margin-right:10px;">总计
-                                                        <b>0</b>个记录</span>
-                                                </div>
+                                        <div class="col-sm-6" style="float:  right;">
+                                            <div class="dataTables_paginate paging_simple_numbers">
+                                                <ul class="pagination">
+                                                  {!! $U_dlrecords->render() !!}
+                                                </ul>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

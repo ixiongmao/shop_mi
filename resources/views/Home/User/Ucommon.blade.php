@@ -46,8 +46,11 @@ KindEditor.ready(function(K) {
                                 <div class="root_node">会员中心</div>
                                 <ul>
                                     <li>
-                                        <a class="on" href="/user/">我的个人中心</a>
+                                        <a class="on" href="/user/index">我的个人中心</a>
                                         <a class="" href="/user/my_information">用户信息</a>
+                                        <a class="" href="/user/my_collect_goods">我收藏的商品</a>
+                                        <a class="" href="/user/my_address">收货地址</a>
+                                        <a class="" href="/user/my_feedback">我的反馈</a>
                                     </li>
                                 </ul>
                             </li>
@@ -57,9 +60,9 @@ KindEditor.ready(function(K) {
                                   <div class="root_node">订单中心</div>
                                   <ul>
                                       <li>
-                                          <a class="" href="/user/orders">我的订单</a>
-                                          <a class="" href="/user/index">收货地址</a>
-                                          <a class="" href="/user/aftersale">售后服务</a>
+                                          <a class="" href="/user/my_orders">我的订单</a>
+                                          <a class="" href="/user/my_after_goods">售后服务</a>
+                                          <a class="" href="/user/my_balance_records?Records=balance">消费记录</a>
                                       </li>
                                   </ul>
                               </li>
@@ -73,9 +76,4 @@ KindEditor.ready(function(K) {
                 </div>
             </div>
         </div>
-    @if (session('Error'))
-    <script type="text/javascript">
-      layer.msg('{{session('Error')}}');
-    </script>
-    @endif
 @endsection

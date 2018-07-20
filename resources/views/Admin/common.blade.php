@@ -31,7 +31,12 @@
     <script src="/Admin/assets/dist/js/sb-admin-2.js"></script>
     <!-- 以下为在线可视化HTML编辑器js 感谢提供者，开源无私：http://kindeditor.net/ -->
     <script charset="utf-8" src="/Editor/kindeditor-all-min.js"></script>
-    <script charset="utf-8" src="/Editor/lang/zh_CN.js"></script>
+    <script charset="utf-8" src="/Editor/lang/zh-CN.js"></script>
+    <style type="text/css">
+      .ixongmao_content img{
+        width: 100%;
+      }
+    </style>
     <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -263,6 +268,10 @@
                   <i class="fa fa-dashboard fa-fw"></i>后台首页</a>
               </li>
               <li>
+                <a href="/admin/orders/index">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>查看订单</a>
+              </li>
+              <li>
                 <a href="#">
                   <i class="fa fa-bar-chart-o fa-fw"></i>文章管理
                   <span class="fa arrow"></span></a>
@@ -299,17 +308,7 @@
                     <a href="/admin/meals/index">查看套餐</a></li>
                 </ul>
               </li>
-              <li>
-                <a href="#">
-                  <i class="fa fa-bar-chart-o fa-fw"></i>增值服务
-                  <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                  <li>
-                    <a href="/admin/zengzhi/create">添加商品</a></li>
-                  <li>
-                    <a href="/admin/zengzhi/index">查看商品</a></li>
-                </ul>
-              </li>
+
               <!-- 注释为mao -->
               <li>
                 <a href="#">
@@ -326,6 +325,15 @@
               </li>
               <li>
                 <a href="#">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>收货地址管理
+                  <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="/admin/address/index">查看用户收货地址</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">
                   <i class="fa fa-bar-chart-o fa-fw"></i>文件管理
                   <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -335,8 +343,6 @@
                     <a href="/admin/qudong/index">查看文件</a></li>
                 </ul>
               </li>
-              <!-- 注释为Song -->
-              <!-- 注释为IXiongmao -->
               <li>
                 <a href="#">
                   <i class="fa fa-bar-chart-o fa-fw"></i>广告管理
@@ -407,8 +413,24 @@
                   <i class="fa fa-wrench fa-fw"></i>网站设置</a>
               </li>
               <li>
+                <a href="/admin/comment/index">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>评论管理</a>
+              </li>
+              <li>
                 <a href="/admin/record/index">
                   <i class="glyphicon glyphicon-record"></i>记录管理</a>
+              </li>
+              <li>
+                <a href="/admin/user/balance_record">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>用户消费记录查看</a>
+              </li>
+              <li>
+                <a href="/admin/user/dlrecord">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>用户登录记录查看</a>
+              </li>
+              <li>
+                <a href="/admin/user/collect_record">
+                  <i class="fa fa-bar-chart-o fa-fw"></i>用户收藏查看</a>
               </li>
             </ul>
           </div>

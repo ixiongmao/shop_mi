@@ -17,9 +17,8 @@ class AdminBannerController extends Controller
     public function index()
     {
         //
-        $get_session = session('Admin_Session');
         $data = DB::table('banners')->get();
-        return view('Admin.Banner.list',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.Banner.list',['data'=>$data]);
     }
 
     /**
@@ -30,8 +29,7 @@ class AdminBannerController extends Controller
     public function create()
     {
         //
-        $get_session = session('Admin_Session');
-        return view('Admin.Banner.add',['get_session'=>$get_session]);
+        return view('Admin.Banner.add');
     }
 
     /**
@@ -61,17 +59,6 @@ class AdminBannerController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -80,9 +67,8 @@ class AdminBannerController extends Controller
     public function edit($id)
     {
         //
-        $get_session = session('Admin_Session');
         $data = DB::table('banners')->find($id);
-        return view('Admin.Banner.edit',['get_session'=>$get_session,'data'=>$data]);
+        return view('Admin.Banner.edit',['data'=>$data]);
     }
 
     /**

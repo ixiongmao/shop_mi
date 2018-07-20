@@ -15,16 +15,6 @@
                 <div class="panel-body">
                   <div class="row">
                     <form action="/admin/feedback/index" method="get">
-                        <!-- <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>请选择类型查询</label>
-                                  <select class="form-control" name="fk_fenlei">
-                                    <option value="0">请选择</option>
-                                    <option value="1">用户名</option>
-                                    <option value="2">反馈标题</option>
-                                  </select>
-                            </div>
-                        </div> -->
                         <div class="col-sm-12" style="float:  right;">
                             <div class="form-group input-group">
                               <label>请选择相关类型的关键字</label>
@@ -60,20 +50,12 @@
                               @foreach ($data as $k => $v)
                                 <tr>
                                     <td>{{ $v->id }}</td>
-                                    <td>
-                                      @if ($v->uid == 0)
-                                      匿名用户
-                                      @else
-                                      {{ $v->UsersInfo->u_name }}
-                                      @endif</td>
+                                    <td>{{ $v->UsersInfo->u_name }}</td>
                                     <td>{{ $v->feedbacks_name }}</td>
                                     <td>{{ $v->feedbacks_email }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg-{{ $v->id }}">点击查看反馈的信息</button></td>
+                                    <td><button type="button" class="btn btn-outline btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg-{{ $v->id }}">点击查看反馈的信息</button></td>
                                     <td>{{ date('Y-m-d H:i:s',$v->feedbacks_time) }}</td>
-                                    <td>
-                                        <a href="/admin/feedback/edit/{{ $v->id }}" class="btn btn-primary btn-sm">修改</a>|
-                                        <a href="/admin/feedback/del/{{ $v->id }}" class="btn btn-danger btn-sm">删除</a></td>
+                                    <td><a href="/admin/feedback/del/{{ $v->id }}" class="btn btn-danger btn-sm">删除</a></td>
                                 </tr>
                                 <!-- 反馈加载开始 -->
                                 <div class="modal fade bs-example-modal-lg-{{ $v->id }}" id="myModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -84,7 +66,10 @@
                                                     <span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title" id="myModalLabel">随意点击框外面其他处，即可关闭</h4></div>
                                             <div class="modal-body">
-                                                <font color="red">{{ $v->feedbacks_content }}</font></div>
+                                              <div class="ixongmao_content">
+                                                <p style="margin:0px;padding:5px;">{!! $v->feedbacks_content !!}</p>
+                                              </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

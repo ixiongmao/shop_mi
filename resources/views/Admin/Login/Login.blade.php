@@ -99,9 +99,9 @@
       $(function() {
         $('#huanfu').click(function() {
 
-          $('img').css({
+          $('body').css({
             'background':'url(/admin/assets/images/bg/mojave.jpg) fixed no-repeat',
-             'background-size':'100% 100%'
+            'background-size':'100% 100%'
           });
         });
       });

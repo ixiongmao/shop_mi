@@ -23,16 +23,16 @@
     <table class="layui-table" style=" display:inline-block; width:1122px;">
         <thead>
             <tr>
-                <th style="width:373px;">售后网点地址</th>
-                <th style="width:373px;">联系电话</th>
-                <th style="width:373px;">售后范围</th></tr>
+                <th style="width:700px;text-align:center;">售后网点地址</th>
+                <th style="width:90px;text-align:center;">联系电话</th>
+                <th style="width:373px;text-align:center;">售后范围</th></tr>
         </thead>
         <tbody>
           @foreach ($data as $k=>$v)
             <tr>
-                <td style="width:374px;">
+                <td style="width:700px;">
                     <a href="/news/{{ $v['id'] }}">{{ $v['aftersale_site'] }}</a></td>
-                <td style="width:374px;">{{ $v['aftersale_phone'] }}</td>
+                <td style="width:90px;">{{ $v['aftersale_phone'] }}</td>
                 <td style="width:374px;">{{ $v['aftersale_scope'] }}</td>
             </tr>
             @endforeach

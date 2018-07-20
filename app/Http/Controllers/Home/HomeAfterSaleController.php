@@ -18,11 +18,9 @@ class HomeAfterSaleController extends Controller
     public function index(Request $request)
     {
         //
-
-        $get_session = session('Home_Session');
         $Search = $request->input('Search');
         $data = DB::table('aftersale_site')->where('aftersale_site','like','%'.$Search.'%')->paginate(25);
-        return view('Home.AfterSale.list',['get_session'=>$get_session,'data'=>$data,'Search'=>$Search]);
+        return view('Home.AfterSale.list',['data'=>$data,'Search'=>$Search]);
     }
 
 }

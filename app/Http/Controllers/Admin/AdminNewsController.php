@@ -19,9 +19,8 @@ class AdminNewsController extends Controller
     {
         //
         $Search = $request->input('Search');
-        $get_session = session('Admin_Session');
         $data = DB::table('news')->where('news_name','like','%'.$Search.'%')->paginate(25);
-        return view('Admin.News.list',['data'=>$data,'get_session'=>$get_session,'Search'=>$Search]);
+        return view('Admin.News.list',['data'=>$data,'Search'=>$Search]);
     }
 
     /**
@@ -32,8 +31,7 @@ class AdminNewsController extends Controller
     public function create()
     {
         //
-        $get_session = session('Admin_Session');
-        return view('Admin.News.add',['get_session'=>$get_session]);
+        return view('Admin.News.add');
     }
 
     /**
@@ -68,9 +66,8 @@ class AdminNewsController extends Controller
     public function edit($id)
     {
         //
-        $get_session = session('Admin_Session');
         $data = DB::table('news')->where('id','=',$id)->first();
-        return view('Admin.News.edit',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.News.edit',['data'=>$data]);
     }
 
     /**

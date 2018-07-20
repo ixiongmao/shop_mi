@@ -21,10 +21,9 @@ class AdminAdminController extends Controller
     public function index(Request $request)
     {
         check_admin_purview('1');
-        $get_session = session('Admin_Session');
         $Search = $request -> input('Search');
         $data = AdminModel::where('a_name','like','%'.$Search.'%')->orderBy('id','asc')->paginate(25);
-        return view('Admin.Admin.list',['data'=>$data,'Search'=>$Search,'get_session'=>$get_session]);
+        return view('Admin.Admin.list',['data'=>$data,'Search'=>$Search]);
     }
 
     /**
@@ -58,9 +57,8 @@ class AdminAdminController extends Controller
     public function create()
     {
         //
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
-        return view('Admin.Admin.add',['get_session'=>$get_session]);
+        check_admin_purview('1');
+        return view('Admin.Admin.add');
     }
 
     /**
@@ -72,7 +70,7 @@ class AdminAdminController extends Controller
     public function store(Request $request)
     {
         //
-        check_admin_purview('0');
+        check_admin_purview('1');
         $data = $request -> except('_token');
         $Admin = new AdminModel;
         $Admin -> a_status = $data['a_status'];
@@ -101,10 +99,9 @@ class AdminAdminController extends Controller
     public function edit($id)
     {
         //
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
+        check_admin_purview('1');
         $data = AdminModel::find($id);
-        return view('Admin.Admin.edit',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.Admin.edit',['data'=>$data]);
     }
 
     /**
@@ -117,7 +114,7 @@ class AdminAdminController extends Controller
     public function update(Request $request, $id)
     {
         //
-        check_admin_purview('0');
+        check_admin_purview('1');
         $data = $request->except('_token');
         $Admin = AdminModel::find($id);
         $Admin -> a_status = $data['a_status'];
@@ -149,9 +146,8 @@ class AdminAdminController extends Controller
     */
      public function Record_index(Request $request,$id)
      {
-       check_admin_purview('0');
-       $get_session = session('Admin_Session');
+       check_admin_purview('1');
        $data = AdminRecordModel::where('admin_id','=',$id)->orderBy('id','desc')->paginate(25);
-       return view('Admin.Admin.record',['data'=>$data,'get_session'=>$get_session]);
+       return view('Admin.Admin.record',['data'=>$data]);
      }
 }

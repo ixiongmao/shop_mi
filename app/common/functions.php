@@ -15,7 +15,7 @@ if (in_array($t0,$arr_admin_permission)) {
             move: false, //拖拽关闭
             closeBtn: 0,
             yes: function(idnex, layero) {
-                  location.href = "/admin/blank";
+                  location.href = "/admin/index";
             },
         });
       </script>';

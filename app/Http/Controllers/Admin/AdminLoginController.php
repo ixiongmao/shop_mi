@@ -22,7 +22,7 @@ class AdminLoginController extends Controller
     {
         //Ixiongmao
         if (session('Admin_Session')) {
-          return back()->with('Success','您已经登录成功，请先退出，重新登录！');
+          return redirect('/admin/index')->with('Success','您已经登录成功，请先退出，重新登录！');
         } else {
           return view('Admin.Login.Login');
         }

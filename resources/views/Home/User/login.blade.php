@@ -24,6 +24,14 @@
                             <label class="labelbox">
                                 <input type="password" name="m_password" placeholder="请输入密码"></label>
                         </div>
+                        <div class="inputbg">
+                    <label class="labelbox" style="float:left;">
+                      <input name="verify_code" type="text" size="25" placeholder="请输入右侧验证码" style="width:213px;" required="">
+                    </label>
+                    <label class="inputbg" style="float:left;">
+                      <img src="/VerifyCode" alt="" style="width:90px;margin-left:6px;color:#fff;font-size:14px;height:45px;line-height:40px;" onclick="this.src='/VerifyCode?VerifyCode='+Math.random()">
+                    </label>
+                  </div>
                         <div class="fixed_bot mar_phone_dis1">
                             <input type="submit" value="登录" class="btn332 btn_reg_1 submit-step"></div>
                         <div class="trig">未有账号?

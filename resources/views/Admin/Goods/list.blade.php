@@ -1,6 +1,6 @@
 @extends('Admin.common')
 
-@section('AD2_title', '售后网点管理')
+@section('AD2_title', '商品管理')
 
 @section('Left_Nav')
     @parent

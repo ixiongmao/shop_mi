@@ -19,11 +19,9 @@ class AdminUserController extends Controller
     public function index(Request $request)
     {
         //显示用户
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
         $search = $request->input('Search');
         $data = UsersModel::where('u_name','like','%'.$search.'%')->orderBy('id','asc')->paginate(25);
-        return view('Admin.User.list',['data'=>$data,'search'=>$search,'get_session'=>$get_session]);
+        return view('Admin.User.list',['data'=>$data,'search'=>$search]);
     }
     /**
      * 发送Ajax
@@ -51,9 +49,7 @@ class AdminUserController extends Controller
     public function create()
     {
         //
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
-        return view('Admin.User.add',['get_session'=>$get_session]);
+        return view('Admin.User.add');
     }
 
     /**
@@ -64,7 +60,6 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
-        check_admin_purview('0');
         $data = $request->except('_token');
         $users = new UsersModel;
         $users -> u_status = $data['u_status'];
@@ -83,7 +78,6 @@ class AdminUserController extends Controller
         $users -> u_phone = $data['u_phone'];
         $users -> u_email = $data['u_email'];
         $users -> u_money = $data['u_money'];
-        $users -> u_paypassword = Hash::make($data['u_paypassword']);
         $users -> u_time = time();
         $db = $users -> save();
         if($db){
@@ -102,10 +96,8 @@ class AdminUserController extends Controller
      */
     public function edit($id)
     {
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
         $data =  UsersModel::find($id);
-        return view('Admin.User.edit',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.User.edit',['data'=>$data]);
     }
 
     /**
@@ -117,17 +109,15 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        check_admin_purview('0');
         $data = $request->except('_token');
         $users = UsersModel::find($id);
         $users -> u_status = $data['u_status'];
-        $users -> u_password = Hash::make($data['u_password']);
+        // $users -> u_password = Hash::make($data['u_password']);
         $users -> u_sex = $data['u_sex'];
         $users -> u_photo = $data['u_photo'];
         $users -> u_phone = $data['u_phone'];
         $users -> u_email = $data['u_email'];
         $users -> u_money = $data['u_money'];
-        $users -> u_paypassword = Hash::make($data['u_paypassword']);
         $db = $users -> save();
         if($db){
             return redirect('/admin/user/index')->with('Success','修改成功');
@@ -144,7 +134,6 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        check_admin_purview('0');
         $data = UsersModel::find($id);
         $db = $data -> delete();
         if($db){
@@ -158,11 +147,9 @@ class AdminUserController extends Controller
      */
     public function recycled()
     {
-        check_admin_purview('0');
-        $get_session = session('Admin_Session');
         $data = UsersModel::onlyTrashed()->paginate(25);
         //var_dump($date);
-        return view('Admin.User.recycled',['data'=>$data,'get_session'=>$get_session]);
+        return view('Admin.User.recycled',['data'=>$data]);
     }
     /**
      * 会员回收站管理

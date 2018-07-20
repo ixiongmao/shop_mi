@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
+use Validator;
+use Input;
 use App\Models\Admin\CateModel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -38,9 +40,7 @@ class UserLoginController extends Controller
         if (session('Home_Session')) {
           return redirect('/')->with('Error','您已经登录，请先退出！');
         } else {
-          $get_session = session('Home_Session');
-          $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
-          return view('Home.User.register',['get_session'=>$get_session,'Cate'=>$Cate]);
+          return view('Home.User.register');
         }
 
     }
@@ -56,8 +56,7 @@ class UserLoginController extends Controller
         if (session('Home_Session')) {
           return redirect('/')->with('Error','您已经登录，请先退出！');
         } else {
-          $Cate = CateModel::select('id','cname','pid','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(25);
-          return view('Home.User.VerifyMimaCode',['Cate'=>$Cate]);
+          return view('Home.User.VerifyMimaCode');
         }
 
     }
@@ -74,8 +73,23 @@ class UserLoginController extends Controller
       $db = DB::table('users')->where('u_name','=',$data['m_name'])->first();
       $res = Hash::check($u_passwd, $db['u_password']);
       if ($res) {
-        session(['Home_Session'=>$db]);
-        return redirect('/')->with('Success','登录成功');
+        $verify_code = [
+            'verify_code' => 'required|captcha'
+        ];
+        $validator = Validator::make(Input::all(), $verify_code);
+        if ($validator->fails()) {
+            return redirect('/login')->with('Error','验证码错误');
+        } else {
+          DB::table('u_dlrecords')->insert([
+            'user_id'=>$db['id'],
+            'user_remark'=>'用户于'.date('Y-m-d H:i:s',time()).'登录,IP为：'.$_SERVER['REMOTE_ADDR'],
+            'user_ip'=>ip2long($_SERVER['REMOTE_ADDR']),
+            'user_time'=>time()
+          ]);
+          session(['Home_Session'=>$db]);
+          return redirect('/')->with('Success','登录成功');
+
+        }
       } else {
         return back()->with('Error','登录失败');
       }
@@ -92,20 +106,30 @@ class UserLoginController extends Controller
         $data = $request->except('_token');
         $db = DB::table('users')->where('u_name','=',$data['m_name'])->first();
         if ($db == null) {
-          $reg = DB::table('users')->insert([
-            'u_name'=>$data['m_name'],
-            'u_password'=>Hash::make($data['m_password']),
-            'u_email'=>$data['m_email'],
-            'u_sex'=>$data['m_sex'],
-            'u_phone'=>$data['m_phone']
-          ]);
-          if ($reg) {
-            return redirect('/login')->with('Success','注册成功');
+          $verify_code = [
+              'verify_code' => 'required|captcha'
+          ];
+          $validator = Validator::make(Input::all(), $verify_code);
+          if ($validator->fails()) {
+              return redirect('/reg')->with('Error','验证码错误');
           } else {
-            return back()->with('Error','注册失败');
+            $reg = DB::table('users')->insert([
+              'u_name'=>$data['m_name'],
+              'u_password'=>Hash::make($data['m_password']),
+              'u_email'=>$data['m_email'],
+              'u_sex'=>$data['m_sex'],
+              'u_phone'=>$data['m_phone'],
+              'u_time'=>time()
+            ]);
+            if ($reg) {
+              return redirect('/login')->with('Success','注册成功');
+            } else {
+              return redirect('/reg')->with('Error','注册失败');
+            }
           }
+
         } else {
-          return back()->with('Error','用户名已存在');
+          return redirect('/reg')->with('Error','用户名已存在');
         }
     }
 
@@ -176,10 +200,16 @@ class UserLoginController extends Controller
     }
 
     public function logout()
-    {
+    {   $get_session = session('Home_Session');
         if (!session('Home_Session')) {
           return redirect('/login')->with('Error','请先登录！');
         }else if (session()->forget('Home_Session') == null) {
+          DB::table('u_dlrecords')->insert([
+            'user_id'=>$get_session['id'],
+            'user_remark'=>'用户于'.date('Y-m-d H:i:s',time()).'退出,IP为：'.$_SERVER['REMOTE_ADDR'],
+            'user_ip'=>ip2long($_SERVER['REMOTE_ADDR']),
+            'user_time'=>time()
+          ]);
           return redirect('/login')->with('Error','退出成功！');
         }
     }

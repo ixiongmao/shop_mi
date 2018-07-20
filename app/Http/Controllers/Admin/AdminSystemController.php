@@ -18,9 +18,9 @@ class AdminSystemController extends Controller
     public function index()
     {
         //
-        $get_session = session('Admin_Session');
+        check_admin_purview('2');
         $data = DB::table('systems')->where('id','=','1')->first();
-        return view('Admin.System',['get_session'=>$get_session,'data'=>$data]);
+        return view('Admin.System',['data'=>$data]);
     }
 
     /**
@@ -33,6 +33,7 @@ class AdminSystemController extends Controller
     public function update(Request $request, $id)
     {
         //
+        check_admin_purview('2');
         $data = $request->except('_token');
         $db = DB::table('systems')->where('id','=',$id)->update([
           'system_status'=>$data['system_status'],

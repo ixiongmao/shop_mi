@@ -23,8 +23,8 @@
                     <label class="radio-inline">
                       <input type="radio" name="goods_status" value="1" checked>上架</label></div>
                   <div class="form-group input-group">
-                    <span class="input-group-addon">商品名称</span>
-                    <input type="text" class="form-control" name="" placeholder="请输入商品名称"></div>
+                    <span  class="input-group-addon">商品名称</span>
+                    <input style="width:250px;" id="n1" type="text" class="form-control" name="goods_name" placeholder="请输入商品名称" value=""><span class="s1"></span></div>
                   <div class="row" style="margin-bottom: 15px;">
                     <div class="col-lg-6">
                       <div class="input-group">
@@ -97,11 +97,11 @@
                     <input type="text" class="form-control" name="goods_pic" placeholder="请输入商品主图(点击框内即可提交上传)" id="picture"></div>
                   <div class="form-group">
                     <label>商品组图</label>
-                    <textarea name="goods_pics[]" class="form-control" rows="3" id="slideshow"></textarea>
+                    <textarea name="goods_pics" class="form-control" rows="3" id="slideshow"></textarea>
                   </div>
                   <div class="form-group">
-                    <label>商品详细</label>
-                    <textarea name="goods_tail" class="form-control" rows="3" id="d_content"></textarea>
+                    <label>商品详图</label>
+                    <textarea name="goods_detail_pic" class="form-control" rows="3" id="d_content"></textarea>
                   </div>
                   <div class="form-group">
                     <label>商品参数</label>
@@ -124,7 +124,7 @@
                     <input type="text" class="form-control" name="goods_sales_start" placeholder="请输入开始时间"></div>
                   <div id="goods_end" class="form-group input-group">
                     <span class="input-group-addon">结束时间</span>
-                    <input type="text" class="form-control" name="goods_sales_end" placeholder="请输入结束时间"></div>
+                    <input type="text" class="form-control" name="goods_sales_end" placeholder="请输入结束时间" id="goods_sales_end"></div>
                   <div class="row" style="margin-bottom: 15px;">
                     <div class="col-lg-6">
                       <div class="input-group">
@@ -180,6 +180,7 @@
             var gname = $(this).val();
             var user_preg = /^[a-zA-Z\u4e00-\u9fa5]{2,}\-*[a-zA-Z0-9\u4e00-\u9fa5]*$/;
             if(user_preg.test(gname)){
+
                  $.post('/admin/good_ajax/store',{'goods_name':gname},function(msg){
                     //console.log(msg);
                     if(msg==1){
@@ -325,4 +326,17 @@
             });
 
     </script>
+    <script type="text/javascript">
+    layui.use('laydate',
+        function() {
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#goods_sales_end',
+                //指定元素
+                type: 'datetime'
+            });
+        });
+      </script>
+
 @endsection

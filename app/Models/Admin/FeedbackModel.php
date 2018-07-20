@@ -13,6 +13,6 @@ class FeedbackModel extends Model
 
     public function UsersInfo()
     {   //这个里面的App\Models\Admin\UsersModel字段 存的是当前$this 表当中的主键
-        return $this->hasOne('App\Models\Admin\UsersModel','id');
+        return $this->hasOne('App\Models\Admin\UsersModel','id','uid');
     }
 }

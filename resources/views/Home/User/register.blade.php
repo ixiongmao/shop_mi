@@ -43,18 +43,14 @@
                             <label class="labelbox">
                                 <input name="m_phone" type="text" placeholder="手机号" id="m_phone"></label>
                         </div>
-                        <!-- <div class="inputbg">
-                            <label class="labelbox" style="float:left;">
-                                <input name="sms_code" id="sms_code" type="text" size="25" placeholder="请输入短信验证码" style="width:213px;" required=""></label>
-                            <label class="inputbg" style="float:left;">
-                                <input type="button" id="btn" onclick="getverifycode1('extend_field5', '手机');" value="获取验证码" style="width:90px;margin-left:6px;background-color:red;color:#fff;font-size:14px;height:45px;line-height:40px;"></label>
-                            <span class="t_text" id="extend_field5i">手机</span>
-                            <span class="error_icon"></span>
-                        </div> -->
-                        <!-- <div class="law">
-                            <label>
-                                <input name="xieyi" type="checkbox" value="1" tabindex="5" class="remember-me">我已看过并接受《
-                                <a href="#" style="color:blue" target="_blank">用户协议</a>》</label></div> -->
+                        <div class="inputbg">
+                    <label class="labelbox" style="float:left;">
+                      <input name="verify_code" type="text" size="25" placeholder="请输入右侧验证码" style="width:213px;" required="">
+                    </label>
+                    <label class="inputbg" style="float:left;">
+                      <img src="/VerifyCode" alt="" style="width:90px;margin-left:6px;color:#fff;font-size:14px;height:45px;line-height:40px;" onclick="this.src='/VerifyCode?VerifyCode='+Math.random()">
+                    </label>
+                  </div>
                         <div class="fixed_bot mar_phone_dis1">
                             <input type="submit" value="同意协议并注册" class="btn332 btn_reg_1 submit-step" id="submit"></div>
                         <div class="trig">已有账号?

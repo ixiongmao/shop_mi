@@ -23,17 +23,13 @@ class AdminGoodsController extends Controller
     public function index()
     {
         //
-
+        check_admin_purview('4');
         //默认分页 没页显示25条信息
         $data = GoodsModel::paginate(25);
         $detail = GoodsDetails::all();
         $cate = CateModel::all();
 
-        $get_session = session('Admin_Session');
-
-
-
-        return view('Admin.Goods.list',['data'=>$data,'detail'=>$detail,'cate'=>$cate,'get_session'=>$get_session]);
+        return view('Admin.Goods.list',['data'=>$data,'detail'=>$detail,'cate'=>$cate]);
 
     }
 
@@ -45,8 +41,8 @@ class AdminGoodsController extends Controller
     public function create()
     {
         //
+        check_admin_purview('4');
         $user = DB::table('users')->get();
-
         $cate = CateModel::all();
         $meal = DB::table('goods_meals')->select('id','goods_meals_detail')->get();
 
@@ -61,74 +57,58 @@ class AdminGoodsController extends Controller
      */
     public function store(Request $request)
     {
-
+        check_admin_purview('4');
          $data = $request -> all();
-         //获取操作人
          $get_session = session('Admin_Session');
           //事务回滚开始
          DB::beginTransaction();
           // 判断主图片是否存在
-         if($request -> hasFile('goods_pic')){
-          //创建文件上传对象
-           $profile = $request -> file('goods_pic');
-           $ext = $profile->getClientOriginalExtension();
-           //处理文件名称
-           $temp_name = str_random(15);
-           $name = $temp_name.'.'.$ext;
-           $dirname = date('Ymd',time());
-           $res = $profile -> move('./Admin/uploads/'.$dirname,$name);
-           $path = '/Admin/uploads/'.$dirname.'/'.$name;
+         if($data['goods_pic']){
 
            //执行添加数据  返回ID
            if($data['goods_sales_status']){
-             $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$path,'goods_price'=>$data['goods_price'],'goods_sales_status'=>$data['goods_sales_status'],'goods_sales_price'=>$data['goods_sales_price'],'goods_sales_start'=>strtotime($data['goods_sales_start']),'goods_sales_end'=>strtotime($data['goods_sales_end']),'display'=>$data['display'],'handler'=>$get_session['a_name'],'hander_time'=>date('Y-m-d H:i:s',time())]);
+             $gid =  DB::table('goods')->insertGetId([
+               'goods_name'=>$data['goods_name'],
+               'goods_sn'=>$data['goods_sn'],
+               'goods_cates'=>$data['goods_cates'],
+               'goods_discript'=>$data['goods_discript'],
+               'goods_pic'=>$data['goods_pic'],
+               'goods_price'=>$data['goods_price'],
+               'goods_sales_status'=>$data['goods_sales_status'],
+               'goods_sales_price'=>$data['goods_sales_price'],
+               'goods_sales_start'=>strtotime($data['goods_sales_start']),
+               'goods_sales_end'=>strtotime($data['goods_sales_end']),
+               'goods_status'=>$data['goods_status'],
+               'handler'=>$get_session['a_name'],
+               'hander_time'=>date('Y-m-d H:i:s',time())
+             ]);
            }else{
-                $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$path,'goods_price'=>$data['goods_price'],'display'=>$data['display'],'handler'=>$get_session['a_name'],'hander_time'=>date('Y-m-d H:i:s',time())]);
+              $gid =  DB::table('goods')->insertGetId(['goods_name'=>$data['goods_name'],'goods_sn'=>$data['goods_sn'],'goods_cates'=>$data['goods_cates'],'goods_discript'=>$data['goods_discript'],'goods_pic'=>$data['goods_pic'],'goods_price'=>$data['goods_price'],'goods_status'=>$data['goods_status'],'handler'=>$get_session['a_name'],'hander_time'=>date('Y-m-d H:i:s',time())]);
            }
           }
 
 
           //创建多文件上传对象
-           $profile = $request->file('goods_pics');
-           $names = [];
-           foreach($profile as $k => $v){
-             $ext = $v->getClientOriginalExtension();
-            //处理文件名称
-             $temp_name = str_random(5);
-             $name = $temp_name.'.'.$ext;
-             $dirname = date('Ymd',time());
-             $res = $v -> move('./Admin/uploads_pic/'.$dirname,$name);
-             $names[] = '/Admin/uploads_pic/'.$dirname.'/'.$name;
-            }
-
-
+          if($data['goods_pics']){
             $goods_set_meals = $data['meal1'].','.$data['meal2'];
-
-           //执行添加数据  返回ID
-           $num = DB::table('goods_details')->insert(['gid'=>$gid,'goods_score'=>$data['goods_score'],'goods_nums'=>$data['goods_nums'],'goods_pics'=>implode(",",$names),'goods_tail'=>$data['goods_tail'],'goods_set_meals'=>$goods_set_meals]);
-
-
+            //执行添加数据  返回ID
+            $num = DB::table('goods_details')->insert([
+              'gid'=>$gid,'goods_score'=>$data['goods_score'],
+              'goods_nums'=>$data['goods_nums'],
+              'goods_pics'=>$data['goods_pics'],
+              'goods_tail'=>$data['goods_tail'],
+              'goods_set_meals'=>$goods_set_meals,
+              'goods_detail_pic'=>$data['goods_detail_pic']
+            ]);
+           }
            if($gid && $num){
                 DB::commit();
                 echo "success";
-                return redirect('/admin/good/index');
+                return redirect('/admin/goods/index');
            }else{
                 DB::rollBack();
                 return back();
            }
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-
 
     }
 
@@ -141,16 +121,15 @@ class AdminGoodsController extends Controller
     public function edit($id)
     {
         //查询此id在关联数据
-          $get_session = session('Admin_Session');
-          $goods = DB::table('goods')->where('id','=',$id)->get();
-          $details = DB::table('goods_details')->where('gid','=',$id)->get();
-          $cate = CateModel::all();
-
-          if($goods && $details){
-            return view('Admin.Good.edit',['get_session'=>$get_session,'goods'=>$goods,'details'=>$details,'cate'=>$cate]);
-          }else{
-            return back();
-          }
+        check_admin_purview('4');
+        $goods = DB::table('goods')->where('id','=',$id)->get();
+        $details = DB::table('goods_details')->where('gid','=',$id)->get();
+        $cate = CateModel::all();
+        if($goods && $details){
+          return view('Admin.Goods.edit',['goods'=>$goods,'details'=>$details,'cate'=>$cate]);
+        }else{
+          return back();
+        }
 
 
     }
@@ -165,6 +144,7 @@ class AdminGoodsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        check_admin_purview('4');
         $data = $request->all();
 
          //事务回滚开始
@@ -222,7 +202,7 @@ class AdminGoodsController extends Controller
     public function destroy($id)
     {
         //
-
+        check_admin_purview('4');
         $order = GoodsModel::find($id);
         if($order -> delete()){
             return redirect('/admin/good/index');

@@ -282,40 +282,6 @@ function addToCart_goods(goodsId, parentId)
 }
 
 
-/* *
- * 添加商品到购物车（我的收藏页面）
- */
-function addToCart_collection(goodsId, parentId)
-{
-  var goods        = new Object();
-  var spec_arr     = new Array();
-  var fittings_arr = new Array();
-  var number       = 1;
-  var formBuy      = document.forms['ECS_FORMBUY'];
-  var quick		   = 0;
-
-  // 检查是否有商品规格
-  if (formBuy)
-  {
-    spec_arr = getSelectedAttributes(formBuy);
-
-    if (formBuy.elements['number'])
-    {
-      number = formBuy.elements['number'].value;
-    }
-
-    quick = 1;
-  }
-
-  goods.quick    = 1;
-  goods.spec     = spec_arr;
-  goods.goods_id = goodsId;
-  goods.number   = number;
-  goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
-
-  Ajax.call('http://www.leishen.cn/flow.php?step=add_to_cart', 'goods=' + $.toJSON(goods), addToCartResponse_collection, 'POST', 'JSON');
-}
-
 
 /**
  * 获得选定的商品属性
@@ -341,75 +307,7 @@ function getSelectedAttributes(formBuy)
   return spec_arr;
 }
 
-/* *
- * 处理添加商品到购物车的反馈信息(商品详情页面)
- */
-function addToCartResponse_goods(result)
-{
-  if (result.error > 0)
-  {
-    // 如果需要缺货登记，跳转
-    if (result.error == 2)
-    {
-      if (confirm(result.message))
-      {
-        location.href = 'http://www.leishen.cn/user/add_booking&id=' + result.goods_id + '&spec=' + result.product_spec;
-      }
-    }
-    // 没选规格，弹出属性选择框
-    else if (result.error == 6)
-    {
-      openSpeDiv(result.message, result.goods_id, result.parent);
-    }
-    else
-    {
-      alert(result.message);
-    }
-  }
-  else
-  {
-    var cartInfo = document.getElementById('ECS_CARTINFO');
-    var cart_url = '../flow/cart';
-    if (cartInfo)
-    {
-      cartInfo.innerHTML = result.content;
-    }
 
-    if (result.one_step_buy == '1')
-    {
-      location.href = cart_url;
-    }
-    else
-    {
-      switch(result.confirm_type)
-      {
-        case '1' :
-          if (confirm(result.message)) location.href = cart_url;
-          break;
-        case '2' :
-          if (!confirm(result.message)) location.href = cart_url;
-          break;
-        case '3' :
-          location.href = cart_url;
-          break;
-        default :
-
-          easyDialog.open({
-            container : 'cart_show'
-          });
-          break;
-      }
-
-
-    }
-  }
-
-  if(result.goods_info.is_presale == 1)
-  {
-    window.location.href="../flow.php?step=checkout&is_presale=1&goods_id="+result.goods_info.goods_id;
-  }
-
-}
 
 /* *
  * 处理添加商品到购物车的反馈信息(商品列表页面)

@@ -18,10 +18,8 @@ class AdminMealController extends Controller
     public function index()
     {
         //
-        $get_session = session('Admin_Session');
         $meal = DB::table('goods_meals')->paginate(25);
-
-        return view('Admin.Meals.list',['meal'=>$meal,'get_session'=>$get_session]);
+        return view('Admin.Meals.list',['meal'=>$meal]);
     }
 
     /**
@@ -32,8 +30,7 @@ class AdminMealController extends Controller
     public function create()
     {
         //
-        $get_session = session('Admin_Session');
-        return view('Admin.Meals.add',['get_session'=>$get_session]);
+        return view('Admin.Meals.add');
     }
 
     /**
@@ -65,12 +62,11 @@ class AdminMealController extends Controller
     public function edit($id)
     {
         //
-        $get_session = session('Admin_Session');
         $meal = DB::table('goods_meals')->where('id','=',$id)->get();
         $meal = $meal[0];
 
         if($meal){
-            return view('Admin.Meals.edit',['meal'=>$meal,'get_session'=>$get_session]);
+            return view('Admin.Meals.edit',['meal'=>$meal]);
         }
     }
 
@@ -85,10 +81,9 @@ class AdminMealController extends Controller
     {
         //
         $meal = $request->all();
+        $num = DB::table('goods_meals')->where('id','=',$id)->update(['goods_meals_name'=>$meal['goods_meals_name'],'goods_meals_detail'=>$meal['goods_meals_detail'],'goods_meals_price'=>$meal['goods_meals_price']]);
 
-         $num = DB::table('goods_meals')->where('id','=',$id)->update(['goods_meals_name'=>$meal['goods_meals_name'],'goods_meals_detail'=>$meal['goods_meals_detail'],'goods_meals_price'=>$meal['goods_meals_price']]);
-
-         if($num){
+        if($num){
             return redirect('/admin/meals/index')->with('Success','修改成功');
         }
 

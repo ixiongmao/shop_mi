@@ -18,8 +18,8 @@ class AdminRecordController extends Controller
     public function index()
     {
         //
-        $get_session = session('Admin_Session');
-        return view('Admin.Record.list',['get_session'=>$get_session]);
+        check_admin_purview('1');
+        return view('Admin.Record.list');
     }
 
     /**
@@ -35,7 +35,7 @@ class AdminRecordController extends Controller
         if ($_GET['do'] == 'AdminRecord') {
           $d = strtotime('-1 month');//获取30天
           echo date('Y-m-d H:i:s',$d);
-          
+
         }
     }
 
