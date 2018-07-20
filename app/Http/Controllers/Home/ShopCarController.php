@@ -8,19 +8,9 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\GoodsModel;
-use App\Models\Admin\AdminAddressModel;
 
 class ShopCarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -122,11 +112,24 @@ class ShopCarController extends Controller
     public function checkout(Request $request)
     {
       $get_session = session('Home_Session');
-      $U_address = AdminAddressModel::where('uid','=',$get_session['id'])->get();
+      $U_address = DB::table('u_address')->where('uid','=',$get_session['id'])->get();
       $U_Car = DB::table('shop_carts')->where('uid','=',$get_session['id'])->get();
       $U_CarGoods = DB::table('goods')->get();
       $U_Totalprice = DB::table('shop_carts')->where('uid','=',$get_session['id'])->sum('total_price');
       return view('Home.Shop_checkout',['U_address'=>$U_address,'U_Car'=>$U_Car,'U_CarGoods'=>$U_CarGoods,'U_Totalprice'=>$U_Totalprice]);
     }
 
+
+    //
+    public function submit(Request $request)
+    {
+      $data = $request->except('_token','x','y');
+      var_dump($data);
+      // $get_session = session('Home_Session');
+      // $U_address = AdminAddressModel::where('uid','=',$get_session['id'])->get();
+      // $U_Car = DB::table('shop_carts')->where('uid','=',$get_session['id'])->get();
+      // $U_CarGoods = DB::table('goods')->get();
+      // $U_Totalprice = DB::table('shop_carts')->where('uid','=',$get_session['id'])->sum('total_price');
+      // return view('Home.Shop_checkout',['U_address'=>$U_address,'U_Car'=>$U_Car,'U_CarGoods'=>$U_CarGoods,'U_Totalprice'=>$U_Totalprice]);
+    }
 }

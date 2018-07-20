@@ -42,7 +42,8 @@
                                         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
                                             <tbody>
                                                 <tr align="center">
-                                                    <td bgcolor="#ffffff">名称</td>
+                                                    <td bgcolor="#ffffff">默认地址</td>
+                                                    <td bgcolor="#ffffff">名字</td>
                                                     <td bgcolor="#ffffff">电话</td>
                                                     <td bgcolor="#ffffff">地址</td>
                                                     <td bgcolor="#ffffff">操作</td>
@@ -50,6 +51,13 @@
                                             </tbody>
                                             @foreach ($data as $k=>$v)
                                             <tr align="center">
+                                                <td bgcolor="#ffffff">
+                                                  @if ($v['address_status'] == '1')
+                                                    默认地址 | <a href="/user/my_address/Nodefault/{{ $v['id'] }}">取消默认</a>
+                                                  @else
+                                                    <a href="/user/my_address/default/{{ $v['id'] }}">设为默认地址</a>
+                                                  @endif
+                                                </td>
                                                 <td bgcolor="#ffffff">{{ $v['address_name'] }}</td>
                                                 <td bgcolor="#ffffff">{{ $v['address_phone'] }}</td>
                                                 <td bgcolor="#ffffff">{{ $v['address_address'] }}</td>

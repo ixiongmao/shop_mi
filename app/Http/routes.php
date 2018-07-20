@@ -18,6 +18,9 @@ Route::get('/shelves','Home\HomeIndexController@shelves');
 Route::get('/list/{id}','Home\HomeIndexController@list');
 Route::get('/item/{id}','Home\HomeIndexController@item');
 
+//浏览记录
+Route::post('/user/my_browse','Home\HomeBrowseController@create');
+
 //前台产品详情页 查询
 Route::post('/Home/check/meal','Home\HomeIndexController@meal');
 
@@ -31,6 +34,7 @@ Route::get('/news/{id}','Home\HomeNewsController@show');
 Route::get('/aftersale_site','Home\HomeAfterSaleController@index');
 //登录注册操作
 Route::get('/login','Home\UserLoginController@Login');
+
 Route::post('/login/select','Home\UserLoginController@LoginIndex');
 Route::get('/reg','Home\UserLoginController@Register');
 Route::post('/reg/create','Home\UserLoginController@RegCreate');
@@ -39,19 +43,21 @@ Route::post('/User/Ajax','Home\UserLoginController@Ajax');
 Route::post('/User/SetMima','Home\UserLoginController@SetPassword');
 Route::post('/User/SavePassword','Home\UserLoginController@UpdatePasswd');
 
-Route::get('/logout','Home\UserLoginController@logout');
-
-Route::post('/admin/user/ajax','Admin\AdminUserController@Ajax');
+Route::get('/logout','Home\UserLoginController@logout');//用户退出
 
 
+/**
+ *  用户中心路由组
+ */
 Route::group(['middleware'=>'Home_Session'],function() {
-
   //评论发送Ajax
   Route::post('/User/Comment/Ajax','Home\HomeAjaxController@Ajax');
+  //
+  Route::get('/user/my_browse/index','Home\HomeBrowseController@index');
+  Route::get('/user/my_browse/del/{id}','Home\HomeBrowseController@destroy');
 
   //购物车
   Route::get('/shop_car','Home\ShopCarController@index');
-
 
   //购物车管理
   Route::get('/shop_car','Home\ShopCarController@create');
@@ -61,12 +67,15 @@ Route::group(['middleware'=>'Home_Session'],function() {
   Route::get('/shop_car/clearall/{id}','Home\ShopCarController@clearCart');
   Route::get('/shop_car/checkout/','Home\ShopCarController@checkout');
 
+  Route::post('/flow/cars','Home\ShopCarController@Submit');
+
   //用户中心
   Route::get('/user/index','Home\UserIndexController@index');
   //订单中心
   Route::get('/user/my_orders','Home\UserOrdersController@index');
   //修改我的资料
   Route::post('/User/My/Ajax','Home\UserController@Ajax');
+
   Route::get('/user/my_information','Home\UserMyInformationController@index');
   //消费记录
   Route::get('/user/my_balance_records','Home\HomeRecordsController@records');
@@ -86,10 +95,12 @@ Route::group(['middleware'=>'Home_Session'],function() {
   Route::get('/user/my_address/edit/{id}','Home\UserAddressController@edit');
   Route::post('/user/my_address/update/{id}','Home\UserAddressController@update');
   Route::get('/user/my_address/del/{id}','Home\UserAddressController@destroy');
+  Route::get('/user/my_address/default/{id}','Home\UserAddressController@default');
+  Route::get('/user/my_address/Nodefault/{id}','Home\UserAddressController@Nodefault');
+
 
 });
 //
-
 
 /**
  *  Auth：李、松、君、IXiongmao
@@ -102,6 +113,7 @@ Route::group(['middleware'=>'Home_Session'],function() {
  Route::get('/admin/login','Admin\AdminLoginController@index');
  Route::post('/admin/login/select','Admin\AdminLoginController@Save');
  Route::get('/admin/login/logout','Admin\AdminLoginController@logout');
+ Route::post('/admin/user/ajax','Admin\AdminUserController@Ajax');//用户中心发送ajax(包括前后台)
  //后台路由组
  Route::group(['middleware'=>'Admin_Session'],function() {
    // 后台文章管理

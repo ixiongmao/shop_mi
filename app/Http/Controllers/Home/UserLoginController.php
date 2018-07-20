@@ -80,7 +80,8 @@ class UserLoginController extends Controller
         if ($validator->fails()) {
             return redirect('/login')->with('Error','验证码错误');
         } else {
-          DB::table('u_dlrecords')->insert([
+          if ($db['u_status'] == '1') {
+            DB::table('u_dlrecords')->insert([
             'user_id'=>$db['id'],
             'user_remark'=>'用户于'.date('Y-m-d H:i:s',time()).'登录,IP为：'.$_SERVER['REMOTE_ADDR'],
             'user_ip'=>ip2long($_SERVER['REMOTE_ADDR']),
@@ -88,6 +89,9 @@ class UserLoginController extends Controller
           ]);
           session(['Home_Session'=>$db]);
           return redirect('/')->with('Success','登录成功');
+        } else {
+          return redirect('/login')->with('Error','账号已被冻结');
+        }
 
         }
       } else {

@@ -32,7 +32,7 @@
             <div class="span4 Zspan4">
                 <ul class="home-channel-list clearfix">
                     <li>
-                        <a href="#" target="_blank">
+                        <a href="/tradein" target="_blank">
                             <i class="iconfont">
                                 <img src="/Home/static/picture/liwu1.png" alt="" /></i>以旧换新</a>
                     </li>
@@ -42,7 +42,7 @@
                                 <img src="/Home/static/picture/sctb2.png" alt="" /></i>驱动下载</a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/service_standard">
                             <i class="iconfont">
                                 <img src="/Home/static/picture/sctb3.png" alt="" /></i>服务标准</a>
                     </li>
@@ -166,13 +166,13 @@
                                 <span class="text_center_red">限时秒杀</span>
                               @endif
                                 <div class="figure figure-img">
-                                    <a href="/item/{{ $val['id'] }}">
+                                    <a href="/item/{{ $val['id'] }}" target="_blank">
                                         <img src="{{ $val['goods_pic'] }}" width="160" height="160" alt="{{ $val['goods_name'] }}"></a></div>
                                 <h3 class="title">
-                                    <a href="/item/{{ $val['id'] }}">{{ $val['goods_name'] }}</a></h3>
+                                    <a href="/item/{{ $val['id'] }}" target="_blank">{{ $val['goods_name'] }}</a></h3>
                                 <p class="desc">{{ $val['goods_discript'] }}</p>
                                 <p class="seckillprice" style="text-align:center;">￥{{ $val['goods_price'] }}</p>
-                                <p class="rank">18人评价</p></li>
+                              </li>
                                 @endif
                               @endif
                             @endforeach
@@ -201,7 +201,7 @@
                                     <a href="/item/{{ $valu['id'] }}">{{ $valu['goods_name'] }}</a></h3>
                                 <p class="desc">{{ $valu['goods_discript'] }}</p>
                                 <p class="seckillprice" style="text-align:center;">￥{{ $valu['goods_price'] }}</p>
-                                <p class="rank">0人评价</p></li>
+                              </li>
                                 @endif
                               @endif
                             @endforeach
@@ -219,41 +219,6 @@
         @endif
       @endforeach
         <!-- 商品显示列表类end -->
-        <div class="home-star-goods recommend-for-you"></div>
-        <!-- 增值服务区start -->
-        <div class="xm-plain-box iflashbuy container">
-            <div class="box-hd">
-                <h2 class="title">增值服务</h2>
-                <div class="more">
-                    <div class="xm-controls xm-controls-line-small xm-carousel-controls">
-                        <a class="control control-prev iconfont" href="javascript: void(0);"></a>
-                        <a class="control control-next iconfont" href="javascript: void(0);"></a></div>
-                </div>
-            </div>
-            <div class="box-bd" style="margin:0 auto;margin-bottom: 15px;background: #fff;">
-                <div class="box-bd" style="width: 1240px">
-                    <div class="xm-carousel-wrapper iflashbuy">
-                        <ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
-                            <!-- 单个轮播商品start -->
-                            <li class="" style="position: relative">
-                                <a class="thumb thumb_time" href="" target="_blank">
-                                    <img src="" /></a>
-                                <a>
-                                    <h3 class="iflashbuyTitle">
-                                        <a href="" target="_blank">123</a></h3>
-                                </a>
-                                <a>
-                                    <p style="text-align: center" class=" ellipsis">123</p></a>
-                                <div class="iflashbuyPrice">
-                                    <span class="killPrice">88888</span>&nbsp;
-                                    <span class="killPrice">元</span>&nbsp;&nbsp;</div></li>
-                            <!-- 单个轮播商品end -->
-                          </ul>
-                      </div>
-                </div>
-            </div>
-        </div>
-        <!-- 增值服务区end -->
       </div>
 </div>
 @endsection

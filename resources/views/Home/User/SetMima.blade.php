@@ -39,11 +39,6 @@
         </div>
     </div>
     <script type="text/javascript">
-    $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
         isPassword = false;
         isnu_Password = false;
         $('input[name=m_password]').focus(function() {

@@ -47,14 +47,20 @@
                             </thead>
                             <tbody>
                               @foreach ($Address_data as $v)
+
                                 <tr>
-                                    <td>{{ $v->id }}</td>
-                                    <td>{{ $v->UsersInfo->u_name }}</td>
-                                    <td>{{ $v->address_name }}</td>
-                                    <td>{{ $v->address_phone }}</td>
-                                    <td>{{ $v->address_address }}</td>
-                                    <td><a href="/admin/address/del/{{ $v->id }}" class="btn btn-danger btn-sm">删除</a></td>
+                                    <td>{{ $v['id'] }}</td>
+                                    @foreach ($User_data as $vv)
+                                    @if ($vv['id'] == $v['uid'])
+                                      <td>{{ $vv['u_name'] }}</td>
+                                    @endif
+                                    @endforeach
+                                    <td>{{ $v['address_name'] }}</td>
+                                    <td>{{ $v['address_phone'] }}</td>
+                                    <td>{{ $v['address_address'] }}</td>
+                                    <td><a href="/admin/address/del/{{ $v['id'] }}" class="btn btn-danger btn-sm">删除</a></td>
                                 </tr>
+
                                 @endforeach
                               </tbody>
                         </table>

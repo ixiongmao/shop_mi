@@ -124,7 +124,7 @@ function $id(element) {
                                        <dd class="goods-phone-type">
                                            <p>{{ $goods->goods_discript }}</p>
                                        </dd>
-                                       @if($goods->goods_sales_status && time() <$goods->goods_sales_end)
+                                       @if($goods->goods_sales_status && time()<$goods->goods_sales_end && time()>$goods->goods_sales_start)
                                            <div id="dis1">
                                                <del>官方价格：
                                                    <em class="cancel">{{ $goods->goods_price }}</em>
@@ -391,7 +391,7 @@ function $id(element) {
                                            </dd>
                                            <div class="clearfix"></div>
                                            <dd class="goods-info-head-cart">
-                                             <button class="btn  btn-primary goods-add-cart-btn" id="buy_btn"><i class="iconfont"></i>加入购物车</button>
+                                             <button class="btn btn-primary goods-add-cart-btn" id="buy_btn"><i class="iconfont"></i>加入购物车</button>
                                              <a href="/user/my_collect_goods/create/{{ $goods->id }}" class=" btn btn-gray  goods-collect-btn " id="fav-btn">
                                                    <i class="iconfont"></i>收藏</a></dd>
                                            <dd class="goods-info-head-userfaq clearfix">
@@ -632,13 +632,26 @@ $(function() {
           }
 
         },
-        error:function() {
-          layer.msg('页面错误，请稍后再试');
+        error:function(xhr) {
+          layer.msg('服务器出了点小毛病,请重试!');
         },
         dataType:'HTML',
         async:true
       });
     });
   });
+
+  var time = setInterval(function(){
+     $.ajax({
+         url:'/user/my_browse',
+         type:'POST',
+         data:{'gid':{{ $goods->id }}},
+         success:function(msg){
+         },
+         dataType:'html',
+         async:true
+       });
+    clearInterval(time)
+ },6000)
  </script>
 @endsection

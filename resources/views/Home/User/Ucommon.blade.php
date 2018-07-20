@@ -51,6 +51,7 @@ KindEditor.ready(function(K) {
                                         <a class="" href="/user/my_collect_goods">我收藏的商品</a>
                                         <a class="" href="/user/my_address">收货地址</a>
                                         <a class="" href="/user/my_feedback">我的反馈</a>
+                                        <a class="" href="/user/my_browse/index">浏览记录</a>
                                     </li>
                                 </ul>
                             </li>

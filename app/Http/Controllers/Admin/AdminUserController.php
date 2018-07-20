@@ -112,11 +112,6 @@ class AdminUserController extends Controller
         $data = $request->except('_token');
         $users = UsersModel::find($id);
         $users -> u_status = $data['u_status'];
-        // $users -> u_password = Hash::make($data['u_password']);
-        $users -> u_sex = $data['u_sex'];
-        $users -> u_photo = $data['u_photo'];
-        $users -> u_phone = $data['u_phone'];
-        $users -> u_email = $data['u_email'];
         $users -> u_money = $data['u_money'];
         $db = $users -> save();
         if($db){
@@ -136,10 +131,11 @@ class AdminUserController extends Controller
     {
         $data = UsersModel::find($id);
         $db = $data -> delete();
-        if($db){
-            return redirect('/admin/user/index')->with('Success','删除成功');
+        $db1 = DB::table('users')->where('id','=',$id)->update(['u_status'=>'0']);
+        if($db && $db1){
+            return redirect('/admin/user/index')->with('Success','放入回收站成功');
         }else{
-            return back() -> with('Error','删除失败');
+            return back() -> with('Error','放入回收站失败');
         }
     }
     /**

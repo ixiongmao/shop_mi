@@ -4,41 +4,41 @@
         <link rel="stylesheet" href="/Home/static/css/Car/flow.css">
         <link rel="stylesheet" href="/Home/static/css/Car/cart.css">
         @if ($Shop_Car_nums)
-        <style media="screen">
-/* 购物车 */
-.Caddress{width: 1210px;margin: auto;position: relative;height: 160px;}
-.Caddress .add_mi{height: 106px;float: left;margin-right: 5px; background: url(/Home/static/images/car/mail.jpg) no-repeat;padding: 6px 17px;}
-.Caddress .add_mi p{font-size: 12px;line-height: 20px;color: #666;width: 203px;}
-        </style>
-        <script type="text/javascript">
-  $(function() {
-    $('.Caddress .add_mi').click(function() {
-      $(this).css('background', 'url("/Home/static/images/car/mail_1.jpg") no-repeat').siblings('.add_mi').css('background', 'url("/Home/static/images/car/mail.jpg") no-repeat')
-    })
-  })
-</script>
-
         <div class="page-main">
             <div class="container clearfix">
                 <div class="checkout-box confirm-order-box">
-                    <h2>确认订单信息页面</h2>
+                    <h2>确认订单信息</h2>
                     <div class="flowBox_in">
-                        <form action="/" method="post">
+                        <form action="/flow/cars" method="post">
+                          {{ csrf_field() }}
                             <ul class="box-main clearfix">
                                 <li class="section-options clearfix">
-                                    <h3 class="section-header">
-                                        <span>收货人信息</span></h3>
-                                      </br>
-                                        <div class="Caddress">
-                                          @foreach ($U_address as $v)
-                                            <div class="add_mi" style="background: url(&quot;/Home/static/images/car/mail.jpg&quot;) no-repeat;">
-                                                <input type="hidden" name="address_id" value="{{ $v['id'] }}">
-                                                <p style="border-bottom:1px dashed #ccc;line-height:28px;">名字：{{ $v['address_name']}}</p>
-                                                <p>电话：{{ $v['address_phone']}}</p>
-                                                <p>地址：{{ $v['address_address']}}</p>
+                                    <div class="layui-tab" lay-filter="test">
+                                        <ul class="layui-tab-title">
+                                            <li class="layui-this">收货人信息</li>
+                                        </ul>
+                                        <div class="layui-tab-content">
+                                            <div class="layui-tab-item layui-show">
+                                            @foreach ($U_address as $v)
+                                              @if ($v['address_status'] == 1)
+                                              <div style="margin-top: 10px;">
+                                                <input type="radio" name="address_id" value="{{ $v['id'] }}" checked ><span id="span">名字：{{ $v['address_name']}} &nbsp;电话：{{ $v['address_phone']}} &nbsp; 地址：{{ $v['address_address']}} </span> &nbsp;<b style="font-size:15px;color:#000;">(默认地址)</b>
+                                              </div>
+                                              @elseif ($v['address_status'] == 0)
+                                              <div style="margin-top: 10px;">
+                                                <input type="radio" name="address_id" value="{{ $v['id'] }}">名字：{{ $v['address_name']}} &nbsp;电话：{{ $v['address_phone']}} &nbsp; 地址：{{ $v['address_address']}}
+                                              </div>
+                                              @endif
+                                            @endforeach
                                             </div>
-                                          @endforeach
-                                        </div>
+                                          </div>
+                                          <script type="text/javascript">
+                                          //  $('input[type=radio]')
+                                          if ($('input[type=radio]:checked')) {
+                                              $('#span').css('color','#c01734')
+                                          }
+                                          </script>
+                                    </div>
                                 </li>
                                 <li class="section-options clearfix">
                                     <div class="layui-tab" lay-filter="test">
@@ -74,8 +74,6 @@
                                             <i class="iconfont"></i></a>
                                     </div>
                                     <table width="100%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd" class="goods-list-table">
-                                        <input type="hidden" name="is_presale" value="">
-                                        <input type="hidden" name="goods_id" value="646">
                                         <tbody>
                                             <tr>
                                               @foreach ($U_Car as $v)
@@ -103,23 +101,31 @@
                                                   @endif
                                                 </td>
                                                 <td class="weiruan" bgcolor="#ffffff" align="right">{{ $v['shop_num'] }}</td>
-                                                <td class="weiruan" bgcolor="#ffffff" align="right" name="Totalprice">
+                                                <td class="weiruan" bgcolor="#ffffff" align="right">
                                                   @if ($v['meal_detail'] != '')
+
                                                     @if ($vv['goods_sales_status'] == '1')
-                                                      @if ((time() > $vv['goods_sales_start']) && (time() < $vv['goods_sales_end']))
+                                                      @if ((time() < $vv['goods_sales_end']) && (time() > $vv['goods_sales_start']))
                                                         {{ ($v['shop_num']*$vv['goods_sales_price']) + $v['meal_price'] }}
                                                     @else
                                                       {{ ($v['shop_num']*$vv['goods_price']) + $v['meal_price'] }}
                                                       @endif
                                                     @endif
+
                                                   @else
+
                                                     @if ($vv['goods_sales_status'] == '1')
-                                                      @if ((time() > $vv['goods_sales_start']) && (time() < $vv['goods_sales_end']))
+
+                                                      @if ((time() < $vv['goods_sales_end']) && (time() > $vv['goods_sales_start']))
                                                         {{ $v['shop_num']*$vv['goods_sales_price'] }}
                                                     @else
+
                                                       {{ $v['shop_num']*$vv['goods_price'] }}
+                                                      
                                                       @endif
+
                                                     @endif
+
                                                   @endif
 
 
@@ -139,13 +145,6 @@
                                     <h3 class="section-header"><span>费用总计</span></h3>
                                     <div id="ECS_ORDERTOTAL" class="money-box">
                                         <ul>
-                                            <!-- <li class="clearfix">
-                                                <label>购买即送：</label>
-                                                <span class="val">
-                                                    <font class="f4_b">88</font>积分</span></li>
-                                            <li class="clearfix">
-                                                <label>商品总价：</label>
-                                                <span class="val" id="TotalpriceNum">9037.00</span></li> -->
                                             <li class="clearfix total-price">
                                                 <label>应付款金额：</label>
                                                 <span class="val">
@@ -156,7 +155,7 @@
                                 </li>
                                 <li class="section-options clearfix" style="border-bottom:none;">
                                     <div style="margin:8px auto; text-align:right;">
-                                        <input type="image" src="http://www.leishen.cn/themes/xiaomi/images/bnt_subOrder.gif">
+                                        <input type="image" src="/Home/static/images/bnt_subOrder.gif">
                                       </div>
                                     </li>
                             </ul>
@@ -170,7 +169,7 @@
             <div class="container">
                 <div class="cart-empty">
                     <h2>您的购物车还是空的!</h2>
-                    <a href="./../" class="btn btn-primary">马上去购物</a></div>
+                    <a href="/" class="btn btn-primary">马上去购物</a></div>
             </div>
         </div>
 

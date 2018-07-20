@@ -1,4 +1,5 @@
 @section('Home_title', $systems['system_name'])
+@if ($systems['system_status'] == 1)
 <!DOCTYPE html>
 <html lang="Zh-cn">
 
@@ -31,7 +32,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        });            
+        });
         </script>
         <!-- <script type="text/javascript" src="/Home/static/js/xiaomi_index.js"></script> -->
       </head>
@@ -186,8 +187,6 @@
         <!-- 继承部分开始 -->
         @yield('content')
         <!-- 继承部分结束 -->
-        <div class="container">
-            <img src="/Home/static/picture/intel_desc_002.jpg" alt="intel" style="position: relative;left: 50%;margin-left: -960px;" /></div>
         <div class="footer">
             <div class="container">
                 <div class="footer-service clearfix">
@@ -288,5 +287,7 @@
             </script>
           @endif
     </body>
-
 </html>
+@else
+  网站管理
+@endif

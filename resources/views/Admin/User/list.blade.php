@@ -66,8 +66,7 @@
                                         保密
                                       @endif
                                     </td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg-{{ $v->id }}">点击查看用户头像</button>
+                                    <td><button type="button" class="btn btn-outline btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg-{{ $v->id }}">点击查看用户头像</button>
                                     </td>
                                     <td>{{ $v->u_email }}</td>
                                     <td>{{ $v->u_phone }}</td>

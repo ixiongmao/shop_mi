@@ -35,12 +35,6 @@
     </div>
     <script type="text/javascript">
     $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
         isYanzheng = false;
         $('#submit').click(function() {
             m_name = $('input[name=m_name]').val();

@@ -8,8 +8,6 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Models\Admin\AdminAddressModel;
-
 class AdminAddressController extends Controller
 {
     /**
@@ -21,8 +19,9 @@ class AdminAddressController extends Controller
     {
         //
         $Search = $request->input('Search');
-        $Address_data = AdminAddressModel::where('address_name','like','%'.$Search.'%')->orderBy('id','desc')->paginate(25);
-        return view('Admin.Address.list',['Address_data'=>$Address_data,'Search'=>$Search]);
+        $Address_data = DB::table('u_address')->where('address_name','like','%'.$Search.'%')->orderBy('id','desc')->paginate(25);
+        $User_data = DB::table('users')->get();
+        return view('Admin.Address.list',['Address_data'=>$Address_data,'User_data'=>$User_data,'Search'=>$Search]);
     }
 
     /**
@@ -34,7 +33,7 @@ class AdminAddressController extends Controller
     public function destroy($id)
     {
         //
-        $db = DB::table('address')->where('id','=',$id)->delete();
+        $db = DB::table('u_address')->where('id','=',$id)->delete();
         if ($db) {
           return redirect('/admin/address/index')->with('Success','删除成功');
         } else {

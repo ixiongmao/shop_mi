@@ -15,7 +15,7 @@
     </div>
 </div>
 <div style="width:100%;text-align:center;">
-    <form action="/news" method="get">
+    <form action="/aftersale_site" method="get">
         <div style="width: 500px;height: 50px;margin-left: 590px;">
             <input type="text" name="Search" lay-verify="required" placeholder="请输入关键字" class="layui-input" style="width: 300px;margin-top: 20px;margin-left:108px;">
             <button class="layui-btn" type="submit" style="margin-top: -38px; float: right;background:#b9000f">点击搜索</button></div>

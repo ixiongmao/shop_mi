@@ -57,7 +57,7 @@ class UserController extends Controller
           } else {
             $db = DB::table('users')->where('id','=',$data['m_id'])->update(['u_photo'=>$data['m_photo']]);
             if ($db == '1') {
-              echo '修改成功,请刷新当前页面！';
+              echo '修改成功！';
             } else {
               echo '修改失败';
             }
@@ -72,9 +72,9 @@ class UserController extends Controller
           } else {
             $db = DB::table('users')->where('id','=',$data['m_id'])->update(['u_sex'=>$data['m_sex']]);
             if ($db == '1') {
-              echo '修改成功,请刷新当前页面！';
+              echo '修改成功！';
             } else {
-              echo '修改失败';
+              echo '修改失败.';
             }
 
           }
@@ -85,11 +85,16 @@ class UserController extends Controller
           if ($data['m_phone'] == null) {
             echo '手机号不能为空';
           } else {
-            $db = DB::table('users')->where('id','=',$data['m_id'])->update(['u_phone'=>$data['m_phone']]);
-            if ($db == '1') {
-              echo '修改成功,请刷新当前页面！';
+            $db = DB::table('users')->where('u_phone','=',$data['m_phone'])->first();
+            if ($db == null) {
+              $db1 = DB::table('users')->where('id','=',$data['m_id'])->update(['u_phone'=>$data['m_phone']]);
+              if ($db1 == '1') {
+                echo '修改成功！';
+              } else {
+                echo '修改失败';
+              }
             } else {
-              echo '修改失败';
+              echo '手机号已存在';
             }
 
           }

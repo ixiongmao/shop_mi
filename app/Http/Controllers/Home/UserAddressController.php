@@ -106,4 +106,45 @@ class UserAddressController extends Controller
           return back()->with('Error','删除失败');
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function default($id)
+    {
+        //
+        $get_session = session('Home_Session');
+        $count = DB::table('u_address')->where('address_status','=','1')->count();
+        if ($count >= 1) {
+          return back()->with('Error','只能默认一个地址');
+        }
+        $db = DB::table('u_address')->where('id','=',$id)->update(['address_status'=>'1']);
+        if ($db) {
+          return redirect('/user/my_address')->with('Success','设置成功');
+        }else{
+          return back()->with('Error','设置失败');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function Nodefault($id)
+    {
+        //
+        $get_session = session('Home_Session');
+        $db = DB::table('u_address')->where('id','=',$id)->update(['address_status'=>'0']);
+        if ($db) {
+          return redirect('/user/my_address')->with('Success','取消成功');
+        }else{
+          return back()->with('Error','取消失败');
+        }
+    }
+
 }
